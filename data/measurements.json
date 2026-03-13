@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "nautical-miles",
+    "title": "Nautical Miles Explained",
+    "description": "Why mariners use nautical miles and how they relate to latitude and charts.",
+    "category": "maritime-measurements",
+    "relatedToolSlugs": ["nautical-mile-converter", "great-circle-distance-calculator"],
+    "content": "A nautical mile is 1,852 meters, or approximately one minute of latitude. So 60 nautical miles equal one degree of latitude. This makes chart work simple: distance on the chart (using the latitude scale) matches distance in the real world. Nautical miles are used worldwide for marine and aviation navigation.",
+    "faq": [
+      {
+        "question": "How do you measure distance on a nautical chart?",
+        "answer": "Use the latitude scale on the sides of the chart. One minute of latitude equals one nautical mile. For longer distances, use the scale or a divider to compare with the latitude scale."
+      }
+    ]
+  },
+  {
+    "slug": "knots-speed",
+    "title": "Knots and Speed at Sea",
+    "description": "Why speed is measured in knots and how to convert to other units.",
+    "category": "maritime-measurements",
+    "relatedToolSlugs": ["knots-speed-converter", "sailing-time-calculator"],
+    "content": "A knot is one nautical mile per hour. Because charts use nautical miles, using knots for speed keeps units consistent: distance in nm divided by speed in knots gives time in hours. The term comes from the historical chip log, where knots in a rope were used to measure speed.",
+    "faq": [
+      {
+        "question": "How fast is 10 knots?",
+        "answer": "10 knots is about 11.5 mph or 18.5 km/h. It's a typical cruising speed for many sailboats and a common wind speed for sailing."
+      }
+    ]
+  }
+]

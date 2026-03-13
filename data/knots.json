@@ -1,0 +1,84 @@
+[
+  {
+    "slug": "bowline",
+    "name": "Bowline Knot",
+    "category": "sailing-knots",
+    "difficulty": "Beginner",
+    "uses": [
+      "creating fixed loops",
+      "mooring lines",
+      "rescue operations"
+    ],
+    "steps": [
+      "Create a small loop (overhand loop) in the rope, with the working end on top.",
+      "Pass the working end up through the loop from below.",
+      "Wrap the working end around behind the standing part.",
+      "Pass the working end back down through the loop.",
+      "Tighten by pulling the standing part and the working end in opposite directions."
+    ],
+    "faq": [
+      {
+        "question": "Why is the bowline called the king of knots?",
+        "answer": "The bowline forms a secure, non-slip loop that won't jam under load and is easy to untie afterward. It's one of the most useful and reliable knots in sailing and general use."
+      },
+      {
+        "question": "When should I use a bowline?",
+        "answer": "Use a bowline whenever you need a fixed loop at the end of a line—for mooring, attaching sheets to sails, rescue loops, or securing to a ring or post. It holds under load but can be untied easily."
+      }
+    ]
+  },
+  {
+    "slug": "cleat-hitch",
+    "name": "Cleat Hitch",
+    "category": "sailing-knots",
+    "difficulty": "Beginner",
+    "uses": [
+      "securing dock lines",
+      "mooring to a cleat",
+      "quick tie-off"
+    ],
+    "steps": [
+      "Take a full turn around the base of the cleat (around the horns).",
+      "Make a figure-8 pattern: pass the line over one horn, under the other, then over the first horn again.",
+      "Finish with a half hitch under the second horn so the free end is trapped.",
+      "Leave a short tail; the hitch should be snug and not slip."
+    ],
+    "faq": [
+      {
+        "question": "How many turns on a cleat?",
+        "answer": "One full turn around the base, then a figure-8 (one pass over each horn). Finish with a half hitch. More turns can help on very large cleats or slippery line."
+      },
+      {
+        "question": "How do you release a cleat hitch quickly?",
+        "answer": "Lift the half hitch off the horn, then unwrap the figure-8. Keeping the line clear of the cleat until you're ready to secure again allows fast release when casting off."
+      }
+    ]
+  },
+  {
+    "slug": "clove-hitch",
+    "name": "Clove Hitch",
+    "category": "sailing-knots",
+    "difficulty": "Beginner",
+    "uses": [
+      "temporary attachment to a post or rail",
+      "fenders",
+      "starting lashings"
+    ],
+    "steps": [
+      "Pass the working end over the object (post, rail, or ring).",
+      "Cross over the standing part and pass under the object again.",
+      "Thread the working end under the second pass so it exits between the two wraps.",
+      "Tighten by pulling both ends. The knot should sit flat against the object."
+    ],
+    "faq": [
+      {
+        "question": "Is the clove hitch secure?",
+        "answer": "The clove hitch can slip under varying load or on smooth poles. It's best for temporary attachment or when the line is under constant tension. For critical loads, use a round turn and two half hitches or a bowline."
+      },
+      {
+        "question": "How do you tie a clove hitch on a fender?",
+        "answer": "Pass the line around the rail or lifeline, cross over, pass around again, and tuck the working end under the second wrap. Adjust so the fender hangs at the right height."
+      }
+    ]
+  }
+]

@@ -1,0 +1,399 @@
+[
+  {
+    "slug": "nautical-mile-converter",
+    "title": "Nautical Mile Converter",
+    "description": "Convert between nautical miles, statute miles, kilometers, and meters. Essential for chart work and passage planning.",
+    "category": "maritime-measurements",
+    "type": "unit-converter",
+    "engine": {
+      "inputs": [
+        { "name": "distance", "label": "Distance", "type": "number", "unit": "nautical_miles", "units": ["nautical_miles", "kilometers", "miles", "meters", "feet"], "default": 1 }
+      ],
+      "outputs": [
+        { "name": "kilometers", "label": "Kilometers", "formula": "distance * 1.852", "decimals": 4 },
+        { "name": "miles", "label": "Miles", "formula": "distance * 1.15078", "decimals": 4 },
+        { "name": "meters", "label": "Meters", "formula": "distance * 1852", "decimals": 0 }
+      ],
+      "formulaDisplay": "1 NM = 1.852 km = 1852 m ≈ 1.15078 miles"
+    },
+    "unitPairs": [
+      { "from": "nautical miles", "to": "kilometers", "factor": 1.852 },
+      { "from": "nautical miles", "to": "meters", "factor": 1852 },
+      { "from": "nautical miles", "to": "statute miles", "factor": 1.15078 },
+      { "from": "nautical miles", "to": "feet", "factor": 6076.12 },
+      { "from": "kilometers", "to": "nautical miles", "factor": 0.539957 },
+      { "from": "meters", "to": "nautical miles", "factor": 0.000539957 },
+      { "from": "statute miles", "to": "nautical miles", "factor": 0.868976 },
+      { "from": "feet", "to": "nautical miles", "factor": 0.000164579 }
+    ],
+    "defaultFrom": "nautical miles",
+    "defaultTo": "kilometers",
+    "formula": "1 nautical mile = 1,852 m = 1.852 km. 1 nm ≈ 1.15078 statute miles ≈ 6,076 feet.",
+    "formulaDetail": "The nautical mile is defined as one minute of latitude (1/60 of a degree). So 60 nautical miles = 1° of latitude.",
+    "examples": ["10 nautical miles = 18.52 km ≈ 11.5 statute miles", "1 nm = 1,852 m (exact)", "A 100 nm passage is 185.2 km"],
+    "faq": [
+      {
+        "question": "What is a nautical mile?",
+        "answer": "A nautical mile is a unit of distance used in maritime and aviation. It is defined as exactly 1,852 meters (about 6,076 feet) and is based on one minute of latitude. One nautical mile per hour equals one knot."
+      },
+      {
+        "question": "How many kilometers in a nautical mile?",
+        "answer": "One nautical mile equals 1.852 kilometers."
+      },
+      {
+        "question": "Why do sailors use nautical miles?",
+        "answer": "Nautical miles align with latitude: one degree of latitude equals 60 nautical miles. This makes chart work and dead reckoning simpler, since distance and position use the same angular measure."
+      }
+    ]
+  },
+  {
+    "slug": "knots-speed-converter",
+    "title": "Knots Speed Converter",
+    "description": "Convert speed between knots, miles per hour, kilometers per hour, and meters per second. Standard for marine and aviation speed.",
+    "category": "maritime-measurements",
+    "type": "unit-converter",
+    "engine": {
+      "inputs": [
+        { "name": "speed", "label": "Speed", "type": "number", "unit": "knots", "units": ["knots", "mph", "km_h", "m_s"], "default": 10 }
+      ],
+      "outputs": [
+        { "name": "mph", "label": "mph", "formula": "speed * 1.15078", "decimals": 2 },
+        { "name": "kmh", "label": "km/h", "formula": "speed * 1.852", "decimals": 2 },
+        { "name": "ms", "label": "m/s", "formula": "speed * 0.514444", "decimals": 3 }
+      ],
+      "formulaDisplay": "1 knot = 1.852 km/h ≈ 1.15078 mph ≈ 0.514 m/s"
+    },
+    "unitPairs": [
+      { "from": "knots", "to": "mph", "factor": 1.15078 },
+      { "from": "knots", "to": "km/h", "factor": 1.852 },
+      { "from": "knots", "to": "m/s", "factor": 0.514444 },
+      { "from": "mph", "to": "knots", "factor": 0.868976 },
+      { "from": "km/h", "to": "knots", "factor": 0.539957 },
+      { "from": "m/s", "to": "knots", "factor": 1.94384 }
+    ],
+    "defaultFrom": "knots",
+    "defaultTo": "mph",
+    "formula": "1 knot = 1 nautical mile per hour = 1.852 km/h. 1 knot ≈ 1.15078 mph ≈ 0.514 m/s.",
+    "formulaDetail": "Knots are the standard unit of speed at sea. Wind forecasts, boat speed logs, and current tables are usually in knots.",
+    "examples": ["6 knots ≈ 6.9 mph (typical cruising sailboat)", "10 knots ≈ 11.5 mph ≈ 18.5 km/h", "1 m/s ≈ 1.94 knots"],
+    "faq": [
+      {
+        "question": "What is a knot in speed?",
+        "answer": "One knot is one nautical mile per hour. So 10 knots means 10 nautical miles per hour. The term comes from the historical practice of measuring speed with a knotted rope (chip log)."
+      },
+      {
+        "question": "How do you convert knots to mph?",
+        "answer": "Multiply knots by 1.15078 to get miles per hour. For example, 10 knots ≈ 11.5 mph."
+      },
+      {
+        "question": "Why is boat speed in knots?",
+        "answer": "Marine charts and navigation use nautical miles. Using knots (nautical miles per hour) keeps speed and distance in the same units, so time = distance ÷ speed works directly for passage planning."
+      }
+    ]
+  },
+  {
+    "slug": "distance-to-horizon-calculator",
+    "title": "Distance to Horizon Calculator",
+    "description": "Find how far the horizon is from your height of eye. Uses the standard nautical formula for horizon distance.",
+    "category": "navigation",
+    "type": "distance-horizon",
+    "engine": {
+      "inputs": [
+        { "name": "height", "label": "Height of eye", "type": "number", "unit": "feet", "units": ["feet", "meters"], "default": 6, "min": 0.5, "step": "0.5" }
+      ],
+      "outputs": [
+        { "name": "horizon_nm", "label": "Horizon distance (nm)", "formula": "1.17 * sqrt(height)", "decimals": 2 },
+        { "name": "horizon_km", "label": "Horizon distance (km)", "formula": "1.17 * sqrt(height) * 1.852", "decimals": 2 }
+      ],
+      "formulaDisplay": "Distance (nm) = 1.17 × √(height in feet)"
+    },
+    "formula": "Distance to horizon (nm) ≈ 1.17 × √(height in feet). In metric: horizon (km) ≈ 3.57 × √(height in meters). Assumes spherical Earth and normal atmospheric refraction.",
+    "formulaDetail": "Your line of sight is tangent to the Earth's surface at the horizon. The greater the height of eye, the farther the tangent point.",
+    "examples": ["6 ft (cockpit): ~2.9 nm (~5.4 km)", "30 ft (mast): ~6.4 nm (~11.9 km)", "100 ft (bridge): ~11.7 nm (~21.7 km)"],
+    "faq": [
+      {
+        "question": "How far can you see at sea?",
+        "answer": "From 6 feet (about 1.8 m) above water, the horizon is roughly 2.9 nautical miles (5.4 km) away. From 30 feet it is about 6.4 nm. The formula is distance (nm) ≈ 1.17 × √(height in feet)."
+      },
+      {
+        "question": "What is the horizon formula?",
+        "answer": "For height of eye in feet: horizon distance in nautical miles ≈ 1.17 × √h. In metric: horizon in km ≈ 3.57 × √(height in meters). This assumes a smooth, spherical Earth and standard refraction."
+      },
+      {
+        "question": "Why does height of eye matter?",
+        "answer": "The horizon is the line where the sky meets the sea. The higher your eyes, the farther that line is. On a small boat you see less; from a ship bridge or mast you see much farther."
+      }
+    ]
+  },
+  {
+    "slug": "sailing-time-calculator",
+    "title": "Sailing Time Calculator",
+    "description": "Estimate how long it will take to cover a given distance at a constant speed. Supports nautical miles, km, knots, mph, and km/h.",
+    "category": "sailing",
+    "type": "sailing-time",
+    "engine": {
+      "inputs": [
+        { "name": "distance", "label": "Distance", "type": "number", "unit": "nautical_miles", "units": ["nautical_miles", "kilometers"], "default": 60, "min": 0.1 },
+        { "name": "speed", "label": "Speed", "type": "number", "unit": "knots", "units": ["knots", "mph", "km_h"], "default": 6, "min": 0.1 }
+      ],
+      "outputs": [
+        { "name": "time", "label": "Travel time", "formula": "distance / speed", "format": "hours", "decimals": 2 }
+      ],
+      "formulaDisplay": "Time (hours) = Distance ÷ Speed"
+    },
+    "formula": "Time = Distance ÷ Speed. With distance in nautical miles and speed in knots, time is in hours. Example: 60 nm ÷ 6 kn = 10 hours.",
+    "formulaDetail": "This is the same relationship used in the speed–distance–time triangle. Useful for ETAs and passage planning.",
+    "examples": ["30 nm at 6 kn → 5 hours", "100 nm at 5 kn → 20 hours", "20 nm at 8 kn → 2.5 hours (2 h 30 min)"],
+    "faq": [
+      {
+        "question": "How do you calculate sailing time?",
+        "answer": "Time = Distance ÷ Speed. In nautical units: time (hours) = distance (nautical miles) ÷ speed (knots). For example, 60 nm at 6 knots = 10 hours."
+      },
+      {
+        "question": "What speed should I use for passage planning?",
+        "answer": "Use your boat's average speed under sail or power for the conditions you expect. Many cruisers plan on 5–6 knots under sail; powerboats use cruising speed. Allow for current and leeway."
+      },
+      {
+        "question": "Why use nautical miles for time?",
+        "answer": "Because speed is in knots (nautical miles per hour), distance in nm gives time in hours directly: 30 nm at 6 kn = 5 hours. No extra conversion is needed."
+      }
+    ]
+  },
+  {
+    "slug": "great-circle-distance-calculator",
+    "title": "Great Circle Distance Calculator",
+    "description": "Compute the shortest distance between two locations on Earth using latitude and longitude. Results in nautical miles and kilometers.",
+    "category": "navigation",
+    "type": "great-circle",
+    "engine": {
+      "inputs": [
+        { "name": "lat1", "label": "Latitude A (°)", "type": "number", "unit": "degrees", "default": 40.7128, "min": -90, "max": 90 },
+        { "name": "lon1", "label": "Longitude A (°)", "type": "number", "unit": "degrees", "default": -74.006, "min": -180, "max": 180 },
+        { "name": "lat2", "label": "Latitude B (°)", "type": "number", "unit": "degrees", "default": 51.5074, "min": -90, "max": 90 },
+        { "name": "lon2", "label": "Longitude B (°)", "type": "number", "unit": "degrees", "default": -0.1278, "min": -180, "max": 180 }
+      ],
+      "outputs": [
+        { "name": "distance_nm", "label": "Distance (nautical miles)", "formula": "haversine_nm(lat1, lon1, lat2, lon2)", "decimals": 1 },
+        { "name": "distance_km", "label": "Distance (km)", "formula": "haversine_nm(lat1, lon1, lat2, lon2) * 1.852", "decimals": 1 }
+      ],
+      "formulaDisplay": "Haversine: d = 2R × asin(√(sin²(Δlat/2) + cos(lat1)×cos(lat2)×sin²(Δlon/2)))"
+    },
+    "formula": "Haversine formula: a = sin²(Δlat/2) + cos(lat₁)×cos(lat₂)×sin²(Δlon/2); c = 2×atan2(√a, √(1−a)); d = R × c. R ≈ 3,440.065 nautical miles (Earth radius).",
+    "formulaDetail": "A great circle is any circle on Earth's surface whose center is the planet's center. The shortest route between two points lies along the unique great circle that passes through both.",
+    "examples": ["New York to London: ~3,076 nm (~5,697 km)", "1° of latitude ≈ 60 nm (along a meridian)", "Equator: 1° longitude = 60 nm; at 60°N, 1° longitude ≈ 30 nm"],
+    "faq": [
+      {
+        "question": "What is great circle distance?",
+        "answer": "The great circle distance is the shortest path between two points on the surface of a sphere (Earth). It follows the arc of a circle whose center is the Earth's center. Sailing or flying great circle routes minimizes distance."
+      },
+      {
+        "question": "How is great circle distance calculated?",
+        "answer": "The haversine formula uses the latitudes and longitudes of both points to compute the central angle between them, then multiplies by Earth's radius (in nautical miles, about 3,440) to get distance."
+      },
+      {
+        "question": "Why use nautical miles for great circle?",
+        "answer": "One nautical mile equals one minute of latitude, so great circle distance in nm relates directly to angular distance. For example, 60 nm is 1° of arc along a great circle."
+      }
+    ]
+  },
+  {
+    "slug": "anchor-scope-calculator",
+    "title": "Anchor Scope Calculator",
+    "description": "Find how much anchor rode to pay out for a given water depth and scope ratio. Supports feet and meters.",
+    "category": "sailing",
+    "type": "anchor-scope",
+    "engine": {
+      "inputs": [
+        { "name": "depth", "label": "Water depth", "type": "number", "unit": "feet", "units": ["feet", "meters"], "default": 10, "min": 1 },
+        { "name": "scopeRatio", "label": "Scope ratio (e.g. 5 for 5:1)", "type": "number", "unit": "ratio", "default": 5, "min": 3, "max": 10, "step": "0.5" }
+      ],
+      "outputs": [
+        { "name": "rode_ft", "label": "Rode length (ft)", "formula": "depth * scopeRatio", "decimals": 0 },
+        { "name": "rode_m", "label": "Rode length (m)", "formula": "depth * scopeRatio * 0.3048", "decimals": 1 }
+      ],
+      "formulaDisplay": "Rode length = Depth × Scope ratio"
+    },
+    "formula": "Rode length = Depth × Scope ratio. Example: 10 ft depth with 5:1 scope → 50 ft of rode. Depth is water depth only; add freeboard when deciding how much to deploy.",
+    "formulaDetail": "More scope lowers the angle between the seabed and the rode at the anchor. A lower angle improves holding because the pull is more horizontal.",
+    "examples": ["10 ft depth, 5:1 → 50 ft rode", "5 m depth, 7:1 → 35 m rode", "20 ft depth, 7:1 → 140 ft rode"],
+    "faq": [
+      {
+        "question": "What is anchor scope?",
+        "answer": "Scope is the ratio of the length of anchor rode (chain and/or rope) paid out to the water depth. For example, 5:1 scope means 5 feet of rode per foot of depth. More scope usually means better holding."
+      },
+      {
+        "question": "What scope ratio should I use?",
+        "answer": "All-chain: typically 5:1 for calm conditions, 7:1 for stronger wind. Rope/chain combination: 7:1 to 10:1. In storm conditions, more scope (up to 10:1) improves holding. Always consider swing room."
+      },
+      {
+        "question": "How do I measure depth for scope?",
+        "answer": "Use water depth from the surface to the seabed—not from the bow roller. Add freeboard (height of bow above water) when calculating how much rode to put out so the anchor sees the correct angle."
+      }
+    ]
+  },
+  {
+    "slug": "beaufort-scale-calculator",
+    "title": "Beaufort Scale Calculator",
+    "description": "Enter wind speed in knots, mph, km/h, or m/s to get the corresponding Beaufort force and sea state description.",
+    "category": "wind-waves",
+    "type": "beaufort",
+    "engine": {
+      "inputs": [
+        { "name": "windSpeed", "label": "Wind speed", "type": "number", "unit": "knots", "units": ["knots", "mph", "km_h", "m_s"], "default": 15, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "force", "label": "Beaufort force", "formula": "beaufort(windSpeed)", "decimals": 0 }
+      ],
+      "formulaDisplay": "Force 0–12 from wind speed (kn). Force 5 = 17–21 kn, Force 7 = 28–33 kn."
+    },
+    "formula": "Beaufort force is defined by wind speed ranges (knots). Force 0: 0–1 kn; Force 3: 7–10 kn; Force 5: 17–21 kn; Force 7: 28–33 kn; Force 10: 48–55 kn; Force 12: 64+ kn.",
+    "formulaDetail": "The scale was developed by Francis Beaufort. Each force has an associated sea state description (wave height, foam, visibility).",
+    "examples": ["10 kn → Force 3 (Gentle breeze)", "20 kn → Force 5 (Fresh breeze)", "30 kn → Force 7 (High wind)", "50 kn → Force 10 (Storm)"],
+    "faq": [
+      {
+        "question": "What is the Beaufort scale?",
+        "answer": "The Beaufort scale is a 0–12 scale that describes wind speed by its effects on the sea and on objects. Force 0 is calm; force 12 is hurricane. It is widely used in marine weather and forecasts."
+      },
+      {
+        "question": "How do you convert wind speed to Beaufort?",
+        "answer": "Wind speed ranges (in knots) are defined for each force. For example, Force 4 is 11–16 knots, Force 5 is 17–21 knots. Our calculator maps your entered wind speed to the correct Beaufort force and sea description."
+      },
+      {
+        "question": "What wind is Force 6?",
+        "answer": "Force 6 (Strong breeze) is 22–27 knots. Sea state: large waves, extensive white foam. Often used as a threshold for small craft advisory conditions."
+      }
+    ]
+  },
+  {
+    "slug": "apparent-wind-calculator",
+    "title": "Apparent Wind Calculator",
+    "description": "Compute apparent wind speed and angle from true wind speed, true wind angle (from the bow), and boat speed. All inputs in knots.",
+    "category": "wind-waves",
+    "type": "apparent-wind",
+    "engine": {
+      "inputs": [
+        { "name": "boatSpeed", "label": "Boat speed (kn)", "type": "number", "unit": "knots", "default": 6, "min": 0 },
+        { "name": "trueWindSpeed", "label": "True wind speed (kn)", "type": "number", "unit": "knots", "default": 10, "min": 0 },
+        { "name": "trueWindAngle", "label": "True wind angle (° from bow)", "type": "number", "unit": "degrees", "default": 90, "min": 0, "max": 180 }
+      ],
+      "outputs": [
+        { "name": "apparentSpeed", "label": "Apparent wind speed (kn)", "formula": "apparentWindSpeedKn(boatSpeed, trueWindSpeed, trueWindAngle)", "decimals": 1 },
+        { "name": "apparentAngle", "label": "Apparent wind angle (° from bow)", "formula": "apparentWindAngleDeg(boatSpeed, trueWindSpeed, trueWindAngle)", "decimals": 0 }
+      ],
+      "formulaDisplay": "Va² = Vb² + Vt² + 2×Vb×Vt×cos(TWA)"
+    },
+    "formula": "Apparent wind = true wind − boat velocity (vector). Va² = Vb² + Vt² + 2·Vb·Vt·cos(TWA). cos(AWA) = (Vt·cos(TWA) + Vb) / Va. Vb=boat, Vt=true wind, TWA=true wind angle, AWA=apparent wind angle.",
+    "formulaDetail": "When you sail into the wind, your motion adds to the wind you feel—so apparent wind is stronger. Downwind, boat motion subtracts, so apparent wind is less than true wind.",
+    "examples": ["6 kn boat, 10 kn true wind, 90° TWA → ~11.7 kn apparent, ~32° AWA", "Headwind: TWA 0° → apparent = true + boat speed", "Downwind: TWA 180° → apparent = |true − boat speed|"],
+    "faq": [
+      {
+        "question": "What is apparent wind?",
+        "answer": "Apparent wind is the wind you feel on the boat—the combination of true wind and the boat's motion. When sailing upwind, apparent wind is stronger and from a narrower angle than true wind."
+      },
+      {
+        "question": "How do you calculate apparent wind from true wind?",
+        "answer": "Using vector math: apparent wind speed² = boat speed² + true wind speed² + 2 × boat speed × true wind speed × cos(true wind angle). The apparent wind angle from the bow can then be found from the resulting vector."
+      },
+      {
+        "question": "Why does apparent wind matter for sailing?",
+        "answer": "Sails respond to apparent wind, not true wind. Sail trim, heeling, and apparent wind angle are what you see on instruments and feel. Understanding apparent vs. true wind helps with trim and tactics."
+      }
+    ]
+  },
+  {
+    "slug": "wave-height-calculator",
+    "title": "Wave Height Calculator",
+    "description": "Estimate significant wave height from wind speed. Uses simplified empirical relationship for open water.",
+    "category": "wind-waves",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "windSpeed", "label": "Wind speed", "type": "number", "unit": "knots", "units": ["knots", "mph", "km_h"], "default": 20, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "waveHeight_m", "label": "Approx. wave height (m)", "formula": "0.024 * windSpeed * windSpeed", "decimals": 2 },
+        { "name": "waveHeight_ft", "label": "Approx. wave height (ft)", "formula": "0.024 * windSpeed * windSpeed * 3.28084", "decimals": 1 }
+      ],
+      "formulaDisplay": "Simplified: H ≈ 0.024 × wind_speed_kn² (open water, fetch-limited)"
+    },
+    "formula": "Significant wave height is approximated from wind speed. Actual height depends on fetch, duration, and depth.",
+    "formulaDetail": "This uses a simplified empirical relationship. Real wave height varies with fetch (distance over water), wind duration, and water depth.",
+    "examples": ["20 kn wind → ~9.6 m waves (open ocean)", "10 kn → ~2.4 m", "30 kn → ~21.6 m (storm)"],
+    "faq": [
+      { "question": "What is significant wave height?", "answer": "Significant wave height is the average height of the highest one-third of waves. It is commonly reported in marine forecasts." },
+      { "question": "Why does wave height vary?", "answer": "Wave height depends on wind speed, fetch (distance the wind blows over water), duration, and water depth. Shallow water limits wave growth." }
+    ]
+  },
+  {
+    "slug": "boat-fuel-consumption-calculator",
+    "title": "Boat Fuel Consumption Calculator",
+    "description": "Estimate fuel needed for a passage from consumption rate and travel time or distance and speed.",
+    "category": "sailing",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "consumptionRate", "label": "Fuel consumption (gal/h)", "type": "number", "unit": "ratio", "default": 5, "min": 0.1 },
+        { "name": "hours", "label": "Running time (hours)", "type": "number", "unit": "ratio", "default": 4, "min": 0.1 }
+      ],
+      "outputs": [
+        { "name": "fuel_gal", "label": "Fuel needed (gal)", "formula": "consumptionRate * hours", "decimals": 1 }
+      ],
+      "formulaDisplay": "Fuel = Consumption rate × Time"
+    },
+    "formula": "Fuel (gal) = Consumption rate (gal/h) × Running time (h). For distance/speed: time = distance ÷ speed, then fuel = rate × time.",
+    "formulaDetail": "Check your engine manual for consumption at cruising RPM. Add 10–20% reserve for safety.",
+    "examples": ["5 gal/h × 4 h = 20 gal", "10 gal/h × 8 h = 80 gal"],
+    "faq": [
+      { "question": "How do I find my boat's fuel consumption?", "answer": "Engine manuals often list consumption at various RPM. You can also measure by filling the tank, running a known time at cruising speed, then refilling to see gallons used." },
+      { "question": "Should I add reserve?", "answer": "Yes. Plan 10–20% extra for headwinds, current, or diversions. Many sailors plan for 30% reserve on long passages." }
+    ]
+  },
+  {
+    "slug": "fathom-converter",
+    "title": "Fathom Converter",
+    "description": "Convert between fathoms, feet, and meters. Fathoms are commonly used for water depth and anchor chain.",
+    "category": "maritime-measurements",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "depth", "label": "Depth", "type": "number", "unit": "fathoms", "units": ["fathoms", "feet", "meters"], "default": 10 }
+      ],
+      "outputs": [
+        { "name": "feet", "label": "Feet", "formula": "depth * 6", "decimals": 1 },
+        { "name": "meters", "label": "Meters", "formula": "depth * 1.8288", "decimals": 2 }
+      ],
+      "formulaDisplay": "1 fathom = 6 feet = 1.8288 m"
+    },
+    "formula": "1 fathom = 6 feet = 1.8288 meters. Historically the span of a sailor's arms; still used for depth and cable length.",
+    "formulaDetail": "Charts often show depth in fathoms. Anchor chain is sometimes marked in fathoms (1 shackle = 15 fathoms).",
+    "examples": ["10 fathoms = 60 ft = 18.29 m", "1 fathom = 6 ft"],
+    "faq": [
+      { "question": "What is a fathom?", "answer": "A fathom is 6 feet (1.8288 m), originally the span of a person's outstretched arms. It is used for water depth and in some regions for anchor chain." },
+      { "question": "Why use fathoms?", "answer": "Marine charts in some areas show depth in fathoms. Lead lines were marked in fathoms. It remains a standard unit in maritime use." }
+    ]
+  },
+  {
+    "slug": "wind-chill-calculator",
+    "title": "Wind Chill Calculator",
+    "description": "Calculate apparent temperature (wind chill) from air temperature and wind speed. Useful for cold-weather sailing.",
+    "category": "wind-waves",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "tempF", "label": "Air temperature (°F)", "type": "number", "unit": "ratio", "default": 35 },
+        { "name": "windMph", "label": "Wind speed (mph)", "type": "number", "unit": "mph", "units": ["mph", "knots", "km_h"], "default": 15, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "windChill", "label": "Feels like (°F)", "formula": "windChillF(tempF, windMph)", "decimals": 0 }
+      ],
+      "formulaDisplay": "Wind chill (°F) = 35.74 + 0.6215×T − 35.75×V^0.16 + 0.4275×T×V^0.16"
+    },
+    "formula": "NWS wind chill formula: combines temperature and wind speed to estimate how cold it feels. Only applies when temp ≤ 50°F and wind ≥ 3 mph.",
+    "formulaDetail": "Wind chill reflects heat loss from exposed skin. At sea, spray and moisture can make it feel colder than the formula suggests.",
+    "examples": ["35°F, 15 mph → ~24°F feels like", "20°F, 25 mph → ~2°F feels like"],
+    "faq": [
+      { "question": "What is wind chill?", "answer": "Wind chill is the apparent temperature felt on exposed skin due to wind. It reflects how quickly the body loses heat in wind." },
+      { "question": "Does wind chill affect boats?", "answer": "Wind chill affects people on deck and can increase risk of hypothermia. It does not change the actual water or air temperature for equipment." }
+    ]
+  }
+]

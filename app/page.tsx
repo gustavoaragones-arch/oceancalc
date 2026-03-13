@@ -1,101 +1,72 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+const SECTIONS = [
+  {
+    title: "Maritime Calculators",
+    description: "Convert units, compute distances, and plan passages with nautical tools.",
+    href: "/tools/",
+  },
+  {
+    title: "Sailing Knots Library",
+    description: "Step-by-step tutorials for essential sailing and boating knots.",
+    href: "/knots/",
+  },
+  {
+    title: "Navigation Fundamentals",
+    description: "Piloting, dead reckoning, and coastal navigation.",
+    href: "/navigation/",
+  },
+  {
+    title: "Wind & Wave Science",
+    description: "Beaufort scale, apparent wind, and sea state reference.",
+    href: "/wind-waves/",
+  },
+  {
+    title: "Maritime Measurements",
+    description: "Nautical miles, fathoms, knots, and conversion tables.",
+    href: "/maritime-measurements/",
+  },
+  {
+    title: "Tools for Sailors",
+    description: "Anchoring, passage planning, and onboard calculations.",
+    href: "/sailing/",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="container-wide py-12 sm:py-16">
+      <section className="text-center max-w-3xl mx-auto mb-16">
+        <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+          Maritime Calculators &amp; Navigation Tools
+        </h1>
+        <p className="text-xl text-slate-600 dark:text-slate-400">
+          Free nautical calculators, sailing navigation reference, and maritime measurement tools. Built for sailors, mariners, and anyone who works on the water.
+        </p>
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <nav
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        aria-label="Site sections"
+      >
+        {SECTIONS.map(({ title, description, href }) => (
+          <Link
+            key={href}
+            href={href}
+            className="card block hover:border-sky-500 dark:hover:border-sky-500 transition-colors group"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100 group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+              {title}
+            </h2>
+            <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
+              {description}
+            </p>
+            <span className="inline-block mt-3 text-sm font-medium text-sky-600 dark:text-sky-400">
+              Explore →
+            </span>
+          </Link>
+        ))}
+      </nav>
     </div>
   );
 }

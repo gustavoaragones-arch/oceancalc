@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "anchor-scope",
+    "title": "Anchor Scope Explained",
+    "description": "Why scope ratio matters for holding and how much rode to use.",
+    "category": "sailing",
+    "relatedToolSlugs": ["anchor-scope-calculator"],
+    "content": "Scope is the ratio of anchor rode length to water depth. More scope (e.g. 7:1 instead of 5:1) lowers the angle at the anchor and usually improves holding. All-chain rode can use 5:1 to 7:1 in normal conditions; rope or mixed rode often needs 7:1 to 10:1. In strong wind or waves, increasing scope helps. Always allow for swing room.",
+    "faq": [
+      {
+        "question": "What scope for all chain?",
+        "answer": "In calm conditions 5:1 is often sufficient. For stronger wind or overnight anchoring, 7:1 is safer. In storm conditions, more scope (up to 10:1 if room allows) improves holding."
+      },
+      {
+        "question": "Do you include freeboard in scope?",
+        "answer": "Scope is calculated from water depth to seabed. When deciding how much rode to pay out, add the height of your bow above the water so the anchor sees the correct angle; the ratio is still depth to rode length."
+      }
+    ]
+  },
+  {
+    "slug": "passage-planning",
+    "title": "Passage Planning Basics",
+    "description": "Distance, time, and speed for planning a sailing passage.",
+    "category": "sailing",
+    "relatedToolSlugs": ["sailing-time-calculator", "great-circle-distance-calculator", "nautical-mile-converter"],
+    "content": "Passage planning starts with the route: waypoints, distance, and desired speed. Use distance in nautical miles and speed in knots so that time in hours = distance ÷ speed. Allow for current, leeway, and rest. Check weather and daylight; have alternatives. Our sailing time and great circle calculators help with the numbers.",
+    "faq": [
+      {
+        "question": "What average speed for passage planning?",
+        "answer": "Use your boat's typical speed under the conditions you expect—often 5–6 knots for a cruising sailboat under sail. Powerboats use cruising speed. Be conservative so you don't overestimate progress."
+      }
+    ]
+  }
+]

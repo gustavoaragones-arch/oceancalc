@@ -4,9 +4,7 @@ import { useState } from "react";
 import { CalculatorCard } from "./CalculatorCard";
 
 // Distance to horizon (nautical miles) ≈ 1.17 × √(height in feet)
-// Or in meters: d_nm = 2.08 × √(h_m), or d_km = 3.57 × √(h_m)
 const FEET_TO_HORIZON_NM = 1.17;
-const METERS_TO_HORIZON_KM = 3.57 / 1.852; // nm
 
 export function DistanceToHorizonCalculator() {
   const [heightFeet, setHeightFeet] = useState("6");

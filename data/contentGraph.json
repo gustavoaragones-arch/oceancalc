@@ -1,0 +1,56 @@
+{
+  "apparent-wind-calculator": {
+    "articles": [
+      "true-wind-vs-apparent-wind",
+      "beaufort-scale"
+    ],
+    "categories": ["wind-waves"]
+  },
+  "beaufort-scale-calculator": {
+    "articles": [
+      "beaufort-scale",
+      "true-wind-vs-apparent-wind"
+    ],
+    "categories": ["wind-waves"]
+  },
+  "wave-height-calculator": {
+    "articles": ["beaufort-scale"],
+    "categories": ["wind-waves"]
+  },
+  "knots-speed-converter": {
+    "articles": ["knots-speed", "true-wind-vs-apparent-wind"],
+    "categories": ["maritime-measurements", "wind-waves"]
+  },
+  "nautical-mile-converter": {
+    "articles": ["nautical-miles", "knots-speed"],
+    "categories": ["maritime-measurements"]
+  },
+  "great-circle-distance-calculator": {
+    "articles": ["dead-reckoning", "passage-planning"],
+    "categories": ["navigation", "sailing"]
+  },
+  "sailing-time-calculator": {
+    "articles": ["dead-reckoning", "passage-planning"],
+    "categories": ["navigation", "sailing"]
+  },
+  "distance-to-horizon-calculator": {
+    "articles": ["distance-to-horizon"],
+    "categories": ["navigation"]
+  },
+  "anchor-scope-calculator": {
+    "articles": ["anchor-scope"],
+    "categories": ["sailing"]
+  },
+  "boat-fuel-consumption-calculator": {
+    "articles": ["passage-planning"],
+    "categories": ["sailing"]
+  },
+  "fathom-converter": {
+    "articles": ["nautical-miles"],
+    "categories": ["maritime-measurements"]
+  },
+  "wind-chill-calculator": {
+    "articles": ["beaufort-scale"],
+    "categories": ["wind-waves"]
+  }
+}

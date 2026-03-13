@@ -1,0 +1,87 @@
+{
+  "wind": [
+    "apparent-wind-calculator",
+    "beaufort-scale-calculator",
+    "wave-height-calculator",
+    "knots-speed-converter",
+    "wind-chill-calculator"
+  ],
+  "apparent wind": [
+    "apparent-wind-calculator",
+    "knots-speed-converter"
+  ],
+  "true wind": [
+    "apparent-wind-calculator",
+    "knots-speed-converter"
+  ],
+  "beaufort": [
+    "beaufort-scale-calculator",
+    "knots-speed-converter"
+  ],
+  "waves": [
+    "wave-height-calculator",
+    "beaufort-scale-calculator"
+  ],
+  "navigation": [
+    "great-circle-distance-calculator",
+    "sailing-time-calculator",
+    "distance-to-horizon-calculator",
+    "nautical-mile-converter"
+  ],
+  "distance": [
+    "great-circle-distance-calculator",
+    "distance-to-horizon-calculator",
+    "nautical-mile-converter",
+    "sailing-time-calculator"
+  ],
+  "horizon": [
+    "distance-to-horizon-calculator"
+  ],
+  "sailing time": [
+    "sailing-time-calculator",
+    "great-circle-distance-calculator",
+    "nautical-mile-converter"
+  ],
+  "passage": [
+    "sailing-time-calculator",
+    "great-circle-distance-calculator",
+    "boat-fuel-consumption-calculator"
+  ],
+  "anchor": [
+    "anchor-scope-calculator"
+  ],
+  "scope": [
+    "anchor-scope-calculator"
+  ],
+  "maritime measurements": [
+    "nautical-mile-converter",
+    "knots-speed-converter",
+    "fathom-converter"
+  ],
+  "nautical mile": [
+    "nautical-mile-converter",
+    "great-circle-distance-calculator",
+    "sailing-time-calculator"
+  ],
+  "knots": [
+    "knots-speed-converter",
+    "sailing-time-calculator",
+    "apparent-wind-calculator"
+  ],
+  "fathom": [
+    "fathom-converter",
+    "nautical-mile-converter"
+  ],
+  "fuel": [
+    "boat-fuel-consumption-calculator",
+    "sailing-time-calculator"
+  ],
+  "great circle": [
+    "great-circle-distance-calculator",
+    "nautical-mile-converter"
+  ],
+  "wind chill": [
+    "wind-chill-calculator",
+    "beaufort-scale-calculator"
+  ]
+}

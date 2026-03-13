@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sitemap": "npx tsx scripts/generate-sitemap.ts"
   },
   "dependencies": {
     "react": "^18",

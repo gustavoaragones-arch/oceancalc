@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "dead-reckoning",
+    "title": "Dead Reckoning Explained",
+    "description": "How to estimate position using course, speed, and time when no fixes are available.",
+    "category": "navigation",
+    "relatedToolSlugs": ["sailing-time-calculator", "nautical-mile-converter"],
+    "content": "Dead reckoning (DR) is the process of estimating your current position based on a previously known position, plus course steered and distance run. You use your last fix, apply the course and speed over time, and plot the DR position. It does not account for current, leeway, or steering error, so DR is always an estimate that should be updated with fixes when possible.",
+    "faq": [
+      {
+        "question": "What is the difference between DR and estimated position?",
+        "answer": "DR uses only course and speed through the water. Estimated position (EP) adjusts for known or estimated current and sometimes leeway, giving a more accurate predicted position."
+      }
+    ]
+  },
+  {
+    "slug": "distance-to-horizon",
+    "title": "Distance to Horizon Explained",
+    "description": "Why the horizon distance depends on height of eye and how to calculate it.",
+    "category": "navigation",
+    "relatedToolSlugs": ["distance-to-horizon-calculator"],
+    "content": "The distance to the horizon depends on how high your eyes are above the water. The formula is distance (nm) ≈ 1.17 × √(height in feet). From a typical cockpit at 6 feet, the horizon is about 2.9 nautical miles away. From the mast at 30 feet, it's about 6.4 nm. This matters for identifying landmarks and for understanding when you'll first see a light or object.",
+    "faq": [
+      {
+        "question": "How is horizon distance used in navigation?",
+        "answer": "You use it to predict when a light or object will appear or disappear over the horizon, and to interpret radar or visual detection ranges. It's also part of the formula for geographic range of a light."
+      }
+    ]
+  }
+]

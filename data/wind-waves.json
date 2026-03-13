@@ -1,0 +1,34 @@
+[
+  {
+    "slug": "true-wind-vs-apparent-wind",
+    "title": "True Wind vs Apparent Wind Explained",
+    "description": "How boat motion changes the wind you feel and why it matters for sailing.",
+    "category": "wind-waves",
+    "relatedToolSlugs": ["apparent-wind-calculator", "knots-speed-converter"],
+    "content": "True wind is the wind you'd feel if the boat were stationary. Apparent wind is what you actually feel—it's the vector combination of true wind and the boat's motion. When sailing upwind, apparent wind is stronger and comes from farther forward than true wind. When sailing downwind, apparent wind is weaker. Your sails and instruments respond to apparent wind, so understanding both is essential for trim and tactics.",
+    "faq": [
+      {
+        "question": "Why does apparent wind increase when sailing upwind?",
+        "answer": "Your boat is moving into the wind, so your forward motion adds to the wind you feel. The apparent wind speed is greater than the true wind, and the apparent wind angle is narrower than the true wind angle."
+      },
+      {
+        "question": "What instrument shows apparent wind?",
+        "answer": "The wind indicator (wind vane) at the masthead and most electronic wind instruments display apparent wind speed and angle. True wind is usually calculated by the instrument from apparent wind and boat speed."
+      }
+    ]
+  },
+  {
+    "slug": "beaufort-scale",
+    "title": "Beaufort Scale Explained",
+    "description": "How wind speed is described by force number and sea state.",
+    "category": "wind-waves",
+    "relatedToolSlugs": ["beaufort-scale-calculator"],
+    "content": "The Beaufort scale from 0 to 12 describes wind speed by its effects—on the sea surface and on objects. Force 0 is calm; force 12 is hurricane. Each force has a range of wind speeds in knots and a description of typical sea state. Mariners and forecasters use it to communicate wind strength without always giving exact speed.",
+    "faq": [
+      {
+        "question": "What is a small craft advisory?",
+        "answer": "In many regions, small craft advisories are issued when winds reach Force 6 (22–27 knots) or when sea conditions are hazardous for small boats. The exact criteria vary by country."
+      }
+    ]
+  }
+]

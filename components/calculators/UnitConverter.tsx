@@ -29,21 +29,21 @@ export function UnitConverter({
   const [fromUnit, setFromUnit] = useState(defaultFrom);
   const [toUnit, setToUnit] = useState(defaultTo);
   const [fromValue, setFromValue] = useState<string>("1");
-  const [toValue, setToValue] = useState<string>("");
+  const [toValue, setToValue] = useState<string>(() => {
+    const fwd = pairs.find((p) => p.from === defaultFrom && p.to === defaultTo);
+    if (fwd) return (1 * fwd.factor).toFixed(6).replace(/\.?0+$/, "");
+    const rev = pairs.find((p) => p.from === defaultTo && p.to === defaultFrom);
+    if (rev) return (1 / rev.factor).toFixed(6).replace(/\.?0+$/, "");
+    return "";
+  });
 
   const convert = useCallback(
     (val: number, from: string, to: string): number => {
       if (from === to) return val;
-      const fromToBase = pairs.find((p) => p.from === from);
-      const toFromBase = pairs.find((p) => p.to === to);
-      if (fromToBase && toFromBase) {
-        const base = val * fromToBase.factor;
-        return base / toFromBase.factor;
-      }
-      const reverse = pairs.find((p) => p.from === to && p.to === from);
-      if (reverse) return val / reverse.factor;
       const fwd = pairs.find((p) => p.from === from && p.to === to);
       if (fwd) return val * fwd.factor;
+      const rev = pairs.find((p) => p.from === to && p.to === from);
+      if (rev) return val / rev.factor;
       return val;
     },
     [pairs]
