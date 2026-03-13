@@ -40,7 +40,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
   );
 }
 
-const SITE_URL = "https://oceancalc.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://oceancalc.com";
 
 export function BreadcrumbSchema({ items }: { items: BreadcrumbItem[] }) {
   if (items.length === 0) return null;

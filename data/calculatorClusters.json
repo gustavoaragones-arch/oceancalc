@@ -1,0 +1,22 @@
+{
+  "maritime-measurements": [
+    "nautical-mile-converter",
+    "knots-speed-converter",
+    "fathom-converter"
+  ],
+  "navigation-tools": [
+    "distance-to-horizon-calculator",
+    "great-circle-distance-calculator",
+    "sailing-time-calculator"
+  ],
+  "wind-weather": [
+    "beaufort-scale-calculator",
+    "wave-height-calculator",
+    "wind-chill-calculator"
+  ],
+  "sailing-performance": [
+    "apparent-wind-calculator",
+    "anchor-scope-calculator",
+    "boat-fuel-consumption-calculator"
+  ]
+}

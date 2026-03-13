@@ -4,7 +4,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { OrganizationSchema, WebSiteSchema } from "@/components/OrganizationSchema";
 
-const SITE_URL = "https://oceancalc.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://oceancalc.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

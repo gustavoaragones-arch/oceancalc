@@ -1,4 +1,4 @@
-const SITE_URL = "https://oceancalc.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://oceancalc.com";
 const SITE_NAME = "OceanCalc";
 
 export interface ToolSEOProps {

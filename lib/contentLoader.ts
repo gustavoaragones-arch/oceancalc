@@ -2,10 +2,11 @@ import * as fs from "fs";
 import * as path from "path";
 import type { CalculatorEntry, KnotEntry, ArticleEntry } from "./types";
 
-const SITE_URL = "https://oceancalc.com";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://oceancalc.com";
 const DATA_DIR = path.join(process.cwd(), "data");
 
 let calculatorsCache: CalculatorEntry[] | null = null;
+let calculatorClustersCache: Record<string, string[]> | null = null;
 let knotsCache: KnotEntry[] | null = null;
 let navigationCache: ArticleEntry[] | null = null;
 let windWavesCache: ArticleEntry[] | null = null;
@@ -31,6 +32,49 @@ export function getCalculatorBySlug(slug: string): CalculatorEntry | null {
 
 export function getAllCalculatorSlugs(): string[] {
   return getCalculators().map((c) => c.slug);
+}
+
+function getCalculatorClusters(): Record<string, string[]> {
+  if (!calculatorClustersCache) {
+    calculatorClustersCache = loadJson<Record<string, string[]>>(
+      "calculatorClusters.json"
+    );
+  }
+  return calculatorClustersCache;
+}
+
+/**
+ * Get related calculator slugs in the same cluster (circular ring).
+ * Returns the next 3 calculators after the current one in the cluster array;
+ * wraps from end to start. Used for tool-page internal linking.
+ */
+export function getRelatedCalculatorSlugsInCluster(
+  currentSlug: string,
+  count = 3
+): { slugs: string[]; clusterLabel: string } {
+  const clusters = getCalculatorClusters();
+  const clusterLabels: Record<string, string> = {
+    "maritime-measurements": "Maritime Measurements",
+    "navigation-tools": "Navigation",
+    "wind-weather": "Wind & Weather",
+    "sailing-performance": "Sailing & Performance",
+  };
+  for (const [clusterKey, slugs] of Object.entries(clusters)) {
+    const i = slugs.indexOf(currentSlug);
+    if (i === -1) continue;
+    const n = slugs.length;
+    if (n <= 1) return { slugs: [], clusterLabel: clusterLabels[clusterKey] ?? clusterKey };
+    const take = Math.min(count, n - 1);
+    const out: string[] = [];
+    for (let k = 1; k <= take; k++) {
+      out.push(slugs[(i + k) % n]);
+    }
+    return {
+      slugs: out,
+      clusterLabel: clusterLabels[clusterKey] ?? clusterKey,
+    };
+  }
+  return { slugs: [], clusterLabel: "" };
 }
 
 export function getKnots(): KnotEntry[] {

@@ -5,6 +5,7 @@ import { CalculatorDisclaimer } from "./CalculatorDisclaimer";
 import { Breadcrumbs, BreadcrumbSchema } from "./Breadcrumbs";
 import { LearnMore } from "./LearnMore";
 import { AuthorPublisher } from "./AuthorPublisher";
+import { RelatedCalculators } from "./RelatedCalculators";
 
 export interface LearnMoreItem {
   slug: string;
@@ -46,6 +47,8 @@ export function CalculatorLayout({
       </header>
 
       {children}
+
+      <RelatedCalculators currentSlug={calculator.slug} />
 
       <section
         className="card mt-8"
