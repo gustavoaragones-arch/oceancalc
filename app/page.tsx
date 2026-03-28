@@ -8,15 +8,13 @@ import {
   IconMeasurements,
   IconSailing,
 } from "@/components/icons/SectionIcons";
-import { AllCalculatorsGrid } from "@/components/AllCalculatorsGrid";
-import { getBuildLastModified } from "@/lib/indexing";
+import { FeaturedCalculators } from "@/components/FeaturedCalculators";
 
 export const metadata = buildSeoMetadata({
   title: "Maritime Calculators & Navigation Tools",
   description:
     "Free maritime calculators, sailing tools, and navigation resources for professionals and enthusiasts.",
   path: "/",
-  lastModified: getBuildLastModified(),
 });
 
 const SECTIONS = [
@@ -100,7 +98,7 @@ export default function HomePage() {
           ))}
         </nav>
 
-        <AllCalculatorsGrid />
+        <FeaturedCalculators />
       </div>
     </div>
   );

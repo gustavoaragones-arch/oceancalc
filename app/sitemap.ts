@@ -1,82 +1,88 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/config/site";
 import { getAllCalculators } from "@/lib/contentLoader";
 import { toolVariants } from "@/lib/toolVariants";
 import { getBuildLastModified, getContentSitemapSlice } from "@/lib/indexing";
 
-/** Required for `output: "export"` — sitemap is emitted as static XML at build time. */
+/**
+ * Static export: sitemap is generated at build/deploy (`out/sitemap.xml`).
+ * Live updates when calculators or content JSON change—rebuild to refresh.
+ */
 export const dynamic = "force-static";
 
-/**
- * Dynamic sitemap: core hubs + every calculator + every variant path.
- * Base URL follows `NEXT_PUBLIC_SITE_URL` / `config/site.ts` (default https://oceancalc.com).
- */
+/** Production canonical; override with NEXT_PUBLIC_SITE_URL for staging sitemaps. */
+const BASE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://oceancalc.com"
+).replace(/\/$/, "");
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = getBuildLastModified();
-  const baseUrl = siteConfig.url.replace(/\/$/, "");
   const changeFrequency = "weekly" as const;
 
   const corePages: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}/`,
+      url: `${BASE_URL}/`,
       lastModified,
       changeFrequency,
-      priority: 1,
+      priority: 1.0,
     },
     {
-      url: `${baseUrl}/tools/`,
+      url: `${BASE_URL}/tools/`,
       lastModified,
       changeFrequency,
-      priority: 0.95,
+      priority: 0.9,
     },
     {
-      url: `${baseUrl}/navigation/`,
+      url: `${BASE_URL}/navigation/`,
       lastModified,
       changeFrequency,
-      priority: 0.85,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/knots/`,
+      url: `${BASE_URL}/knots/`,
       lastModified,
       changeFrequency,
-      priority: 0.85,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/wind-waves/`,
+      url: `${BASE_URL}/wind-waves/`,
       lastModified,
       changeFrequency,
-      priority: 0.85,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/sailing/`,
+      url: `${BASE_URL}/sailing/`,
       lastModified,
       changeFrequency,
-      priority: 0.85,
+      priority: 0.8,
     },
     {
-      url: `${baseUrl}/maritime-measurements/`,
+      url: `${BASE_URL}/maritime-measurements/`,
       lastModified,
       changeFrequency,
-      priority: 0.85,
+      priority: 0.8,
     },
   ];
 
   const calculators = getAllCalculators();
-  const toolUrls = calculators.flatMap((calc) => {
-    const main: MetadataRoute.Sitemap[number] = {
-      url: `${baseUrl}/tools/${calc.slug}/`,
+  const calculatorPages = calculators.flatMap((calc) => {
+    const mainPage: MetadataRoute.Sitemap[number] = {
+      url: `${BASE_URL}/tools/${calc.slug}/`,
       lastModified,
       changeFrequency,
       priority: 0.9,
     };
-    const variants = toolVariants.map((variant) => ({
-      url: `${baseUrl}/tools/${calc.slug}/${variant}/`,
+    const variantPages = toolVariants.map((variant) => ({
+      url: `${BASE_URL}/tools/${calc.slug}/${variant}/`,
       lastModified,
       changeFrequency,
       priority: 0.7,
     }));
-    return [main, ...variants];
+    return [mainPage, ...variantPages];
   });
 
-  return [...corePages, ...toolUrls, ...getContentSitemapSlice(lastModified)];
+  return [
+    ...corePages,
+    ...calculatorPages,
+    ...getContentSitemapSlice(lastModified, BASE_URL),
+  ];
 }

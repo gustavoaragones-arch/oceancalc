@@ -7,8 +7,8 @@ import { Breadcrumbs, BreadcrumbSchema } from "./Breadcrumbs";
 import { LearnMore } from "./LearnMore";
 import { AuthorPublisher } from "./AuthorPublisher";
 import { RelatedCalculators } from "./RelatedCalculators";
-import { AllCalculatorsGrid } from "./AllCalculatorsGrid";
 import { CalculatorCategoryLinks } from "./CalculatorCategoryLinks";
+import LastUpdated from "./LastUpdated";
 
 export interface LearnMoreItem {
   slug: string;
@@ -21,7 +21,6 @@ interface CalculatorLayoutProps {
   children: ReactNode;
   breadcrumbItems?: Array<{ label: string; href?: string }>;
   learnMoreItems?: LearnMoreItem[];
-  lastUpdated?: string;
   /** Variant or default page title */
   displayTitle?: string;
   variantIntro?: string | null;
@@ -34,7 +33,6 @@ export function CalculatorLayout({
   children,
   breadcrumbItems,
   learnMoreItems = [],
-  lastUpdated,
   displayTitle,
   variantIntro,
   generated,
@@ -58,7 +56,8 @@ export function CalculatorLayout({
         <p className="text-lg text-gray-600 dark:text-slate-400 leading-relaxed text-balance">
           {calculator.description}
         </p>
-        <AuthorPublisher lastUpdated={lastUpdated} className="mt-2" />
+        <LastUpdated />
+        <AuthorPublisher className="mt-2" />
       </header>
 
       {variantIntro ? (
@@ -72,8 +71,12 @@ export function CalculatorLayout({
         </section>
       ) : null}
 
+      {children}
+
+      <RelatedCalculators currentSlug={calculator.slug} />
+
       {generated ? (
-        <section className="card mb-8" aria-labelledby="intro-heading">
+        <section className="card mt-8" aria-labelledby="intro-heading">
           <h2 id="intro-heading" className="heading-section">
             Overview
           </h2>
@@ -82,10 +85,6 @@ export function CalculatorLayout({
           </p>
         </section>
       ) : null}
-
-      {children}
-
-      <RelatedCalculators currentSlug={calculator.slug} />
 
       {generated ? (
         <section className="card mt-8" aria-labelledby="howto-heading">
@@ -165,8 +164,6 @@ export function CalculatorLayout({
       <CalculatorCategoryLinks category={calculator.category} />
 
       <LearnMore items={learnMoreItems} title="Learn More" />
-
-      <AllCalculatorsGrid />
 
       <CalculatorDisclaimer />
     </article>

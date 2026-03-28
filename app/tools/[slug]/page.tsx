@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { getCalculatorBySlug, getAllCalculatorSlugs } from "@/lib/contentLoader";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 import { formatSlugToTitle } from "@/lib/format";
-import { getBuildLastModified } from "@/lib/indexing";
 import { CalculatorToolPage } from "@/components/CalculatorToolPage";
 
 interface PageProps {
@@ -22,14 +21,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description: `Use the ${title} to perform maritime calculations quickly and accurately.`,
       path: `/tools/${slug}/`,
-      lastModified: getBuildLastModified(),
     });
   }
   return buildSeoMetadata({
     title: calculator.title,
     description: calculator.description,
     path: `/tools/${slug}/`,
-    lastModified: getBuildLastModified(),
   });
 }
 

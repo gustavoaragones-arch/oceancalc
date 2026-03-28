@@ -2,7 +2,6 @@ import type { ArticleEntry } from "@/lib/types";
 import { FAQ } from "./FAQ";
 import { RelatedTools } from "./RelatedTools";
 import { TopicExplorer } from "./TopicExplorer";
-import { AllCalculatorsGrid } from "./AllCalculatorsGrid";
 import { ArticleContentWithLinks } from "./ArticleContentWithLinks";
 import { Breadcrumbs, BreadcrumbSchema } from "./Breadcrumbs";
 import { AuthorPublisher } from "./AuthorPublisher";
@@ -74,8 +73,6 @@ export function ArticleLayout({
           currentSlug={article.slug}
         />
       )}
-
-      <AllCalculatorsGrid />
 
       {article.faq.length > 0 && <FAQ items={article.faq} />}
     </article>

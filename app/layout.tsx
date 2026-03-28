@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { AllCalculatorsGrid } from "@/components/AllCalculatorsGrid";
 import OrganizationSchema from "@/components/schema/OrganizationSchema";
 import WebsiteSchema from "@/components/schema/WebsiteSchema";
 import { siteConfig } from "@/config/site";
@@ -48,6 +49,9 @@ export default function RootLayout({
         <WebsiteSchema />
         <Header />
         <main className="flex-1">{children}</main>
+        <div className="container-wide pt-8 pb-2 border-t border-gray-100 dark:border-slate-800/80 bg-gray-50/40 dark:bg-slate-950/40">
+          <AllCalculatorsGrid />
+        </div>
         <Footer />
       </body>
     </html>

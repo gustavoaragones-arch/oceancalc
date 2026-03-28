@@ -11,7 +11,9 @@
     "lint": "next lint",
     "sitemap": "npx tsx scripts/generate-sitemap.ts",
     "generate-sitemap": "npx tsx scripts/generate-sitemap.ts",
-    "ping:indexing": "node scripts/ping-indexing.mjs"
+    "ping:indexing": "node scripts/ping-indexing.mjs",
+    "refresh": "echo 'refresh trigger'",
+    "validate:crawl": "node scripts/validate-crawl-depth.mjs"
   },
   "dependencies": {
     "@cloudflare/next-on-pages": "^1.13.16",

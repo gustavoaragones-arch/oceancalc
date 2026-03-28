@@ -9,7 +9,6 @@ import {
   getVariantPageCopy,
 } from "@/lib/toolVariants";
 import { CalculatorToolPage } from "@/components/CalculatorToolPage";
-import { getBuildLastModified } from "@/lib/indexing";
 
 interface PageProps {
   params: Promise<{ slug: string; variant: string }>;
@@ -32,7 +31,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: `Maritime calculator variant for ${title}.`,
       path: `/tools/${slug}/${variant}/`,
       canonicalPath: `/tools/${slug}/`,
-      lastModified: getBuildLastModified(),
     });
   }
   const copy = getVariantPageCopy(calculator, variant);
@@ -41,7 +39,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: copy.description,
     path: `/tools/${slug}/${variant}/`,
     canonicalPath: `/tools/${slug}/`,
-    lastModified: getBuildLastModified(),
   });
 }
 

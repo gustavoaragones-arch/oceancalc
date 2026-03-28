@@ -8,14 +8,22 @@ type Rule = { pattern: RegExp; slug: string };
 /** Longer phrases first so we match e.g. "wind speeds in knots" before "knots". */
 const RULES: Rule[] = [
   { pattern: /\bdistance to the horizon\b/i, slug: "distance-to-horizon-calculator" },
+  { pattern: /\bone minute of latitude\b/i, slug: "nautical-mile-converter" },
+  { pattern: /\b60 nautical miles equal\b/i, slug: "nautical-mile-converter" },
   { pattern: /\bwind speeds in knots\b/i, slug: "knots-speed-converter" },
+  { pattern: /\bchip log\b/i, slug: "knots-speed-converter" },
+  { pattern: /\bone nautical mile per hour\b/i, slug: "knots-speed-converter" },
+  { pattern: /\bdead reckoning\b/i, slug: "sailing-time-calculator" },
   { pattern: /\bBeaufort scale\b/i, slug: "beaufort-scale-calculator" },
   { pattern: /\bapparent wind\b/i, slug: "apparent-wind-calculator" },
   { pattern: /\btrue wind\b/i, slug: "apparent-wind-calculator" },
   { pattern: /\bgreat circle\b/i, slug: "great-circle-distance-calculator" },
   { pattern: /\bsailing time calculator\b/i, slug: "sailing-time-calculator" },
-  { pattern: /\bnautical miles\b/i, slug: "nautical-mile-converter" },
+  { pattern: /\banchor scope\b/i, slug: "anchor-scope-calculator" },
   { pattern: /\banchor rode\b/i, slug: "anchor-scope-calculator" },
+  { pattern: /\bwave height\b/i, slug: "wave-height-calculator" },
+  { pattern: /\bfathom\b/i, slug: "fathom-converter" },
+  { pattern: /\bnautical miles\b/i, slug: "nautical-mile-converter" },
   { pattern: /\bwind speed\b/i, slug: "beaufort-scale-calculator" },
   { pattern: /\bspeed in knots\b/i, slug: "knots-speed-converter" },
 ];

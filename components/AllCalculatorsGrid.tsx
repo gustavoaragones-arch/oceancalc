@@ -2,7 +2,9 @@ import Link from "next/link";
 import { getCalculators } from "@/lib/contentLoader";
 
 /**
- * Universal crawl grid: every tool linked from article and hub pages.
+ * Universal crawl grid: lists every calculator from `data/calculators.json`
+ * plus `data/calculators-phase5.json` when present (via `getCalculators`).
+ * Server-rendered plain `<a>` links — no lazy loading.
  */
 export function AllCalculatorsGrid() {
   const tools = getCalculators();
@@ -10,7 +12,7 @@ export function AllCalculatorsGrid() {
 
   return (
     <section
-      className="card mt-8"
+      className="card"
       aria-labelledby="all-calculators-heading"
     >
       <h2 id="all-calculators-heading" className="heading-section">

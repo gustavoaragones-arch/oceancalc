@@ -1,6 +1,15 @@
 import type { CalculatorEntry } from "./types";
 import { templates } from "@/data/contentTemplates";
 
+/** Deterministic index from key (stable per build; no request-time randomness). */
+function pickVariantIndex(key: string, count: number): number {
+  let h = 0;
+  for (let i = 0; i < key.length; i++) {
+    h = (h * 31 + key.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h) % count;
+}
+
 export interface GeneratedToolContent {
   intro: string;
   howTo: string;
@@ -40,9 +49,11 @@ export function getFormulaTextForGenerator(calculator: CalculatorEntry): string 
 export function generateContent(calculator: CalculatorEntry): GeneratedToolContent {
   const formulaText = getFormulaTextForGenerator(calculator);
   const t = templates.default;
+  const introIdx = pickVariantIndex(calculator.slug, t.introVariants.length);
+  const howIdx = pickVariantIndex(`${calculator.slug}:how`, t.howToVariants.length);
   return {
-    intro: t.intro(calculator.title),
-    howTo: t.howTo(calculator.title),
+    intro: t.introVariants[introIdx](calculator.title),
+    howTo: t.howToVariants[howIdx](calculator.title),
     formulaLine: t.formula(formulaText),
     useCases: t.useCases(calculator.title),
     tips: t.tips(calculator.title),

@@ -1,6 +1,6 @@
 /**
  * Stage 6 — Freshness timestamps, extended sitemap URLs (articles, knots, legal),
- * and Search Console notes. Main tool + variant URLs live in `app/sitemap.ts`.
+ * and Search Console notes. Core + tool URLs live in `app/sitemap.ts`.
  */
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
@@ -36,21 +36,17 @@ export function formatIndexingDisplayDate(d: Date): string {
   });
 }
 
-function baseUrl(): string {
-  return siteConfig.url.replace(/\/$/, "");
-}
-
 function pushPath(
   list: MetadataRoute.Sitemap,
+  baseUrl: string,
   path: string,
   priority: number,
   lastModified: Date
 ): void {
-  const base = baseUrl();
   const p = path.startsWith("/") ? path : `/${path}`;
   const normalized = p.endsWith("/") ? p : `${p}/`;
   list.push({
-    url: `${base}${normalized}`,
+    url: `${baseUrl}${normalized}`,
     lastModified,
     changeFrequency: WEEKLY,
     priority,
@@ -58,9 +54,13 @@ function pushPath(
 }
 
 /**
- * Article, knot, and secondary static URLs (everything except homepage, category hubs, and tools).
+ * Article, knot, and secondary static URLs. Uses the same `baseUrl` as `app/sitemap.ts`
+ * so the merged sitemap never mixes domains.
  */
-export function getContentSitemapSlice(lastModified: Date): MetadataRoute.Sitemap {
+export function getContentSitemapSlice(
+  lastModified: Date,
+  baseUrl: string
+): MetadataRoute.Sitemap {
   const out: MetadataRoute.Sitemap = [];
 
   const staticPages: Array<[string, number]> = [
@@ -73,28 +73,29 @@ export function getContentSitemapSlice(lastModified: Date): MetadataRoute.Sitema
     ["/affiliate/", 0.4],
   ];
   for (const [path, pri] of staticPages) {
-    pushPath(out, path, pri, lastModified);
+    pushPath(out, baseUrl, path, pri, lastModified);
   }
 
   for (const a of getNavigationArticles()) {
-    pushPath(out, `/navigation/${a.slug}/`, 0.75, lastModified);
+    pushPath(out, baseUrl, `/navigation/${a.slug}/`, 0.75, lastModified);
   }
   for (const a of getWindWavesArticles()) {
-    pushPath(out, `/wind-waves/${a.slug}/`, 0.75, lastModified);
+    pushPath(out, baseUrl, `/wind-waves/${a.slug}/`, 0.75, lastModified);
   }
   for (const a of getMeasurementsArticles()) {
-    pushPath(out, `/maritime-measurements/${a.slug}/`, 0.75, lastModified);
+    pushPath(out, baseUrl, `/maritime-measurements/${a.slug}/`, 0.75, lastModified);
   }
   for (const a of getSailingArticles()) {
-    pushPath(out, `/sailing/${a.slug}/`, 0.75, lastModified);
+    pushPath(out, baseUrl, `/sailing/${a.slug}/`, 0.75, lastModified);
   }
   for (const k of getKnots()) {
-    pushPath(out, `/knots/${k.slug}/`, 0.75, lastModified);
+    pushPath(out, baseUrl, `/knots/${k.slug}/`, 0.75, lastModified);
   }
 
   return out;
 }
 
 export function getSitemapAbsoluteUrl(): string {
-  return `${baseUrl()}/sitemap.xml`;
+  const base = siteConfig.url.replace(/\/$/, "");
+  return `${base}/sitemap.xml`;
 }

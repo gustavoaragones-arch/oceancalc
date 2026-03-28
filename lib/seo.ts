@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
+import { getBuildLastModified } from "@/lib/indexing";
 
 function normalizePath(path: string): string {
   if (!path || path === "/") return "/";
@@ -35,30 +36,27 @@ export function generateMetadata({
   path,
   openGraphType = "website",
   canonicalPath,
-  lastModified,
+  lastModified = getBuildLastModified(),
 }: GenerateSeoMetadataInput): Metadata {
   const fullTitle = `${title} | ${siteConfig.name}`;
   const canonical = canonicalUrl(canonicalPath ?? path);
   const pageUrl = canonicalUrl(path);
+  const modifiedIso = lastModified.toISOString();
 
   return {
     title: { absolute: fullTitle },
     description,
     alternates: { canonical },
-    ...(lastModified
-      ? {
-          other: {
-            "article:modified_time": lastModified.toISOString(),
-          },
-        }
-      : {}),
+    other: {
+      "article:modified_time": modifiedIso,
+    },
     openGraph: {
       title: fullTitle,
       description,
       url: pageUrl,
       siteName: siteConfig.name,
       type: openGraphType,
-      ...(lastModified ? { modifiedTime: lastModified.toISOString() } : {}),
+      modifiedTime: modifiedIso,
     },
     twitter: {
       card: "summary_large_image",
@@ -75,7 +73,7 @@ export function generateArticleMetadata({
   headline,
   description,
   path,
-  lastModified,
+  lastModified = getBuildLastModified(),
 }: {
   headline: string;
   description: string;

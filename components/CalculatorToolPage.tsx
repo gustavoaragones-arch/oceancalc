@@ -8,7 +8,6 @@ import {
   type ToolVariantId,
 } from "@/lib/toolVariants";
 import { siteConfig } from "@/config/site";
-import { formatIndexingDisplayDate, getBuildLastModified } from "@/lib/indexing";
 import CalculatorSchema from "@/components/schema/CalculatorSchema";
 import FAQSchema from "@/components/schema/FAQSchema";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
@@ -37,7 +36,6 @@ export function CalculatorToolPage({ slug, variant }: CalculatorToolPageProps) {
 
   const base = siteConfig.url.replace(/\/$/, "");
   const mainToolUrl = `${base}/tools/${slug}/`;
-  const lastUpdated = formatIndexingDisplayDate(getBuildLastModified());
 
   return (
     <>
@@ -55,7 +53,6 @@ export function CalculatorToolPage({ slug, variant }: CalculatorToolPageProps) {
         variantIntro={variantCopy?.lead ?? null}
         generated={generated}
         faqItems={generated.mergedFaq}
-        lastUpdated={lastUpdated}
       >
         <CalculatorRenderer calculator={calculator} />
       </CalculatorLayout>

@@ -1,7 +1,6 @@
 import type { KnotEntry } from "@/lib/types";
 import Link from "next/link";
 import { FAQ } from "./FAQ";
-import { AllCalculatorsGrid } from "./AllCalculatorsGrid";
 
 interface KnotTutorialProps {
   knot: KnotEntry;
@@ -39,7 +38,14 @@ export function KnotTutorial({ knot }: KnotTutorialProps) {
           >
             anchor scope
           </Link>{" "}
-          when setting the hook.
+          when setting the hook. For chart work, use the{" "}
+          <Link
+            href="/tools/nautical-mile-converter/"
+            className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+          >
+            nautical mile converter
+          </Link>{" "}
+          to keep distances consistent with the latitude scale.
         </p>
       </section>
 
@@ -84,8 +90,6 @@ export function KnotTutorial({ knot }: KnotTutorialProps) {
           ))}
         </ol>
       </section>
-
-      <AllCalculatorsGrid />
 
       {knot.faq.length > 0 && <FAQ items={knot.faq} />}
     </article>
