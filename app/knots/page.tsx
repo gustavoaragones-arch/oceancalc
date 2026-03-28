@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { getKnots } from "@/lib/contentLoader";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Sailing Knots Library | OceanCalc",
+export const metadata = buildSeoMetadata({
+  title: "Sailing Knots Library",
   description:
     "Step-by-step tutorials for essential sailing and boating knots. Bowline, cleat hitch, clove hitch, and more.",
-  alternates: { canonical: "https://oceancalc.com/knots/" },
-  openGraph: {
-    title: "Sailing Knots Library | OceanCalc",
-    description: "Tutorials for essential sailing and boating knots.",
-    url: "https://oceancalc.com/knots/",
-  },
-};
+  path: "/knots/",
+});
 
 export default function KnotsHubPage() {
   const knots = getKnots();

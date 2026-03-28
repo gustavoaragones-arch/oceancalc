@@ -1,7 +1,11 @@
-export const metadata = {
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
+
+export const metadata = buildSeoMetadata({
   title: "Affiliate Disclosure",
-  description: "Affiliate disclosure for OceanCalc.",
-};
+  description:
+    "Affiliate disclosure for OceanCalc. How we may earn commissions from product links.",
+  path: "/affiliate/",
+});
 
 export default function AffiliatePage() {
   return (

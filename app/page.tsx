@@ -1,4 +1,12 @@
 import Link from "next/link";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
+
+export const metadata = buildSeoMetadata({
+  title: "Maritime Calculators & Navigation Tools",
+  description:
+    "Free maritime calculators, sailing tools, and navigation resources for professionals and enthusiasts.",
+  path: "/",
+});
 
 const SECTIONS = [
   {

@@ -1,4 +1,6 @@
-const SITE_URL = "https://oceancalc.com";
+import { siteConfig } from "@/config/site";
+
+const SITE_URL = siteConfig.url.replace(/\/$/, "");
 
 export type SoftwareApplicationSchema = {
   "@context": "https://schema.org";

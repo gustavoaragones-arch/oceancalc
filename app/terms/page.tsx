@@ -1,12 +1,11 @@
 import { organization } from "@/config/siteOwner";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = buildSeoMetadata({
   title: "Terms of Use",
-  description: `Terms of use for OceanCalc.`,
-  openGraph: {
-    title: "Terms of Use | OceanCalc",
-  },
-};
+  description: `Terms of use for OceanCalc, operated by ${organization.name}.`,
+  path: "/terms/",
+});
 
 export default function TermsPage() {
   return (

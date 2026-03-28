@@ -3,17 +3,17 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { OrganizationSchema, WebSiteSchema } from "@/components/OrganizationSchema";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://oceancalc.com";
+import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE_URL),
+  metadataBase: new URL(
+    siteConfig.url.endsWith("/") ? siteConfig.url : `${siteConfig.url}/`
+  ),
   title: {
-    default: "OceanCalc — Maritime Calculators & Navigation Tools",
-    template: "%s | OceanCalc",
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Free maritime calculators, sailing navigation tools, nautical measurements, and wind & wave reference. The largest maritime calculator and navigation knowledge hub.",
+  description: siteConfig.description,
   keywords: [
     "maritime calculator",
     "nautical tools",
@@ -25,8 +25,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: SITE_URL,
-    siteName: "OceanCalc",
+    url: `${siteConfig.url.replace(/\/$/, "")}/`,
+    siteName: siteConfig.name,
+    description: siteConfig.description,
   },
   robots: {
     index: true,

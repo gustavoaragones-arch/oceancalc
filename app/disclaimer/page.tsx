@@ -1,12 +1,11 @@
 import { organization } from "@/config/siteOwner";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = buildSeoMetadata({
   title: "Disclaimer",
-  description: "Disclaimer for OceanCalc maritime calculators and content.",
-  openGraph: {
-    title: "Disclaimer | OceanCalc",
-  },
-};
+  description: `Disclaimer for OceanCalc maritime calculators and content. Operated by ${organization.name}.`,
+  path: "/disclaimer/",
+});
 
 export default function DisclaimerPage() {
   return (

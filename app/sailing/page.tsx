@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { getSailingArticles } from "@/lib/contentLoader";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Tools for Sailors | OceanCalc",
+export const metadata = buildSeoMetadata({
+  title: "Tools for Sailors",
   description:
     "Anchoring, passage planning, and onboard calculations for sailors and cruisers.",
-  alternates: { canonical: "https://oceancalc.com/sailing/" },
-  openGraph: {
-    title: "Tools for Sailors | OceanCalc",
-    description: "Anchoring, passage planning, and sailing calculators.",
-    url: "https://oceancalc.com/sailing/",
-  },
-};
+  path: "/sailing/",
+});
 
 export default function SailingHubPage() {
   const articles = getSailingArticles();

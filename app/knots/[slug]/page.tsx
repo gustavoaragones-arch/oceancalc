@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getKnotBySlug, getAllKnotSlugs } from "@/lib/contentLoader";
-import { buildKnotSEO } from "@/lib/seoBuilder";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 import { buildHowToSchema, buildFAQSchema } from "@/lib/schemaBuilder";
 import { KnotTutorial } from "@/components/KnotTutorial";
 
@@ -17,16 +17,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const knot = getKnotBySlug(slug);
   if (!knot) return { title: "Not Found" };
-  const seo = buildKnotSEO({
-    name: knot.name,
+  return buildSeoMetadata({
+    title: knot.name,
+    description: `How to tie the ${knot.name}. Step-by-step tutorial for sailors and boaters.`,
     path: `/knots/${slug}/`,
+    openGraphType: "article",
   });
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: seo.canonical },
-    openGraph: seo.openGraph,
-  };
 }
 
 export default async function KnotPage({ params }: PageProps) {

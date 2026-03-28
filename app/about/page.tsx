@@ -1,14 +1,12 @@
 import Link from "next/link";
 import { organization } from "@/config/siteOwner";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = buildSeoMetadata({
   title: "About",
   description: `About OceanCalc — maritime calculators and navigation reference. Built by ${organization.name}.`,
-  openGraph: {
-    title: "About | OceanCalc",
-    description: `OceanCalc is an independent maritime tools platform built by ${organization.name}.`,
-  },
-};
+  path: "/about/",
+});
 
 export default function AboutPage() {
   return (

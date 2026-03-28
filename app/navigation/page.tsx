@@ -1,18 +1,14 @@
 import Link from "next/link";
 import { getNavigationArticles } from "@/lib/contentLoader";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Navigation Fundamentals | OceanCalc",
+export const metadata = buildSeoMetadata({
+  title: "Navigation Tools & Guides",
   description:
-    "Piloting, dead reckoning, coastal navigation, and chart work for sailors and mariners.",
-  alternates: { canonical: "https://oceancalc.com/navigation/" },
-  openGraph: {
-    title: "Navigation Fundamentals | OceanCalc",
-    description: "Piloting, dead reckoning, and coastal navigation.",
-    url: "https://oceancalc.com/navigation/",
-  },
-};
+    "Learn maritime navigation, dead reckoning, and coastal piloting techniques.",
+  path: "/navigation/",
+});
 
 export default function NavigationHubPage() {
   const articles = getNavigationArticles();

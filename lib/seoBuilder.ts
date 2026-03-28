@@ -1,5 +1,5 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://oceancalc.com";
-const SITE_NAME = "OceanCalc";
+import { generateMetadata, generateArticleMetadata } from "./seo";
+import type { Metadata } from "next";
 
 export interface ToolSEOProps {
   title: string;
@@ -20,87 +20,73 @@ export interface KnotSEOProps {
   path: string;
 }
 
-/**
- * Tool page: "{Calculator Name} | OceanCalc"
- */
+function metadataToLegacy(m: Metadata): {
+  title: string;
+  description: string;
+  canonical: string;
+  openGraph: NonNullable<Metadata["openGraph"]>;
+} {
+  const titleObj = m.title;
+  const title =
+    typeof titleObj === "object" &&
+    titleObj !== null &&
+    "absolute" in titleObj &&
+    typeof titleObj.absolute === "string"
+      ? titleObj.absolute
+      : String(titleObj ?? "");
+  const description = m.description ?? "";
+  const canonical =
+    (typeof m.alternates?.canonical === "string"
+      ? m.alternates.canonical
+      : m.alternates?.canonical?.toString()) ?? "";
+  return {
+    title,
+    description,
+    canonical,
+    openGraph: m.openGraph ?? {},
+  };
+}
+
+/** @deprecated Prefer `generateMetadata` from @/lib/seo */
 export function buildToolSEO(props: ToolSEOProps) {
-  const title = `${props.title} | ${SITE_NAME}`;
-  const canonical = `${SITE_URL}${props.path}`;
-  return {
-    title,
-    description: props.description,
-    canonical,
-    openGraph: {
-      title,
+  return metadataToLegacy(
+    generateMetadata({
+      title: props.title,
       description: props.description,
-      url: canonical,
-      siteName: SITE_NAME,
-      type: "website" as const,
-    },
-  };
+      path: props.path,
+    })
+  );
 }
 
-/**
- * Article page: "{Topic} Explained | OceanCalc" or custom title
- */
+/** @deprecated Prefer `generateArticleMetadata` from @/lib/seo */
 export function buildArticleSEO(props: ArticleSEOProps) {
-  const title = props.title.endsWith("Explained") || props.title.includes("|")
-    ? `${props.title} | ${SITE_NAME}`
-    : `${props.title} Explained | ${SITE_NAME}`;
-  const canonical = `${SITE_URL}${props.path}`;
-  return {
-    title,
-    description: props.description,
-    canonical,
-    openGraph: {
-      title,
+  return metadataToLegacy(
+    generateArticleMetadata({
+      headline: props.title,
       description: props.description,
-      url: canonical,
-      siteName: SITE_NAME,
-      type: "article" as const,
-    },
-  };
+      path: props.path,
+    })
+  );
 }
 
-/**
- * Knot tutorial: "{Knot Name} | OceanCalc"
- */
+/** @deprecated Prefer `generateMetadata` from @/lib/seo with openGraphType: "article" */
 export function buildKnotSEO(props: KnotSEOProps) {
-  const title = `${props.name} | ${SITE_NAME}`;
   const description =
     props.description ??
     `How to tie the ${props.name}. Step-by-step tutorial for sailors and boaters.`;
-  const canonical = `${SITE_URL}${props.path}`;
-  return {
-    title,
-    description,
-    canonical,
-    openGraph: {
-      title,
+  return metadataToLegacy(
+    generateMetadata({
+      title: props.name,
       description,
-      url: canonical,
-      siteName: SITE_NAME,
-      type: "article" as const,
-    },
-  };
+      path: props.path,
+      openGraphType: "article",
+    })
+  );
 }
 
-/**
- * Hub page SEO (e.g. /tools/, /knots/)
- */
+/** @deprecated Prefer `generateMetadata` from @/lib/seo */
 export function buildHubSEO(title: string, description: string, path: string) {
-  const fullTitle = `${title} | ${SITE_NAME}`;
-  const canonical = `${SITE_URL}${path}`;
-  return {
-    title: fullTitle,
-    description,
-    canonical,
-    openGraph: {
-      title: fullTitle,
-      description,
-      url: canonical,
-      siteName: SITE_NAME,
-      type: "website" as const,
-    },
-  };
+  return metadataToLegacy(
+    generateMetadata({ title, description, path })
+  );
 }

@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { getWindWavesArticles } from "@/lib/contentLoader";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Wind & Wave Science | OceanCalc",
+export const metadata = buildSeoMetadata({
+  title: "Wind & Wave Science",
   description:
     "Beaufort scale, apparent wind, sea state, and marine weather reference for sailors.",
-  alternates: { canonical: "https://oceancalc.com/wind-waves/" },
-  openGraph: {
-    title: "Wind & Wave Science | OceanCalc",
-    description: "Beaufort scale, apparent wind, and sea state reference.",
-    url: "https://oceancalc.com/wind-waves/",
-  },
-};
+  path: "/wind-waves/",
+});
 
 export default function WindWavesHubPage() {
   const articles = getWindWavesArticles();

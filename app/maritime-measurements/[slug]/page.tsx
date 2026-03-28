@@ -8,7 +8,7 @@ import {
   getRelatedToolsForArticle,
   getArticlesInCategory,
 } from "@/lib/internalLinker";
-import { buildArticleSEO } from "@/lib/seoBuilder";
+import { generateArticleMetadata } from "@/lib/seo";
 import { buildArticleSchema, buildFAQSchema } from "@/lib/schemaBuilder";
 import { ArticleLayout } from "@/components/ArticleLayout";
 
@@ -24,17 +24,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const article = getMeasurementsArticleBySlug(slug);
   if (!article) return { title: "Not Found" };
-  const seo = buildArticleSEO({
-    title: article.title,
+  return generateArticleMetadata({
+    headline: article.title,
     description: article.description,
     path: `/maritime-measurements/${slug}/`,
   });
-  return {
-    title: seo.title,
-    description: seo.description,
-    alternates: { canonical: seo.canonical },
-    openGraph: seo.openGraph,
-  };
 }
 
 export default async function MeasurementsArticlePage({ params }: PageProps) {

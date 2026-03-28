@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { getMeasurementsArticles } from "@/lib/contentLoader";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Maritime Measurements | OceanCalc",
+export const metadata = buildSeoMetadata({
+  title: "Maritime Measurements",
   description:
     "Nautical miles, fathoms, knots, and conversion tables for maritime and sailing.",
-  alternates: { canonical: "https://oceancalc.com/maritime-measurements/" },
-  openGraph: {
-    title: "Maritime Measurements | OceanCalc",
-    description: "Nautical miles, fathoms, knots, and conversion reference.",
-    url: "https://oceancalc.com/maritime-measurements/",
-  },
-};
+  path: "/maritime-measurements/",
+});
 
 export default function MaritimeMeasurementsHubPage() {
   const articles = getMeasurementsArticles();

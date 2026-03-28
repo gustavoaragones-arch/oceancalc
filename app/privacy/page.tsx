@@ -1,12 +1,11 @@
 import { organization } from "@/config/siteOwner";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = buildSeoMetadata({
   title: "Privacy Policy",
   description: `Privacy policy for OceanCalc and ${organization.name}.`,
-  openGraph: {
-    title: "Privacy Policy | OceanCalc",
-  },
-};
+  path: "/privacy/",
+});
 
 export default function PrivacyPage() {
   return (

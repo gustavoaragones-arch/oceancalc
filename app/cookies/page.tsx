@@ -1,12 +1,11 @@
 import { organization } from "@/config/siteOwner";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Cookies",
-  description: "Cookie policy for OceanCalc.",
-  openGraph: {
-    title: "Cookies | OceanCalc",
-  },
-};
+export const metadata = buildSeoMetadata({
+  title: "Cookie Policy",
+  description: `Cookie policy for OceanCalc, operated by ${organization.name}.`,
+  path: "/cookies/",
+});
 
 export default function CookiesPage() {
   return (

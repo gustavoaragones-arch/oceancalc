@@ -1,18 +1,13 @@
 import Link from "next/link";
 import { getCalculators } from "@/lib/contentLoader";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Maritime Calculators | OceanCalc",
+export const metadata = buildSeoMetadata({
+  title: "Maritime Calculators",
   description:
     "Free nautical calculators: nautical mile converter, knots speed, distance to horizon, sailing time, great circle distance, anchor scope, Beaufort scale, apparent wind, and more.",
-  alternates: { canonical: "https://oceancalc.com/tools/" },
-  openGraph: {
-    title: "Maritime Calculators | OceanCalc",
-    description:
-      "Free nautical calculators for sailors and mariners. Convert units, plan passages, and calculate anchor scope, wind, and distance.",
-    url: "https://oceancalc.com/tools/",
-  },
-};
+  path: "/tools/",
+});
 
 export default function ToolsHubPage() {
   const calculators = getCalculators();

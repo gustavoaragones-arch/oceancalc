@@ -1,13 +1,11 @@
 import { organization } from "@/config/siteOwner";
+import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
-export const metadata = {
+export const metadata = buildSeoMetadata({
   title: "Contact",
-  description: `Contact OceanCalc and ${organization.name}.`,
-  openGraph: {
-    title: "Contact | OceanCalc",
-    description: `Get in touch with the OceanCalc team.`,
-  },
-};
+  description: `Contact OceanCalc and ${organization.name}. Get in touch with the OceanCalc team.`,
+  path: "/contact/",
+});
 
 export default function ContactPage() {
   return (
