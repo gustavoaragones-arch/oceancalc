@@ -2,6 +2,7 @@
   "maritime-measurements": [
     "nautical-mile-converter",
     "knots-speed-converter",
+    "knots-to-kmh",
     "fathom-converter"
   ],
   "navigation-tools": [

@@ -1,6 +1,7 @@
 "use client";
 
 import type { CalculatorEntry } from "@/lib/types";
+import { CalculatorShell } from "./calculator/CalculatorShell";
 import { CalculatorEngine } from "./calculator-engine/CalculatorEngine";
 import { UnitConverter } from "./calculators/UnitConverter";
 import { DistanceToHorizonCalculator } from "./calculators/DistanceToHorizon";
@@ -15,6 +16,10 @@ interface CalculatorRendererProps {
 }
 
 export function CalculatorRenderer({ calculator }: CalculatorRendererProps) {
+  if (calculator.simpleRegistry) {
+    return <CalculatorShell calculator={calculator} />;
+  }
+
   if (calculator.engine) {
     return (
       <CalculatorEngine

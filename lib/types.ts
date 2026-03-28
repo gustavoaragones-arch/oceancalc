@@ -31,12 +31,33 @@ export interface CalculatorEngineConfig {
   formulaDisplay?: string;
 }
 
+/** Registry-based shell: one formula key + simple numeric inputs (scalable to 100+ tools). */
+export interface SimpleRegistryInput {
+  name: string;
+  label: string;
+  type: "number";
+  default?: number;
+  min?: number;
+  step?: string;
+}
+
+export interface SimpleRegistryConfig {
+  formulaKey: string;
+  inputs: SimpleRegistryInput[];
+  resultLabel: string;
+  decimals?: number;
+}
+
 export interface CalculatorEntry {
   slug: string;
   title: string;
   description: string;
   category: string;
   type: string;
+  /**
+   * When set, renders `CalculatorShell` with `lib/calculators` map (takes precedence over `engine` / legacy UI).
+   */
+  simpleRegistry?: SimpleRegistryConfig;
   /** Legacy: unit converter pairs. Use engine.inputs/outputs for universal engine. */
   unitPairs?: UnitPair[];
   defaultFrom?: string;

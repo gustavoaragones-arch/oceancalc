@@ -5,6 +5,12 @@
     "description": "Convert between nautical miles, statute miles, kilometers, and meters. Essential for chart work and passage planning.",
     "category": "maritime-measurements",
     "type": "unit-converter",
+    "simpleRegistry": {
+      "formulaKey": "nauticalMilesToKm",
+      "inputs": [{ "name": "value", "label": "Nautical Miles", "type": "number", "default": 1, "min": 0, "step": "any" }],
+      "resultLabel": "Kilometers",
+      "decimals": 4
+    },
     "engine": {
       "inputs": [
         { "name": "distance", "label": "Distance", "type": "number", "unit": "nautical_miles", "units": ["nautical_miles", "kilometers", "miles", "meters", "feet"], "default": 1 }
@@ -88,6 +94,32 @@
       {
         "question": "Why is boat speed in knots?",
         "answer": "Marine charts and navigation use nautical miles. Using knots (nautical miles per hour) keeps speed and distance in the same units, so time = distance ÷ speed works directly for passage planning."
+      }
+    ]
+  },
+  {
+    "slug": "knots-to-kmh",
+    "title": "Knots to km/h Converter",
+    "description": "Convert speed in knots to kilometers per hour. One knot equals 1.852 km/h.",
+    "category": "maritime-measurements",
+    "type": "registry-shell",
+    "simpleRegistry": {
+      "formulaKey": "knotsToKmh",
+      "inputs": [{ "name": "value", "label": "Knots", "type": "number", "default": 10, "min": 0, "step": "any" }],
+      "resultLabel": "km/h",
+      "decimals": 2
+    },
+    "formula": "1 knot = 1 nautical mile per hour = 1.852 km/h.",
+    "formulaDetail": "Multiply speed in knots by 1.852 to get kilometers per hour.",
+    "examples": ["10 knots = 18.52 km/h", "6 knots ≈ 11.11 km/h", "20 knots = 37.04 km/h"],
+    "faq": [
+      {
+        "question": "How do you convert knots to km/h?",
+        "answer": "Multiply the speed in knots by 1.852. For example, 10 knots equals 18.52 km/h."
+      },
+      {
+        "question": "Why is the factor 1.852?",
+        "answer": "One nautical mile is exactly 1,852 meters, so one knot (one nautical mile per hour) is 1.852 kilometers per hour."
       }
     ]
   },
