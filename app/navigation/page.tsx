@@ -2,12 +2,14 @@ import Link from "next/link";
 import { getNavigationArticles } from "@/lib/contentLoader";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
+import { getBuildLastModified } from "@/lib/indexing";
 
 export const metadata = buildSeoMetadata({
   title: "Navigation Tools & Guides",
   description:
     "Learn maritime navigation, dead reckoning, and coastal piloting techniques.",
   path: "/navigation/",
+  lastModified: getBuildLastModified(),
 });
 
 export default function NavigationHubPage() {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getKnotBySlug, getAllKnotSlugs } from "@/lib/contentLoader";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
+import { getBuildLastModified } from "@/lib/indexing";
 import { buildHowToSchema } from "@/lib/schemaBuilder";
 import FAQSchema from "@/components/schema/FAQSchema";
 import { KnotTutorial } from "@/components/KnotTutorial";
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: `How to tie the ${knot.name}. Step-by-step tutorial for sailors and boaters.`,
     path: `/knots/${slug}/`,
     openGraphType: "article",
+    lastModified: getBuildLastModified(),
   });
 }
 

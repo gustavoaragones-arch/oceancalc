@@ -9,6 +9,7 @@ import {
   getArticlesInCategory,
 } from "@/lib/internalLinker";
 import { generateArticleMetadata } from "@/lib/seo";
+import { getBuildLastModified } from "@/lib/indexing";
 import { buildArticleSchema } from "@/lib/schemaBuilder";
 import FAQSchema from "@/components/schema/FAQSchema";
 import { ArticleLayout } from "@/components/ArticleLayout";
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     headline: article.title,
     description: article.description,
     path: `/navigation/${slug}/`,
+    lastModified: getBuildLastModified(),
   });
 }
 

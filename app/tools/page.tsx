@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { getCalculators } from "@/lib/contentLoader";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
+import { getBuildLastModified } from "@/lib/indexing";
 
 export const metadata = buildSeoMetadata({
   title: "Maritime Calculators",
   description:
     "Free nautical calculators: nautical mile converter, knots speed, distance to horizon, sailing time, great circle distance, anchor scope, Beaufort scale, apparent wind, and more.",
   path: "/tools/",
+  lastModified: getBuildLastModified(),
 });
 
 export default function ToolsHubPage() {

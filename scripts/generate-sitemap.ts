@@ -1,17 +1,15 @@
 /**
- * Generates sitemap index + section sitemaps for SEO.
+ * Legacy: generates section sitemap XML files under public/.
+ *
+ * Primary sitemap for crawlers is built at deploy time from `app/sitemap.ts`
+ * (see `lib/indexing.ts`) and must not be duplicated as `public/sitemap.xml`.
+ *
  * Run: npm run sitemap (or npx tsx scripts/generate-sitemap.ts)
  * Reads NEXT_PUBLIC_SITE_URL from .env.local, falls back to https://oceancalc.com
  *
  * Output in public/:
- *   sitemap.xml (index)
- *   sitemap-calculators.xml
- *   sitemap-navigation.xml
- *   sitemap-measurements.xml
- *   sitemap-knots.xml
- *   sitemap-wind-waves.xml
- *   sitemap-sailing.xml
- *   sitemap-pages.xml
+ *   sitemap-calculators.xml, sitemap-navigation.xml, sitemap-measurements.xml,
+ *   sitemap-knots.xml, sitemap-wind-waves.xml, sitemap-sailing.xml, sitemap-pages.xml
  */
 
 import * as fs from "fs";
@@ -151,34 +149,7 @@ function main() {
   );
   writeUrlset("sitemap-pages.xml", pageEntries);
 
-  // --- sitemap.xml (index) ---
-  const indexNames = [
-    "sitemap-calculators.xml",
-    "sitemap-navigation.xml",
-    "sitemap-measurements.xml",
-    "sitemap-knots.xml",
-    "sitemap-wind-waves.xml",
-    "sitemap-sailing.xml",
-    "sitemap-pages.xml",
-  ];
-  const indexEntries = indexNames
-    .map(
-      (name) =>
-        `
- <sitemap>
-  <loc>${escapeXml(`${BASE_URL}/${name}`)}</loc>
- </sitemap>`
-    )
-    .join("");
-
-  const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${indexEntries}
-</sitemapindex>
-`;
-  fs.writeFileSync(path.join(PUBLIC_DIR, "sitemap.xml"), indexXml, "utf-8");
-
-  console.log(`\nSitemap index: ${BASE_URL}/sitemap.xml`);
-  console.log("Section sitemaps in public/:");
+  console.log("\nSection sitemaps in public/ (legacy). Main crawler sitemap: app/sitemap.ts → out/sitemap.xml");
 }
 
 main();

@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { getKnots } from "@/lib/contentLoader";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
+import { getBuildLastModified } from "@/lib/indexing";
 
 export const metadata = buildSeoMetadata({
   title: "Sailing Knots Library",
   description:
     "Step-by-step tutorials for essential sailing and boating knots. Bowline, cleat hitch, clove hitch, and more.",
   path: "/knots/",
+  lastModified: getBuildLastModified(),
 });
 
 export default function KnotsHubPage() {

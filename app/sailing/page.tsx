@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { getSailingArticles } from "@/lib/contentLoader";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
+import { getBuildLastModified } from "@/lib/indexing";
 
 export const metadata = buildSeoMetadata({
   title: "Tools for Sailors",
   description:
     "Anchoring, passage planning, and onboard calculations for sailors and cruisers.",
   path: "/sailing/",
+  lastModified: getBuildLastModified(),
 });
 
 export default function SailingHubPage() {

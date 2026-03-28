@@ -19,6 +19,10 @@ export interface GenerateSeoMetadataInput {
   description: string;
   path: string;
   openGraphType?: "website" | "article";
+  /** If set, `alternates.canonical` points here (e.g. main tool URL for `/tools/[slug]/[variant]/`). */
+  canonicalPath?: string;
+  /** Freshness signal for crawlers (Open Graph `modifiedTime`). */
+  lastModified?: Date;
 }
 
 /**
@@ -30,20 +34,31 @@ export function generateMetadata({
   description,
   path,
   openGraphType = "website",
+  canonicalPath,
+  lastModified,
 }: GenerateSeoMetadataInput): Metadata {
   const fullTitle = `${title} | ${siteConfig.name}`;
-  const canonical = canonicalUrl(path);
+  const canonical = canonicalUrl(canonicalPath ?? path);
+  const pageUrl = canonicalUrl(path);
 
   return {
     title: { absolute: fullTitle },
     description,
     alternates: { canonical },
+    ...(lastModified
+      ? {
+          other: {
+            "article:modified_time": lastModified.toISOString(),
+          },
+        }
+      : {}),
     openGraph: {
       title: fullTitle,
       description,
-      url: canonical,
+      url: pageUrl,
       siteName: siteConfig.name,
       type: openGraphType,
+      ...(lastModified ? { modifiedTime: lastModified.toISOString() } : {}),
     },
     twitter: {
       card: "summary_large_image",
@@ -60,10 +75,12 @@ export function generateArticleMetadata({
   headline,
   description,
   path,
+  lastModified,
 }: {
   headline: string;
   description: string;
   path: string;
+  lastModified?: Date;
 }): Metadata {
   const title =
     headline.endsWith("Explained") || headline.includes("|")
@@ -74,5 +91,6 @@ export function generateArticleMetadata({
     description,
     path,
     openGraphType: "article",
+    lastModified,
   });
 }

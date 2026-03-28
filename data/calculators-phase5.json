@@ -1,0 +1,658 @@
+[
+  {
+    "slug": "hull-speed-calculator",
+    "title": "Hull Speed Calculator",
+    "description": "Estimate theoretical hull speed from waterline length using the classic 1.34 × √LWL rule for displacement hulls.",
+    "category": "sailing-performance",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "lwl", "label": "Waterline length (ft)", "type": "number", "unit": "ratio", "default": 32, "min": 6, "max": 400 }
+      ],
+      "outputs": [
+        { "name": "vmax", "label": "Approx. hull speed (kn)", "formula": "hull_speed_kn(lwl)", "decimals": 2 }
+      ],
+      "formulaDisplay": "Hull speed (kn) ≈ 1.34 × √(LWL ft)"
+    },
+    "formula": "Classical displacement estimate: V ≈ 1.34√LWL (knots, LWL in feet). Planing hulls and multihulls often exceed this.",
+    "formulaDetail": "Based on Froude number ~0.4 for typical monohull wave-making resistance.",
+    "examples": ["32 ft LWL → ~7.6 kn", "40 ft → ~8.5 kn"],
+    "faq": [
+      { "question": "Is hull speed a hard limit?", "answer": "No. It is a useful rule of thumb for displacement monohulls. Light air, surfing, or planing can yield higher speeds." }
+    ]
+  },
+  {
+    "slug": "initial-bearing-calculator",
+    "title": "Initial Bearing Calculator",
+    "description": "Compute the initial true bearing from one lat/lon waypoint to another (great-circle start heading).",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "lat1", "label": "Start latitude (°)", "type": "number", "unit": "degrees", "default": 40.7, "min": -90, "max": 90 },
+        { "name": "lon1", "label": "Start longitude (°)", "type": "number", "unit": "degrees", "default": -74, "min": -180, "max": 180 },
+        { "name": "lat2", "label": "End latitude (°)", "type": "number", "unit": "degrees", "default": 51.5, "min": -90, "max": 90 },
+        { "name": "lon2", "label": "End longitude (°)", "type": "number", "unit": "degrees", "default": -0.13, "min": -180, "max": 180 }
+      ],
+      "outputs": [
+        { "name": "brg", "label": "Initial true bearing (°)", "formula": "initial_bearing_deg(lat1, lon1, lat2, lon2)", "decimals": 1 }
+      ],
+      "formulaDisplay": "Forward azimuth via spherical trigonometry (atan2 of sin/cos terms)"
+    },
+    "formula": "Initial bearing uses the standard forward azimuth formula between two geographic points on a sphere.",
+    "formulaDetail": "Does not apply variation/deviation; output is true bearing.",
+    "examples": ["NYC to London initial bearing ≈ 51°", "Use with great-circle distance for route sketching"],
+    "faq": [
+      { "question": "Does bearing stay constant along the route?", "answer": "No. Great-circle routes change bearing along the arc; this value is only the starting heading." }
+    ]
+  },
+  {
+    "slug": "rhumb-distance-calculator",
+    "title": "Rhumb Line Distance Calculator",
+    "description": "Approximate rhumb-line distance in nautical miles between two positions (plane sailing at mean latitude).",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "lat1", "label": "Latitude A (°)", "type": "number", "unit": "degrees", "default": 40, "min": -90, "max": 90 },
+        { "name": "lon1", "label": "Longitude A (°)", "type": "number", "unit": "degrees", "default": -74, "min": -180, "max": 180 },
+        { "name": "lat2", "label": "Latitude B (°)", "type": "number", "unit": "degrees", "default": 41, "min": -90, "max": 90 },
+        { "name": "lon2", "label": "Longitude B (°)", "type": "number", "unit": "degrees", "default": -73, "min": -180, "max": 180 }
+      ],
+      "outputs": [
+        { "name": "nm", "label": "Approx. distance (nm)", "formula": "rhumb_distance_nm(lat1, lon1, lat2, lon2)", "decimals": 1 }
+      ],
+      "formulaDisplay": "Plane sailing: √((Δlat×60)² + (Δlon×60×cos φₘ)²) nm"
+    },
+    "formula": "Rhumb line maintains constant bearing; this is a mid-latitude plane approximation, not exact Mercator sailing.",
+    "formulaDetail": "For short legs it is close to GPS track distance; for ocean legs prefer great-circle tools.",
+    "examples": ["Small coastal hops: compare to chart divider distance"],
+    "faq": [
+      { "question": "When is rhumb line used?", "answer": "Mercator charts plot rhumb lines as straight segments; many short legs are steered nearly rhumb." }
+    ]
+  },
+  {
+    "slug": "statute-nautical-mile-converter",
+    "title": "Statute Miles to Nautical Miles Converter",
+    "description": "Convert statute (land) miles to nautical miles using 1 nm = 1.15078 statute miles.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "sm", "label": "Statute miles", "type": "number", "unit": "ratio", "default": 100, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "nm", "label": "Nautical miles", "formula": "sm * 0.868976", "decimals": 2 }
+      ],
+      "formulaDisplay": "nm = statute miles ÷ 1.15078"
+    },
+    "formula": "1 nautical mile ≈ 1.15078 statute miles, so nm = sm × 0.868976.",
+    "formulaDetail": "Nautical miles align with latitude minutes; statute miles are the common US/UK land mile.",
+    "examples": ["100 statute miles ≈ 86.9 nm"],
+    "faq": [
+      { "question": "Why two mile types?", "answer": "Marine navigation uses nautical miles tied to latitude; road and many maps use statute miles." }
+    ]
+  },
+  {
+    "slug": "celsius-fahrenheit-converter",
+    "title": "Celsius to Fahrenheit Converter",
+    "description": "Convert air or water temperature between °C and °F for forecasts, logs, and crew briefings.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "c", "label": "Temperature (°C)", "type": "number", "unit": "ratio", "default": 10 }
+      ],
+      "outputs": [
+        { "name": "f", "label": "Temperature (°F)", "formula": "c * 9 / 5 + 32", "decimals": 1 }
+      ],
+      "formulaDisplay": "°F = °C × 9/5 + 32"
+    },
+    "formula": "Linear conversion between Celsius and Fahrenheit scales.",
+    "examples": ["0°C = 32°F", "10°C = 50°F"],
+    "faq": [
+      { "question": "Is this exact?", "answer": "Yes for everyday temperatures; it is the definition of the Fahrenheit scale relative to Celsius." }
+    ]
+  },
+  {
+    "slug": "feet-meters-converter",
+    "title": "Feet to Meters Converter",
+    "description": "Convert feet to meters (and vice versa) for dock lines, mast heights, and bridge clearances.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "ft", "label": "Feet", "type": "number", "unit": "feet", "default": 6, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "m", "label": "Meters", "formula": "ft * 0.3048", "decimals": 3 }
+      ],
+      "formulaDisplay": "1 ft = 0.3048 m (exact)"
+    },
+    "formula": "International foot definition: 0.3048 meters per foot.",
+    "examples": ["6 ft ≈ 1.829 m", "50 ft ≈ 15.24 m"],
+    "faq": []
+  },
+  {
+    "slug": "latitude-degrees-to-nm-calculator",
+    "title": "Latitude Degrees to Nautical Miles",
+    "description": "Convert degrees of latitude (or longitude at the equator) to nautical miles along a meridian.",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "deg", "label": "Degrees", "type": "number", "unit": "degrees", "default": 1, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "nm", "label": "Nautical miles", "formula": "deg * 60", "decimals": 2 }
+      ],
+      "formulaDisplay": "1° latitude = 60 nm (meridian arc)"
+    },
+    "formula": "One degree of latitude equals 60 nautical miles by definition (one minute = one nm).",
+    "formulaDetail": "Longitude distance varies with cos(latitude); this tool is for latitude or equator longitude.",
+    "examples": ["1° lat = 60 nm", "0.5° = 30 nm"],
+    "faq": [
+      { "question": "Does this work for longitude everywhere?", "answer": "Only at the equator. Elsewhere use cos(latitude) scaling or a rhumb/great-circle tool." }
+    ]
+  },
+  {
+    "slug": "vmg-calculator",
+    "title": "VMG Calculator",
+    "description": "Velocity made good toward a mark: boat speed × cos(angle off bow to the mark).",
+    "category": "sailing-performance",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "bsp", "label": "Boat speed (kn)", "type": "number", "unit": "knots", "default": 6, "min": 0 },
+        { "name": "angle", "label": "Angle to mark (° from bow)", "type": "number", "unit": "degrees", "default": 40, "min": 0, "max": 180 }
+      ],
+      "outputs": [
+        { "name": "vmg", "label": "VMG (kn)", "formula": "bsp * cos(deg2rad(angle))", "decimals": 2 }
+      ],
+      "formulaDisplay": "VMG = BSP × cos(θ), θ from bow toward mark"
+    },
+    "formula": "VMG is the component of velocity toward a waypoint along your heading-to-mark geometry.",
+    "formulaDetail": "0° = dead ahead; 90° = VMG 0 toward mark along heading (pure beam reach to mark geometry).",
+    "examples": ["6 kn at 30° → ~5.2 kn VMG"],
+    "faq": []
+  },
+  {
+    "slug": "fuel-range-nautical-calculator",
+    "title": "Fuel Range Calculator (Nautical Miles)",
+    "description": "Estimate range in nautical miles from cruising speed, fuel aboard, and consumption rate.",
+    "category": "sailing-performance",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "speed", "label": "Speed (kn)", "type": "number", "unit": "knots", "default": 6, "min": 0.1 },
+        { "name": "fuel", "label": "Fuel available (gal)", "type": "number", "unit": "ratio", "default": 40, "min": 0 },
+        { "name": "gph", "label": "Consumption (gal/h)", "type": "number", "unit": "ratio", "default": 2, "min": 0.01 }
+      ],
+      "outputs": [
+        { "name": "nm", "label": "Range (nm)", "formula": "speed * (fuel / gph)", "decimals": 1 }
+      ],
+      "formulaDisplay": "Range (nm) = speed × (fuel ÷ gal/h)"
+    },
+    "formula": "Time available = fuel ÷ burn rate; range = speed × time when speed is steady in knots.",
+    "examples": ["6 kn, 40 gal, 2 gph → 120 nm"],
+    "faq": [
+      { "question": "Should I add reserve?", "answer": "Yes—plan 10–30% fuel reserve depending on passage and weather." }
+    ]
+  },
+  {
+    "slug": "anchor-shackle-rode-calculator",
+    "title": "Anchor Shackle to Feet Calculator",
+    "description": "Convert anchor chain shackles (15 fathoms each) to total feet of rode.",
+    "category": "sailing-performance",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "shackles", "label": "Number of shackles", "type": "number", "unit": "ratio", "default": 5, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "ft", "label": "Rode (ft)", "formula": "shackles * 90", "decimals": 0 }
+      ],
+      "formulaDisplay": "1 shackle = 15 fathoms = 90 ft"
+    },
+    "formula": "US Navy / common shipping: 1 shackle of chain = 15 fathoms = 90 feet.",
+    "examples": ["5 shackles = 450 ft"],
+    "faq": []
+  },
+  {
+    "slug": "bar-psi-converter",
+    "title": "Bar to PSI Converter",
+    "description": "Convert pressure in bar to pounds per square inch for gauges and systems.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "bar", "label": "Pressure (bar)", "type": "number", "unit": "ratio", "default": 1, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "psi", "label": "PSI", "formula": "bar * 14.5038", "decimals": 2 }
+      ],
+      "formulaDisplay": "1 bar = 14.5038 psi"
+    },
+    "formula": "1 bar = 100 kPa ≈ 14.5038 psi.",
+    "examples": ["2 bar ≈ 29 psi"],
+    "faq": []
+  },
+  {
+    "slug": "liters-us-gallons-converter",
+    "title": "Liters to US Gallons Converter",
+    "description": "Convert liters to US gallons for fuel tanks and water tanks.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "L", "label": "Liters", "type": "number", "unit": "ratio", "default": 100, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "gal", "label": "US gallons", "formula": "L * 0.264172", "decimals": 2 }
+      ],
+      "formulaDisplay": "1 US gal = 3.78541 L"
+    },
+    "formula": "US liquid gallon conversion for tank planning.",
+    "examples": ["100 L ≈ 26.4 US gal"],
+    "faq": [
+      { "question": "Imperial gallons?", "answer": "This uses US gallons. Imperial (UK) gallons are larger; use a dedicated converter if needed." }
+    ]
+  },
+  {
+    "slug": "cable-nautical-mile-converter",
+    "title": "Cables to Nautical Miles Converter",
+    "description": "Convert cables (1/10 nm) to nautical miles for chart and pilotage notation.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "cables", "label": "Cables", "type": "number", "unit": "ratio", "default": 10, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "nm", "label": "Nautical miles", "formula": "cables * 0.1", "decimals": 2 }
+      ],
+      "formulaDisplay": "1 cable = 0.1 nm = 185.2 m"
+    },
+    "formula": "The cable (tenth of a nautical mile) is still seen in some charting and naval usage.",
+    "examples": ["10 cables = 1 nm"],
+    "faq": []
+  },
+  {
+    "slug": "geographic-range-lights-calculator",
+    "title": "Geographic Range of a Light Calculator",
+    "description": "Estimate combined geographic visible range (nm) from height of eye and light elevation.",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "eye", "label": "Height of eye (ft)", "type": "number", "unit": "feet", "default": 9, "min": 0 },
+        { "name": "light", "label": "Light elevation (ft)", "type": "number", "unit": "feet", "default": 80, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "nm", "label": "Geographic range (nm)", "formula": "geographic_range_nm(eye, light)", "decimals": 1 }
+      ],
+      "formulaDisplay": "d (nm) ≈ 1.17×(√eye + √light), heights in feet"
+    },
+    "formula": "Optical geographic range sums horizon distances from observer and light. Atmospheric conditions and light power alter actual sighting.",
+    "examples": ["9 ft eye, 80 ft light → ~15 nm combined geometric range"],
+    "faq": [
+      { "question": "Is this luminous range?", "answer": "No—this is geometric horizon range. Nominal range depends on light intensity and visibility." }
+    ]
+  },
+  {
+    "slug": "radar-horizon-calculator",
+    "title": "Radar Horizon Calculator",
+    "description": "Approximate radar line-of-sight horizon in nautical miles from antenna height.",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "h_m", "label": "Antenna height (m)", "type": "number", "unit": "meters", "default": 12, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "nm", "label": "Radar horizon (nm)", "formula": "radar_horizon_nm(h_m)", "decimals": 1 }
+      ],
+      "formulaDisplay": "d (nm) ≈ 1.23 × √(h), h in meters (approximate)"
+    },
+    "formula": "Empirical radar horizon approximation; target detectability also depends on power, sea clutter, and target height.",
+    "examples": ["12 m scanner → ~4.3 nm to sea surface (rough)"],
+    "faq": []
+  },
+  {
+    "slug": "drift-set-distance-calculator",
+    "title": "Current Drift Distance Calculator",
+    "description": "Distance run by set in nautical miles: current speed × time in hours.",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "curr", "label": "Current (kn)", "type": "number", "unit": "knots", "default": 1.5, "min": 0 },
+        { "name": "hours", "label": "Time (hours)", "type": "number", "unit": "ratio", "default": 4, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "nm", "label": "Drift distance (nm)", "formula": "curr * hours", "decimals": 2 }
+      ],
+      "formulaDisplay": "Drift (nm) = current (kn) × time (h)"
+    },
+    "formula": "If set is steady and perpendicular to intended track, this estimates offset magnitude over time.",
+    "formulaDetail": "Real vectors need angle to course for cross-track error.",
+    "examples": ["1.5 kn for 4 h → 6 nm drift"],
+    "faq": []
+  },
+  {
+    "slug": "sail-area-displacement-calculator",
+    "title": "Sail Area to Displacement Ratio",
+    "description": "Classic ratio SA ÷ DISPL^(2/3) with displacement in pounds (not long tons).",
+    "category": "sailing-performance",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "sa", "label": "Sail area (ft²)", "type": "number", "unit": "ratio", "default": 450, "min": 1 },
+        { "name": "disp", "label": "Displacement (lb)", "type": "number", "unit": "ratio", "default": 18000, "min": 1 }
+      ],
+      "outputs": [
+        { "name": "ratio", "label": "SA/D ratio", "formula": "sa / pow(disp / 64, 2 / 3)", "decimals": 1 }
+      ],
+      "formulaDisplay": "SA/D = SA / (DISPL/64)^(2/3)"
+    },
+    "formula": "Higher SA/D generally indicates a more powerful rig relative to hull displacement (light-air performance vs stiffness tradeoffs).",
+    "examples": ["Typical cruisers often fall in teens–low twenties depending on design"],
+    "faq": []
+  },
+  {
+    "slug": "capsize-screening-calculator",
+    "title": "Capsize Screening Factor",
+    "description": "Simple beam / (DISPL/64)^(1/3) style screening number (displacement in pounds).",
+    "category": "sailing-performance",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "beam", "label": "Beam (ft)", "type": "number", "unit": "ratio", "default": 12, "min": 1 },
+        { "name": "disp", "label": "Displacement (lb)", "type": "number", "unit": "ratio", "default": 8000, "min": 1 }
+      ],
+      "outputs": [
+        { "name": "csf", "label": "Screening value", "formula": "beam / pow(disp / 64, 1 / 3)", "decimals": 2 }
+      ],
+      "formulaDisplay": "Beam ÷ cube root of (displacement in cubic feet from lb/64)"
+    },
+    "formula": "Historical rule-of-thumb screening; not a substitute for stability letters, STIX, or naval architecture review.",
+    "examples": ["Lower values often correlate with offshore-oriented designs in popular literature—verify with official data"],
+    "faq": [
+      { "question": "Is this certification?", "answer": "No. It is an approximate comparative index only." }
+    ]
+  },
+  {
+    "slug": "pounds-kilograms-converter",
+    "title": "Pounds to Kilograms Converter",
+    "description": "Convert weight in pounds to kilograms for provisions, ground tackle, and cargo.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "lb", "label": "Pounds (lb)", "type": "number", "unit": "ratio", "default": 100, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "kg", "label": "Kilograms", "formula": "lb * 0.453592", "decimals": 2 }
+      ],
+      "formulaDisplay": "1 lb = 0.453592 kg"
+    },
+    "formula": "International avoirdupois pound to kilogram conversion.",
+    "examples": ["220 lb ≈ 99.8 kg"],
+    "faq": []
+  },
+  {
+    "slug": "kilowatts-horsepower-converter",
+    "title": "Kilowatts to Horsepower Converter",
+    "description": "Convert engine power kW to mechanical horsepower for marine diesels and electric drives.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "kw", "label": "Kilowatts", "type": "number", "unit": "ratio", "default": 40, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "hp", "label": "Mechanical hp", "formula": "kw * 1.34102", "decimals": 2 }
+      ],
+      "formulaDisplay": "1 kW ≈ 1.34102 hp (mechanical)"
+    },
+    "formula": "Mechanical horsepower conversion commonly used for propulsion comparisons.",
+    "examples": ["40 kW ≈ 53.6 hp"],
+    "faq": []
+  },
+  {
+    "slug": "meters-second-knots-converter",
+    "title": "Meters per Second to Knots Converter",
+    "description": "Convert m/s to knots for scientific wind data or current models.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "ms", "label": "Speed (m/s)", "type": "number", "unit": "ratio", "default": 10, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "kn", "label": "Knots", "formula": "ms / 0.514444", "decimals": 2 }
+      ],
+      "formulaDisplay": "1 kn = 0.514444 m/s"
+    },
+    "formula": "Exact knot definition via nautical mile per hour vs SI meters per second.",
+    "examples": ["10 m/s ≈ 19.44 kn"],
+    "faq": []
+  },
+  {
+    "slug": "inches-mercury-millibar-converter",
+    "title": "Inches of Mercury to Millibar Converter",
+    "description": "Convert inHg to hPa/mbar for barometers and weather maps.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "inhg", "label": "Pressure (inHg)", "type": "number", "unit": "ratio", "default": 30, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "mbar", "label": "Millibar (hPa)", "formula": "inhg * 33.8639", "decimals": 1 }
+      ],
+      "formulaDisplay": "1 inHg = 33.8639 mbar"
+    },
+    "formula": "Standard conversion between US mercury barometer units and millibars.",
+    "examples": ["30.00 inHg ≈ 1016 mbar"],
+    "faq": []
+  },
+  {
+    "slug": "bilge-pump-time-calculator",
+    "title": "Bilge Pump Time Calculator",
+    "description": "Minutes to move a volume at a given pump rate (US gal, GPM).",
+    "category": "sailing-performance",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "vol", "label": "Volume (US gal)", "type": "number", "unit": "ratio", "default": 50, "min": 0 },
+        { "name": "gpm", "label": "Pump rate (GPM)", "type": "number", "unit": "ratio", "default": 10, "min": 0.01 }
+      ],
+      "outputs": [
+        { "name": "min", "label": "Time (minutes)", "formula": "vol / gpm", "decimals": 1 }
+      ],
+      "formulaDisplay": "Time (min) = volume (gal) ÷ GPM"
+    },
+    "formula": "Idealized steady pump rate; hose lift and strainer clogging reduce real flow.",
+    "examples": ["50 gal at 10 GPM → 5 min"],
+    "faq": []
+  },
+  {
+    "slug": "wave-length-from-period-calculator",
+    "title": "Wavelength from Wave Period",
+    "description": "Deep-water wavelength from period using L = gT²/(2π).",
+    "category": "wind-waves",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "T", "label": "Period (seconds)", "type": "number", "unit": "ratio", "default": 8, "min": 0.1 }
+      ],
+      "outputs": [
+        { "name": "Lm", "label": "Wavelength (m)", "formula": "wave_length_deep_water_m(T)", "decimals": 1 }
+      ],
+      "formulaDisplay": "L = g T² / (2π), deep water"
+    },
+    "formula": "Dispersion relation for deep-water gravity waves; shallow water shortens wavelength at fixed period.",
+    "examples": ["8 s period → ~100 m wavelength (approx.)"],
+    "faq": []
+  },
+  {
+    "slug": "longitude-minute-nautical-mile-calculator",
+    "title": "Longitude Minutes to Nautical Miles",
+    "description": "Nautical miles per minute of longitude at a given latitude (cosine scaling).",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "lat", "label": "Latitude (°)", "type": "number", "unit": "degrees", "default": 45, "min": -90, "max": 90 },
+        { "name": "minutes", "label": "Minutes of longitude", "type": "number", "unit": "ratio", "default": 10, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "nm", "label": "Distance (nm)", "formula": "longitude_minute_to_nm(lat, minutes)", "decimals": 2 }
+      ],
+      "formulaDisplay": "nm = minutes × cos(lat)"
+    },
+    "formula": "At the equator, 1' longitude = 1 nm; at latitude φ, east-west distance per minute shrinks by cos(φ).",
+    "examples": ["10' lon at 45° ≈ 7.07 nm"],
+    "faq": []
+  },
+  {
+    "slug": "true-magnetic-heading-calculator",
+    "title": "True from Magnetic Heading",
+    "description": "True heading = magnetic heading + easterly variation (subtract westerly).",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "mag", "label": "Magnetic heading (°)", "type": "number", "unit": "degrees", "default": 270, "min": 0, "max": 360 },
+        { "name": "var", "label": "Variation (°, E+ / W−)", "type": "number", "unit": "degrees", "default": 10 }
+      ],
+      "outputs": [
+        { "name": "true", "label": "True heading (°)", "formula": "mag + var", "decimals": 1 }
+      ],
+      "formulaDisplay": "True = Magnetic + variation (east positive)"
+    },
+    "formula": "Variation (declination) converts between magnetic and true directions. Deviation is additional ship-specific error.",
+    "examples": ["270° mag, 10°W variation → enter −10 for var → 260° true"],
+    "faq": [
+      { "question": "What about deviation?", "answer": "Apply deviation from the compass card after magnetic correction, or combine into a single correction per your procedure." }
+    ]
+  },
+  {
+    "slug": "cross-track-error-calculator",
+    "title": "Cross Track Error Calculator",
+    "description": "Approximate XTE in nm from distance run along track and bearing error.",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "along", "label": "Distance along track (nm)", "type": "number", "unit": "nautical_miles", "default": 10, "min": 0 },
+        { "name": "err", "label": "Bearing error (°)", "type": "number", "unit": "degrees", "default": 5, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "xte", "label": "Approx. XTE (nm)", "formula": "cross_track_error_nm(along, err)", "decimals": 2 }
+      ],
+      "formulaDisplay": "XTE ≈ along × sin(error)"
+    },
+    "formula": "Small-angle linearized cross-track estimate for quick mental checks.",
+    "examples": ["10 nm, 5° error → ~0.87 nm XTE"],
+    "faq": []
+  },
+  {
+    "slug": "speed-over-ground-calculator",
+    "title": "Speed Over Ground Calculator",
+    "description": "Vector sum of speed through water and current using law of cosines.",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "stw", "label": "Speed through water (kn)", "type": "number", "unit": "knots", "default": 6, "min": 0 },
+        { "name": "curr", "label": "Current speed (kn)", "type": "number", "unit": "knots", "default": 1.5, "min": 0 },
+        { "name": "theta", "label": "Angle STW↔current (°)", "type": "number", "unit": "degrees", "default": 45, "min": 0, "max": 180 }
+      ],
+      "outputs": [
+        { "name": "sog", "label": "Speed over ground (kn)", "formula": "speed_over_ground_kn(stw, curr, theta)", "decimals": 2 }
+      ],
+      "formulaDisplay": "SOG = √(STW² + Vc² + 2·STW·Vc·cos θ)"
+    },
+    "formula": "θ is the angle between velocity vectors of boat through water and water movement (set).",
+    "examples": ["6 kn STW + 1.5 kn current at 45° → ~7.1 kn SOG (illustrative)"],
+    "faq": []
+  },
+  {
+    "slug": "mercator-scale-factor-calculator",
+    "title": "Mercator Scale Factor Calculator",
+    "description": "Chart scale exaggeration k = sec(φ) at a given latitude.",
+    "category": "navigation",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "lat", "label": "Latitude (°)", "type": "number", "unit": "degrees", "default": 60, "min": -89, "max": 89 }
+      ],
+      "outputs": [
+        { "name": "k", "label": "Scale factor k", "formula": "mercator_scale_factor(lat)", "decimals": 3 }
+      ],
+      "formulaDisplay": "k = 1 / cos(φ)"
+    },
+    "formula": "On a Mercator chart, scale expands away from the equator; k is the linear exaggeration at latitude φ.",
+    "examples": ["60° → k = 2", "45° → k ≈ 1.414"],
+    "faq": []
+  },
+  {
+    "slug": "anchor-rode-shackles-calculator",
+    "title": "Feet of Rode to Shackles",
+    "description": "Convert deployed rode length in feet to standard anchor shackles (90 ft each).",
+    "category": "sailing-performance",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "ft", "label": "Rode length (ft)", "type": "number", "unit": "feet", "default": 180, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "shackles", "label": "Shackles", "formula": "ft / 90", "decimals": 2 }
+      ],
+      "formulaDisplay": "shackles = feet ÷ 90"
+    },
+    "formula": "Common anchor chain marking: 1 shackle = 15 fathoms = 90 feet.",
+    "examples": ["180 ft = 2 shackles"],
+    "faq": []
+  },
+  {
+    "slug": "square-feet-square-meters-converter",
+    "title": "Square Feet to Square Meters Converter",
+    "description": "Convert sail area or deck area between ft² and m².",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "sf", "label": "Area (ft²)", "type": "number", "unit": "ratio", "default": 500, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "sm", "label": "Area (m²)", "formula": "sf * 0.092903", "decimals": 2 }
+      ],
+      "formulaDisplay": "1 ft² = 0.092903 m²"
+    },
+    "formula": "Area conversion using international foot definition.",
+    "examples": ["500 ft² ≈ 46.45 m²"],
+    "faq": []
+  },
+  {
+    "slug": "cubic-feet-liters-converter",
+    "title": "Cubic Feet to Liters Converter",
+    "description": "Tank volume conversion for bilge, water, or fuel compartments.",
+    "category": "conversions",
+    "type": "engine",
+    "engine": {
+      "inputs": [
+        { "name": "cf", "label": "Volume (ft³)", "type": "number", "unit": "ratio", "default": 50, "min": 0 }
+      ],
+      "outputs": [
+        { "name": "L", "label": "Liters", "formula": "cf * 28.3168", "decimals": 1 }
+      ],
+      "formulaDisplay": "1 ft³ = 28.3168 L"
+    },
+    "formula": "Cubic foot to liter conversion for capacity planning.",
+    "examples": ["50 ft³ ≈ 1416 L"],
+    "faq": []
+  }
+]

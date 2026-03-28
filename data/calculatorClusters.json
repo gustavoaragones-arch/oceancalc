@@ -5,19 +5,53 @@
     "knots-to-kmh",
     "fathom-converter"
   ],
+  "conversions": [
+    "statute-nautical-mile-converter",
+    "celsius-fahrenheit-converter",
+    "feet-meters-converter",
+    "bar-psi-converter",
+    "liters-us-gallons-converter",
+    "cable-nautical-mile-converter",
+    "pounds-kilograms-converter",
+    "kilowatts-horsepower-converter",
+    "meters-second-knots-converter",
+    "inches-mercury-millibar-converter",
+    "square-feet-square-meters-converter",
+    "cubic-feet-liters-converter"
+  ],
   "navigation": [
     "distance-to-horizon-calculator",
     "great-circle-distance-calculator",
-    "sailing-time-calculator"
+    "sailing-time-calculator",
+    "initial-bearing-calculator",
+    "rhumb-distance-calculator",
+    "geographic-range-lights-calculator",
+    "radar-horizon-calculator",
+    "latitude-degrees-to-nm-calculator",
+    "drift-set-distance-calculator",
+    "longitude-minute-nautical-mile-calculator",
+    "true-magnetic-heading-calculator",
+    "cross-track-error-calculator",
+    "speed-over-ground-calculator",
+    "mercator-scale-factor-calculator"
   ],
   "wind-waves": [
     "beaufort-scale-calculator",
     "wave-height-calculator",
-    "wind-chill-calculator"
+    "wind-chill-calculator",
+    "apparent-wind-calculator",
+    "wave-length-from-period-calculator"
   ],
-  "sailing": [
+  "sailing-performance": [
     "anchor-scope-calculator",
     "boat-fuel-consumption-calculator",
-    "apparent-wind-calculator"
+    "hull-speed-calculator",
+    "vmg-calculator",
+    "fuel-range-nautical-calculator",
+    "anchor-shackle-rode-calculator",
+    "bilge-pump-time-calculator",
+    "anchor-rode-shackles-calculator",
+    "sail-area-displacement-calculator",
+    "capsize-screening-calculator"
   ]
 }

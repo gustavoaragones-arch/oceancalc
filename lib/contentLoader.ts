@@ -19,11 +19,24 @@ function loadJson<T>(filePath: string): T {
   return JSON.parse(raw) as T;
 }
 
+function loadAllCalculatorEntries(): CalculatorEntry[] {
+  const main = loadJson<CalculatorEntry[]>("calculators.json");
+  const extraPath = path.join(DATA_DIR, "calculators-phase5.json");
+  if (!fs.existsSync(extraPath)) return main;
+  const extra = loadJson<CalculatorEntry[]>("calculators-phase5.json");
+  return [...main, ...extra];
+}
+
 export function getCalculators(): CalculatorEntry[] {
   if (!calculatorsCache) {
-    calculatorsCache = loadJson<CalculatorEntry[]>("calculators.json");
+    calculatorsCache = loadAllCalculatorEntries();
   }
   return calculatorsCache;
+}
+
+/** Alias for sitemap and programmatic SEO (all entries from calculators.json + phase5). */
+export function getAllCalculators(): CalculatorEntry[] {
+  return getCalculators();
 }
 
 export function getCalculatorBySlug(slug: string): CalculatorEntry | null {

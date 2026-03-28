@@ -85,6 +85,76 @@ function apparentWindAngleDeg(Vb: number, Vt: number, TWAdeg: number): number {
   return (Math.acos(Math.max(-1, Math.min(1, cosAWA))) * 180) / Math.PI;
 }
 
+/** Classical hull speed (knots) from waterline length (feet): 1.34 × √LWL */
+function hull_speed_kn(lwl_ft: number): number {
+  return 1.34 * Math.sqrt(Math.max(0, lwl_ft));
+}
+
+/** Initial true bearing (0–360°) from point A to B; lat/lon in degrees */
+function initial_bearing_deg(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const φ1 = (lat1 * Math.PI) / 180;
+  const φ2 = (lat2 * Math.PI) / 180;
+  const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+  const y = Math.sin(Δλ) * Math.cos(φ2);
+  const x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
+  return (((Math.atan2(y, x) * 180) / Math.PI) + 360) % 360;
+}
+
+/** Rhumb-line distance (nautical miles), plane-sailing approximation for moderate ranges */
+function rhumb_distance_nm(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const dLat = (lat2 - lat1) * 60;
+  const dLon = (lon2 - lon1) * 60 * Math.cos((((lat1 + lat2) / 2) * Math.PI) / 180);
+  return Math.sqrt(dLat * dLat + dLon * dLon);
+}
+
+/** Geographic visible range (nm): height of eye and light elevation in feet */
+function geographic_range_nm(eye_ft: number, light_ft: number): number {
+  return 1.17 * (Math.sqrt(Math.max(0, eye_ft)) + Math.sqrt(Math.max(0, light_ft)));
+}
+
+/** Radar horizon (nm) from antenna height (meters), common refraction approximation */
+function radar_horizon_nm(h_m: number): number {
+  return 1.23 * Math.sqrt(Math.max(0, h_m));
+}
+
+/** Cross-track error (nm) ≈ distance along track × sin(bearing error in degrees) */
+function cross_track_error_nm(along_nm: number, error_deg: number): number {
+  const rad = (error_deg * Math.PI) / 180;
+  return along_nm * Math.sin(rad);
+}
+
+/**
+ * Speed over ground (kn) from speed through water, current speed, and angle (degrees)
+ * between STW vector and current vector (0° = same direction).
+ */
+function speed_over_ground_kn(stw: number, curr: number, angle_deg: number): number {
+  const rad = (angle_deg * Math.PI) / 180;
+  return Math.sqrt(
+    stw * stw + curr * curr + 2 * stw * curr * Math.cos(rad)
+  );
+}
+
+/** Mercator scale factor k = sec(φ) at mean latitude φ (degrees) */
+function mercator_scale_factor(lat_deg: number): number {
+  const clamped = Math.max(-89.9, Math.min(89.9, lat_deg));
+  const c = Math.cos((clamped * Math.PI) / 180);
+  if (Math.abs(c) < 1e-6) return NaN;
+  return 1 / c;
+}
+
+/** Nautical miles for given longitude minutes at latitude φ (degrees) */
+function longitude_minute_to_nm(lat_deg: number, minutes: number): number {
+  const c = Math.cos((lat_deg * Math.PI) / 180);
+  return minutes * c;
+}
+
+/** Deep-water wavelength (m) from period T (s): L = g T² / (2π) */
+function wave_length_deep_water_m(period_s: number): number {
+  const g = 9.80665;
+  const T = Math.max(0, period_s);
+  return (g * T * T) / (2 * Math.PI);
+}
+
 export const DEFAULT_CUSTOM_FUNCTIONS: CustomFunctions = {
   ...MATH_FUNCTIONS,
   beaufort,
@@ -92,6 +162,16 @@ export const DEFAULT_CUSTOM_FUNCTIONS: CustomFunctions = {
   windChillF,
   apparentWindSpeedKn,
   apparentWindAngleDeg,
+  hull_speed_kn,
+  initial_bearing_deg,
+  rhumb_distance_nm,
+  geographic_range_nm,
+  radar_horizon_nm,
+  cross_track_error_nm,
+  speed_over_ground_kn,
+  mercator_scale_factor,
+  longitude_minute_to_nm,
+  wave_length_deep_water_m,
 };
 
 type Token =

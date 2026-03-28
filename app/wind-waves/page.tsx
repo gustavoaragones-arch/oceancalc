@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { getWindWavesArticles } from "@/lib/contentLoader";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
+import { getBuildLastModified } from "@/lib/indexing";
 
 export const metadata = buildSeoMetadata({
   title: "Wind & Wave Science",
   description:
     "Beaufort scale, apparent wind, sea state, and marine weather reference for sailors.",
   path: "/wind-waves/",
+  lastModified: getBuildLastModified(),
 });
 
 export default function WindWavesHubPage() {

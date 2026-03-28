@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint",
     "sitemap": "npx tsx scripts/generate-sitemap.ts",
-    "generate-sitemap": "npx tsx scripts/generate-sitemap.ts"
+    "generate-sitemap": "npx tsx scripts/generate-sitemap.ts",
+    "ping:indexing": "node scripts/ping-indexing.mjs"
   },
   "dependencies": {
     "@cloudflare/next-on-pages": "^1.13.16",

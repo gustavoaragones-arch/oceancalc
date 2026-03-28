@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { getMeasurementsArticles } from "@/lib/contentLoader";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
+import { getBuildLastModified } from "@/lib/indexing";
 
 export const metadata = buildSeoMetadata({
   title: "Maritime Measurements",
   description:
     "Nautical miles, fathoms, knots, and conversion tables for maritime and sailing.",
   path: "/maritime-measurements/",
+  lastModified: getBuildLastModified(),
 });
 
 export default function MaritimeMeasurementsHubPage() {

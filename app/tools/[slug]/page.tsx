@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { getCalculatorBySlug, getAllCalculatorSlugs } from "@/lib/contentLoader";
-import { getArticlesForTool } from "@/lib/internalLinker";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 import { formatSlugToTitle } from "@/lib/format";
-import { siteConfig } from "@/config/site";
-import CalculatorSchema from "@/components/schema/CalculatorSchema";
-import FAQSchema from "@/components/schema/FAQSchema";
-import { CalculatorLayout } from "@/components/CalculatorLayout";
-import { CalculatorRenderer } from "@/components/CalculatorRenderer";
+import { getBuildLastModified } from "@/lib/indexing";
+import { CalculatorToolPage } from "@/components/CalculatorToolPage";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -27,44 +22,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description: `Use the ${title} to perform maritime calculations quickly and accurately.`,
       path: `/tools/${slug}/`,
+      lastModified: getBuildLastModified(),
     });
   }
   return buildSeoMetadata({
     title: calculator.title,
     description: calculator.description,
     path: `/tools/${slug}/`,
+    lastModified: getBuildLastModified(),
   });
 }
 
 export default async function ToolPage({ params }: PageProps) {
   const { slug } = await params;
-  const calculator = getCalculatorBySlug(slug);
-  if (!calculator) notFound();
-
-  const learnMoreItems = getArticlesForTool(slug);
-  const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "Calculators", href: "/tools/" },
-    { label: calculator.title },
-  ];
-
-  const base = siteConfig.url.replace(/\/$/, "");
-
-  return (
-    <>
-      <CalculatorSchema
-        name={calculator.title}
-        description={calculator.description}
-        url={`${base}/tools/${slug}/`}
-      />
-      <FAQSchema faqs={calculator.faq} />
-      <CalculatorLayout
-        calculator={calculator}
-        breadcrumbItems={breadcrumbItems}
-        learnMoreItems={learnMoreItems}
-      >
-        <CalculatorRenderer calculator={calculator} />
-      </CalculatorLayout>
-    </>
-  );
+  return <CalculatorToolPage slug={slug} />;
 }
