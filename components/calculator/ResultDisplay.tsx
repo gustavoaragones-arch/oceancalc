@@ -3,25 +3,31 @@
 interface ResultDisplayProps {
   label: string;
   value: string;
+  unit?: string;
   error?: string | null;
 }
 
-export function ResultDisplay({ label, value, error }: ResultDisplayProps) {
+export function ResultDisplay({ label, value, unit, error }: ResultDisplayProps) {
   return (
     <div
-      className="rounded-md border border-slate-200 dark:border-slate-600 bg-slate-50 dark:bg-slate-800/50 px-4 py-3 mt-4"
+      className="result-box"
       role="region"
       aria-live="polite"
       aria-label="Calculation result"
     >
-      <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+      <p className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-slate-400">
         {label}
       </p>
       {error ? (
-        <p className="text-sm text-amber-700 dark:text-amber-400 mt-1">{error}</p>
+        <p className="text-sm text-red-600 dark:text-red-400 mt-2 font-normal">{error}</p>
       ) : (
-        <p className="text-2xl font-semibold tabular-nums text-slate-900 dark:text-white mt-1">
-          {value}
+        <p className="text-2xl font-semibold tabular-nums text-gray-900 dark:text-white mt-2">
+          <span>{value}</span>
+          {unit ? (
+            <span className="text-lg font-medium text-gray-600 dark:text-slate-400 ml-2">
+              {unit}
+            </span>
+          ) : null}
         </p>
       )}
     </div>

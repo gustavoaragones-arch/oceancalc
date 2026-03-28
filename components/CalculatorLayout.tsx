@@ -6,6 +6,7 @@ import { Breadcrumbs, BreadcrumbSchema } from "./Breadcrumbs";
 import { LearnMore } from "./LearnMore";
 import { AuthorPublisher } from "./AuthorPublisher";
 import { RelatedCalculators } from "./RelatedCalculators";
+import { AllCalculatorsGrid } from "./AllCalculatorsGrid";
 
 export interface LearnMoreItem {
   slug: string;
@@ -37,10 +38,10 @@ export function CalculatorLayout({
         </>
       )}
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-3 text-balance">
           {calculator.title}
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-gray-600 dark:text-slate-400 leading-relaxed text-balance">
           {calculator.description}
         </p>
         <AuthorPublisher lastUpdated={lastUpdated} className="mt-2" />
@@ -86,6 +87,8 @@ export function CalculatorLayout({
       {calculator.faq.length > 0 && (
         <FAQ items={calculator.faq} />
       )}
+
+      <AllCalculatorsGrid />
 
       <LearnMore items={learnMoreItems} title="Learn More" />
 

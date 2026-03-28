@@ -7,8 +7,21 @@
     "type": "unit-converter",
     "simpleRegistry": {
       "formulaKey": "nauticalMilesToKm",
-      "inputs": [{ "name": "value", "label": "Nautical Miles", "type": "number", "default": 1, "min": 0, "step": "any" }],
+      "inputs": [
+        {
+          "name": "value",
+          "label": "Nautical Miles",
+          "type": "number",
+          "unit": "nmi",
+          "canonical": "nmi",
+          "default": 1,
+          "min": 0,
+          "validation": "nonNegative",
+          "step": "any"
+        }
+      ],
       "resultLabel": "Kilometers",
+      "output": { "unit": "km", "decimals": 4 },
       "decimals": 4
     },
     "engine": {
@@ -105,8 +118,21 @@
     "type": "registry-shell",
     "simpleRegistry": {
       "formulaKey": "knotsToKmh",
-      "inputs": [{ "name": "value", "label": "Knots", "type": "number", "default": 10, "min": 0, "step": "any" }],
-      "resultLabel": "km/h",
+      "inputs": [
+        {
+          "name": "value",
+          "label": "Knots",
+          "type": "number",
+          "unit": "knots",
+          "canonical": "knots",
+          "default": 10,
+          "min": 0,
+          "validation": "nonNegative",
+          "step": "any"
+        }
+      ],
+      "resultLabel": "Converted speed",
+      "output": { "unit": "km/h", "decimals": 2 },
       "decimals": 2
     },
     "formula": "1 knot = 1 nautical mile per hour = 1.852 km/h.",
@@ -160,18 +186,39 @@
   {
     "slug": "sailing-time-calculator",
     "title": "Sailing Time Calculator",
-    "description": "Estimate how long it will take to cover a given distance at a constant speed. Supports nautical miles, km, knots, mph, and km/h.",
+    "description": "Estimate how long it will take to cover a given distance at a constant speed. Supports nautical miles, km, miles, knots, km/h, and mph.",
     "category": "sailing",
-    "type": "sailing-time",
-    "engine": {
+    "type": "registry-shell",
+    "simpleRegistry": {
+      "formulaKey": "sailingTime",
+      "formulaText": "time = distance / speed",
+      "formulaExplanation": "Time is in hours when distance is in nautical miles and speed is in knots. Pick other units from the menus; values are converted automatically. Speed must be greater than zero.",
+      "resultLabel": "Travel time",
+      "output": { "unit": "hours", "decimals": 2 },
       "inputs": [
-        { "name": "distance", "label": "Distance", "type": "number", "unit": "nautical_miles", "units": ["nautical_miles", "kilometers"], "default": 60, "min": 0.1 },
-        { "name": "speed", "label": "Speed", "type": "number", "unit": "knots", "units": ["knots", "mph", "km_h"], "default": 6, "min": 0.1 }
-      ],
-      "outputs": [
-        { "name": "time", "label": "Travel time", "formula": "distance / speed", "format": "hours", "decimals": 2 }
-      ],
-      "formulaDisplay": "Time (hours) = Distance ÷ Speed"
+        {
+          "name": "distance",
+          "label": "Distance",
+          "type": "number",
+          "unit": "nmi",
+          "units": ["nmi", "km", "mi"],
+          "canonical": "nmi",
+          "default": 60,
+          "min": 0,
+          "validation": "nonNegative"
+        },
+        {
+          "name": "speed",
+          "label": "Speed",
+          "type": "number",
+          "unit": "knots",
+          "units": ["knots", "kmh", "mph"],
+          "canonical": "knots",
+          "default": 6,
+          "min": 0,
+          "validation": "positive"
+        }
+      ]
     },
     "formula": "Time = Distance ÷ Speed. With distance in nautical miles and speed in knots, time is in hours. Example: 60 nm ÷ 6 kn = 10 hours.",
     "formulaDetail": "This is the same relationship used in the speed–distance–time triangle. Useful for ETAs and passage planning.",

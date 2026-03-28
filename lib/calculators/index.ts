@@ -1,14 +1,15 @@
+import type { RegistryFormulaFn } from "./types";
 import * as nautical from "./nautical";
+import * as navigation from "./navigation";
 
-export type RegistryInputs = Record<string, number>;
-
-export type RegistryFormulaFn = (inputs: RegistryInputs) => number;
+export type { RegistryInputs, RegistryFormulaFn } from "./types";
 
 /**
  * Maps `simpleRegistry.formulaKey` from calculator JSON to pure functions.
- * Add new calculators: implement the function, then register it here.
+ * Functions receive canonical numeric inputs (e.g. nm, knots) after unit conversion.
  */
 export const calculatorMap: Record<string, RegistryFormulaFn> = {
-  nauticalMilesToKm: (inputs) => nautical.nauticalMilesToKm(inputs.value ?? 0),
-  knotsToKmh: (inputs) => nautical.knotsToKmh(inputs.value ?? 0),
+  nauticalMilesToKm: (inputs) => nautical.nauticalMilesToKm(inputs),
+  knotsToKmh: (inputs) => nautical.knotsToKmh(inputs),
+  sailingTime: (inputs) => navigation.sailingTime(inputs),
 };

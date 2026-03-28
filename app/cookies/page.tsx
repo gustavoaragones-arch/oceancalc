@@ -36,7 +36,7 @@ export default function CookiesPage() {
         <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-100">Contact</h2>
         <p>
           Questions:{" "}
-          <a href={`mailto:${organization.email}`} className="text-sky-600 dark:text-sky-400 hover:underline">
+          <a href={`mailto:${organization.email}`} className="text-blue-600 dark:text-blue-400 hover:underline">
             {organization.email}
           </a>
           .

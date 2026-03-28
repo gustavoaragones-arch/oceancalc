@@ -5,7 +5,6 @@ import { CalculatorShell } from "./calculator/CalculatorShell";
 import { CalculatorEngine } from "./calculator-engine/CalculatorEngine";
 import { UnitConverter } from "./calculators/UnitConverter";
 import { DistanceToHorizonCalculator } from "./calculators/DistanceToHorizon";
-import { SailingTimeCalculator } from "./calculators/SailingTime";
 import { GreatCircleDistanceCalculator } from "./calculators/GreatCircleDistance";
 import { AnchorScopeCalculator } from "./calculators/AnchorScope";
 import { BeaufortScaleCalculator } from "./calculators/BeaufortScale";
@@ -48,8 +47,6 @@ export function CalculatorRenderer({ calculator }: CalculatorRendererProps) {
   switch (calculator.type) {
     case "distance-horizon":
       return <DistanceToHorizonCalculator />;
-    case "sailing-time":
-      return <SailingTimeCalculator />;
     case "great-circle":
       return <GreatCircleDistanceCalculator />;
     case "anchor-scope":
@@ -61,7 +58,7 @@ export function CalculatorRenderer({ calculator }: CalculatorRendererProps) {
     default:
       return (
         <div className="card">
-          <p className="text-slate-600 dark:text-slate-400">
+          <p className="text-gray-600 dark:text-slate-400 leading-relaxed">
             Calculator type &quot;{calculator.type}&quot; is not configured.
           </p>
         </div>

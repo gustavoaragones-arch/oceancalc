@@ -33,7 +33,7 @@ export function TopicExplorer({
           <li key={`${category}-${slug}`}>
             <Link
               href={`/${categoryPath(category)}/${slug}/`}
-              className="text-sky-600 dark:text-sky-400 hover:underline"
+              className="text-blue-600 dark:text-blue-400 hover:underline transition-colors duration-200"
             >
               {title}
             </Link>

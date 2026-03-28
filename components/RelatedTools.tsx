@@ -22,7 +22,7 @@ export function RelatedTools({ tools, title = "Related Tools" }: RelatedToolsPro
           <li key={slug}>
             <Link
               href={`/tools/${slug}/`}
-              className="text-sky-600 dark:text-sky-400 hover:underline"
+              className="text-blue-600 dark:text-blue-400 hover:underline transition-colors duration-200"
             >
               {toolTitle} →
             </Link>

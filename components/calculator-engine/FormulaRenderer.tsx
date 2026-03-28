@@ -24,7 +24,7 @@ export function FormulaRenderer({ formula, className = "" }: FormulaRendererProp
   }
   return (
     <code
-      className={`block font-mono text-sm text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded px-3 py-2 overflow-x-auto ${className}`}
+      className={`block font-mono text-sm text-gray-800 dark:text-slate-200 bg-gray-100 dark:bg-slate-800/80 border border-gray-200 dark:border-slate-600 rounded-xl px-3 py-2 overflow-x-auto transition-all duration-200 ${className}`}
       aria-label={`Formula: ${formula}`}
     >
       {display}

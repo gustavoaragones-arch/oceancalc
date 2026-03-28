@@ -3,6 +3,7 @@ import { FAQ } from "./FAQ";
 import { RelatedTools } from "./RelatedTools";
 import { TopicExplorer } from "./TopicExplorer";
 import { AllCalculatorsGrid } from "./AllCalculatorsGrid";
+import { ArticleContentWithLinks } from "./ArticleContentWithLinks";
 import { Breadcrumbs, BreadcrumbSchema } from "./Breadcrumbs";
 import { AuthorPublisher } from "./AuthorPublisher";
 
@@ -51,19 +52,17 @@ export function ArticleLayout({
       <Breadcrumbs items={breadcrumbs} />
 
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-3 text-balance">
           {article.title}
         </h1>
-        <p className="text-lg text-slate-600 dark:text-slate-400">
+        <p className="text-lg text-gray-600 dark:text-slate-400 leading-relaxed text-balance">
           {article.description}
         </p>
         <AuthorPublisher lastUpdated={lastUpdated} className="mt-2" />
       </header>
 
       <div className="prose prose-slate dark:prose-invert max-w-none">
-        <p className="text-slate-700 dark:text-slate-300 whitespace-pre-line">
-          {article.content}
-        </p>
+        <ArticleContentWithLinks content={article.content} />
       </div>
 
       <RelatedTools tools={relatedTools} title="Related Tools" />

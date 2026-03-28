@@ -22,7 +22,7 @@ export default function AboutPage() {
             href={organization.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sky-600 dark:text-sky-400 hover:underline"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
           >
             {organization.name}
           </a>
@@ -45,7 +45,7 @@ export default function AboutPage() {
 
         <p className="text-slate-700 dark:text-slate-300">
           For questions or feedback, please{" "}
-          <Link href="/contact/" className="text-sky-600 dark:text-sky-400 hover:underline">
+          <Link href="/contact/" className="text-blue-600 dark:text-blue-400 hover:underline">
             contact us
           </Link>
           .

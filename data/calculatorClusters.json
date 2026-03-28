@@ -5,19 +5,19 @@
     "knots-to-kmh",
     "fathom-converter"
   ],
-  "navigation-tools": [
+  "navigation": [
     "distance-to-horizon-calculator",
     "great-circle-distance-calculator",
     "sailing-time-calculator"
   ],
-  "wind-weather": [
+  "wind-waves": [
     "beaufort-scale-calculator",
     "wave-height-calculator",
     "wind-chill-calculator"
   ],
-  "sailing-performance": [
-    "apparent-wind-calculator",
+  "sailing": [
     "anchor-scope-calculator",
-    "boat-fuel-consumption-calculator"
+    "boat-fuel-consumption-calculator",
+    "apparent-wind-calculator"
   ]
 }

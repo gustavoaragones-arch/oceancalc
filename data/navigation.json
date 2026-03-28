@@ -5,7 +5,7 @@
     "description": "How to estimate position using course, speed, and time when no fixes are available.",
     "category": "navigation",
     "relatedToolSlugs": ["sailing-time-calculator", "nautical-mile-converter"],
-    "content": "Dead reckoning (DR) is the process of estimating your current position based on a previously known position, plus course steered and distance run. You use your last fix, apply the course and speed over time, and plot the DR position. It does not account for current, leeway, or steering error, so DR is always an estimate that should be updated with fixes when possible.",
+    "content": "Dead reckoning (DR) is the process of estimating your current position based on a previously known position, plus course steered and distance run. You use your last fix, apply the course and speed over time, and plot the DR position. It does not account for current, leeway, or steering error, so DR is always an estimate that should be updated with fixes when possible. For each leg, keep speed in knots and distance in nautical miles consistent with your chart so time and run stay easy to sanity-check.",
     "faq": [
       {
         "question": "What is the difference between DR and estimated position?",

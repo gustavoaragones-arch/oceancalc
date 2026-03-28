@@ -45,25 +45,19 @@ function getCalculatorClusters(): Record<string, string[]> {
 
 /**
  * Get related calculator slugs in the same cluster (circular ring).
- * Returns the next 3 calculators after the current one in the cluster array;
- * wraps from end to start. Used for tool-page internal linking.
+ * Returns the next calculators after the current one in the cluster array;
+ * wraps from end to start. Used for tool-page internal linking (ring crawl).
  */
 export function getRelatedCalculatorSlugsInCluster(
   currentSlug: string,
-  count = 3
-): { slugs: string[]; clusterLabel: string } {
+  count = 4
+): { slugs: string[]; clusterKey: string } {
   const clusters = getCalculatorClusters();
-  const clusterLabels: Record<string, string> = {
-    "maritime-measurements": "Maritime Measurements",
-    "navigation-tools": "Navigation",
-    "wind-weather": "Wind & Weather",
-    "sailing-performance": "Sailing & Performance",
-  };
   for (const [clusterKey, slugs] of Object.entries(clusters)) {
     const i = slugs.indexOf(currentSlug);
     if (i === -1) continue;
     const n = slugs.length;
-    if (n <= 1) return { slugs: [], clusterLabel: clusterLabels[clusterKey] ?? clusterKey };
+    if (n <= 1) return { slugs: [], clusterKey };
     const take = Math.min(count, n - 1);
     const out: string[] = [];
     for (let k = 1; k <= take; k++) {
@@ -71,10 +65,10 @@ export function getRelatedCalculatorSlugsInCluster(
     }
     return {
       slugs: out,
-      clusterLabel: clusterLabels[clusterKey] ?? clusterKey,
+      clusterKey,
     };
   }
-  return { slugs: [], clusterLabel: "" };
+  return { slugs: [], clusterKey: "" };
 }
 
 export function getKnots(): KnotEntry[] {

@@ -21,7 +21,7 @@ export default function ContactPage() {
             href={organization.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sky-600 dark:text-sky-400 hover:underline"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
           >
             {organization.name}
           </a>
@@ -34,7 +34,7 @@ export default function ContactPage() {
           </h2>
           <a
             href={`mailto:${organization.email}`}
-            className="text-sky-600 dark:text-sky-400 hover:underline font-medium"
+            className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
           >
             {organization.email}
           </a>

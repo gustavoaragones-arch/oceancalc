@@ -30,7 +30,7 @@ export default function PrivacyPage() {
 
         <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-100">Cookies and Similar Technologies</h2>
         <p>
-          We may use cookies and similar technologies for analytics and to improve the user experience. You can manage cookie preferences in your browser. See our <a href="/cookies/" className="text-sky-600 dark:text-sky-400 hover:underline">Cookies</a> page for more detail.
+          We may use cookies and similar technologies for analytics and to improve the user experience. You can manage cookie preferences in your browser. See our <a href="/cookies/" className="text-blue-600 dark:text-blue-400 hover:underline">Cookies</a> page for more detail.
         </p>
 
         <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-100">Data Sharing</h2>
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
         <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-100">Contact</h2>
         <p>
           For privacy-related questions, contact us at{" "}
-          <a href={`mailto:${organization.email}`} className="text-sky-600 dark:text-sky-400 hover:underline">
+          <a href={`mailto:${organization.email}`} className="text-blue-600 dark:text-blue-400 hover:underline">
             {organization.email}
           </a>
           .

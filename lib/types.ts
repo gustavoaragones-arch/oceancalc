@@ -31,21 +31,39 @@ export interface CalculatorEngineConfig {
   formulaDisplay?: string;
 }
 
-/** Registry-based shell: one formula key + simple numeric inputs (scalable to 100+ tools). */
+/** Registry-based shell: multi-input, optional units, validation, formula help text. */
 export interface SimpleRegistryInput {
   name: string;
   label: string;
   type: "number";
+  /** Default selected unit (e.g. nmi, knots, kmh). */
+  unit?: string;
+  /** If multiple, shows unit dropdown and converts to `canonical` for the formula. */
+  units?: string[];
+  /** Unit the formula expects after conversion (e.g. nmi, knots). */
+  canonical?: string;
   default?: number;
   min?: number;
+  max?: number;
   step?: string;
+  validation?: "positive" | "nonNegative";
+}
+
+export interface SimpleRegistryOutput {
+  unit: string;
+  decimals?: number;
 }
 
 export interface SimpleRegistryConfig {
   formulaKey: string;
   inputs: SimpleRegistryInput[];
-  resultLabel: string;
+  /** Prefer `output` for new calculators. */
+  resultLabel?: string;
   decimals?: number;
+  output?: SimpleRegistryOutput;
+  /** Shown in FormulaBlock (e.g. time = distance / speed). */
+  formulaText?: string;
+  formulaExplanation?: string;
 }
 
 export interface CalculatorEntry {

@@ -1,6 +1,12 @@
-/**
- * Reserved for navigation calculators (e.g. distance, ETA).
- * Export functions here and register them in `index.ts` when adding tools.
- */
+import type { RegistryInputs } from "./types";
 
-export {};
+/**
+ * Sailing time in hours: distance (nautical miles) ÷ speed (knots).
+ * Inputs must already be in canonical units.
+ */
+export function sailingTime(inputs: RegistryInputs): number {
+  const distance = inputs.distance ?? 0;
+  const speed = inputs.speed ?? 0;
+  if (speed === 0) return Number.NaN;
+  return distance / speed;
+}
