@@ -9,7 +9,8 @@ import {
   getArticlesInCategory,
 } from "@/lib/internalLinker";
 import { generateArticleMetadata } from "@/lib/seo";
-import { buildArticleSchema, buildFAQSchema } from "@/lib/schemaBuilder";
+import { buildArticleSchema } from "@/lib/schemaBuilder";
+import FAQSchema from "@/components/schema/FAQSchema";
 import { ArticleLayout } from "@/components/ArticleLayout";
 
 interface PageProps {
@@ -46,21 +47,13 @@ export default async function SailingArticlePage({ params }: PageProps) {
     article.description,
     `/sailing/${slug}/`
   );
-  const faqSchema =
-    article.faq.length > 0 ? buildFAQSchema(article.faq) : null;
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+      <FAQSchema faqs={article.faq} />
       <ArticleLayout
         article={article}
         relatedTools={relatedTools}

@@ -4,7 +4,9 @@ import { getCalculatorBySlug, getAllCalculatorSlugs } from "@/lib/contentLoader"
 import { getArticlesForTool } from "@/lib/internalLinker";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 import { formatSlugToTitle } from "@/lib/format";
-import { buildSoftwareApplicationSchema, buildFAQSchema } from "@/lib/schemaBuilder";
+import { siteConfig } from "@/config/site";
+import CalculatorSchema from "@/components/schema/CalculatorSchema";
+import FAQSchema from "@/components/schema/FAQSchema";
 import { CalculatorLayout } from "@/components/CalculatorLayout";
 import { CalculatorRenderer } from "@/components/CalculatorRenderer";
 
@@ -46,28 +48,16 @@ export default async function ToolPage({ params }: PageProps) {
     { label: calculator.title },
   ];
 
-  const appSchema = buildSoftwareApplicationSchema(
-    calculator.title,
-    calculator.description,
-    `/tools/${slug}/`
-  );
-  const faqSchema =
-    calculator.faq.length > 0
-      ? buildFAQSchema(calculator.faq)
-      : null;
+  const base = siteConfig.url.replace(/\/$/, "");
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }}
+      <CalculatorSchema
+        name={calculator.title}
+        description={calculator.description}
+        url={`${base}/tools/${slug}/`}
       />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+      <FAQSchema faqs={calculator.faq} />
       <CalculatorLayout
         calculator={calculator}
         breadcrumbItems={breadcrumbItems}

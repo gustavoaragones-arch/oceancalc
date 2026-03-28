@@ -2,6 +2,12 @@ import { siteConfig } from "@/config/site";
 
 const SITE_URL = siteConfig.url.replace(/\/$/, "");
 
+export function createJsonLd(data: object): { __html: string } {
+  return {
+    __html: JSON.stringify(data),
+  };
+}
+
 export type SoftwareApplicationSchema = {
   "@context": "https://schema.org";
   "@type": "SoftwareApplication";

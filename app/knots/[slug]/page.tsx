@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getKnotBySlug, getAllKnotSlugs } from "@/lib/contentLoader";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
-import { buildHowToSchema, buildFAQSchema } from "@/lib/schemaBuilder";
+import { buildHowToSchema } from "@/lib/schemaBuilder";
+import FAQSchema from "@/components/schema/FAQSchema";
 import { KnotTutorial } from "@/components/KnotTutorial";
 
 interface PageProps {
@@ -36,21 +37,13 @@ export default async function KnotPage({ params }: PageProps) {
     knot.steps,
     `/knots/${slug}/`
   );
-  const faqSchema =
-    knot.faq.length > 0 ? buildFAQSchema(knot.faq) : null;
-
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
       />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+      <FAQSchema faqs={knot.faq} />
       <KnotTutorial knot={knot} />
     </>
   );
