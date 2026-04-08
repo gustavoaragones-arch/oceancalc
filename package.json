@@ -12,6 +12,7 @@
     "sitemap": "npx tsx scripts/generate-sitemap.ts",
     "generate-sitemap": "npx tsx scripts/generate-sitemap.ts",
     "ping:indexing": "node scripts/ping-indexing.mjs",
+    "ping": "node scripts/ping.js",
     "refresh": "echo 'refresh trigger'",
     "validate:crawl": "node scripts/validate-crawl-depth.mjs"
   },

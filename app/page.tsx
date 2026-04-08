@@ -8,7 +8,7 @@ import {
   IconMeasurements,
   IconSailing,
 } from "@/components/icons/SectionIcons";
-import { FeaturedCalculators } from "@/components/FeaturedCalculators";
+import { MostUsedMaritimeCalculators } from "@/components/MostUsedMaritimeCalculators";
 
 export const metadata = buildSeoMetadata({
   title: "Maritime Calculators & Navigation Tools",
@@ -98,7 +98,7 @@ export default function HomePage() {
           ))}
         </nav>
 
-        <FeaturedCalculators />
+        <MostUsedMaritimeCalculators />
       </div>
     </div>
   );

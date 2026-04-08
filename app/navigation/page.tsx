@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getNavigationArticles } from "@/lib/contentLoader";
 import { SidebarNavigation } from "@/components/SidebarNavigation";
+import { PriorityCalculatorsStrip } from "@/components/PriorityCalculatorsStrip";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 import { getBuildLastModified } from "@/lib/indexing";
 
@@ -25,6 +26,8 @@ export default function NavigationHubPage() {
           Coastal and offshore navigation: position, course, distance, and time. Use our tools for passage planning and piloting.
         </p>
       </header>
+
+      <PriorityCalculatorsStrip />
 
       <div className="flex flex-col lg:flex-row lg:items-start gap-8">
         <ul className="flex-1 min-w-0 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 list-none p-0 m-0">

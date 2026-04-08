@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getWindWavesArticles } from "@/lib/contentLoader";
+import { PriorityCalculatorsStrip } from "@/components/PriorityCalculatorsStrip";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 import { getBuildLastModified } from "@/lib/indexing";
 
@@ -23,6 +24,8 @@ export default function WindWavesHubPage() {
           Understand wind strength, sea state, and apparent wind with our calculators and reference.
         </p>
       </header>
+
+      <PriorityCalculatorsStrip />
 
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0">
         {articles.map((article) => (

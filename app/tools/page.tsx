@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { getCalculators } from "@/lib/contentLoader";
+import type { CalculatorEntry } from "@/lib/types";
+import { getCalculatorsWithPriorityFirst } from "@/lib/priorityPages";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 import { getBuildLastModified } from "@/lib/indexing";
 
@@ -11,8 +12,33 @@ export const metadata = buildSeoMetadata({
   lastModified: getBuildLastModified(),
 });
 
+function ToolCardList({ tools }: { tools: CalculatorEntry[] }) {
+  return (
+    <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0">
+      {tools.map((tool) => (
+        <li key={tool.slug}>
+          <Link
+            href={`/tools/${tool.slug}/`}
+            className="card block group h-full"
+          >
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
+              {tool.title}
+            </h2>
+            <p className="text-sm text-gray-600 dark:text-slate-400 mt-2 leading-relaxed">
+              {tool.description}
+            </p>
+            <span className="inline-block mt-4 text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform duration-200">
+              Use calculator →
+            </span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function ToolsHubPage() {
-  const calculators = getCalculators();
+  const { popular, rest } = getCalculatorsWithPriorityFirst();
   return (
     <div className="container-wide py-8">
       <header className="mb-10">
@@ -24,26 +50,27 @@ export default function ToolsHubPage() {
         </p>
       </header>
 
-      <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 list-none p-0 m-0">
-        {calculators.map((tool) => (
-          <li key={tool.slug}>
-            <Link
-              href={`/tools/${tool.slug}/`}
-              className="card block group h-full"
-            >
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
-                {tool.title}
-              </h2>
-              <p className="text-sm text-gray-600 dark:text-slate-400 mt-2 leading-relaxed">
-                {tool.description}
-              </p>
-              <span className="inline-block mt-4 text-sm font-medium text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform duration-200">
-                Use calculator →
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {popular.length > 0 ? (
+        <section className="mb-12" aria-labelledby="tools-popular-heading">
+          <h2
+            id="tools-popular-heading"
+            className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6"
+          >
+            Popular calculators
+          </h2>
+          <ToolCardList tools={popular} />
+        </section>
+      ) : null}
+
+      <section aria-labelledby="tools-all-heading">
+        <h2
+          id="tools-all-heading"
+          className="text-2xl font-semibold text-gray-900 dark:text-slate-100 mb-6"
+        >
+          All maritime calculators
+        </h2>
+        <ToolCardList tools={rest} />
+      </section>
     </div>
   );
 }

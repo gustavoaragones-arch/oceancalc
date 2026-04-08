@@ -3,23 +3,23 @@ export interface TemplateFaqItem {
   answer: string;
 }
 
-/** Same meaning, alternate phrasing—index chosen deterministically from slug at build time. */
+/** Definition-first, short lines for AEO / AI extraction. */
 const introVariants = [
   (title: string) =>
-    `The ${title} helps you perform accurate maritime calculations quickly, using standard nautical relationships and clear inputs.`,
+    `${title}: standard nautical formulas, clear inputs, immediate results.`,
   (title: string) =>
-    `Use the ${title} for fast, reliable maritime math—built on standard nautical relationships with straightforward inputs.`,
+    `${title} uses established maritime relationships—enter values and read outputs without extra steps.`,
   (title: string) =>
-    `The ${title} gives you precise nautical results from familiar formulas, with an interface suited to deck and chart-table use.`,
+    `${title} applies familiar chart and piloting math in one place for deck and planning use.`,
 ] as const;
 
 const howToVariants = [
   (title: string) =>
-    `To use the ${title}, enter your values in the fields above. Results update as you adjust numbers, so you can compare scenarios without leaving the page.`,
+    `Enter numbers in the fields above; results update as you change inputs.`,
   (title: string) =>
-    `Start by filling in the fields for the ${title}; the page recalculates as you type so you can iterate through options in one place.`,
+    `Fill the inputs for the ${title}; the tool recalculates live as you edit.`,
   (title: string) =>
-    `With the ${title}, type your figures into the inputs above—the output refreshes live, making it easy to sanity-check several cases.`,
+    `Type your figures into the form; outputs refresh so you can compare cases quickly.`,
 ] as const;
 
 export const templates = {
@@ -28,29 +28,29 @@ export const templates = {
     howToVariants,
 
     formula: (formulaText: string) =>
-      `The relationship behind this tool is: ${formulaText}`,
+      `Core relationship: ${formulaText}`,
 
     templateFaq: [
       {
         question: "How accurate is this calculator?",
         answer:
-          "This calculator uses standard maritime formulas and practical approximations where noted. It is suitable for planning and cross-checks; always verify safety-critical decisions with official references and local conditions.",
+          "It uses standard maritime formulas and noted approximations. Use it for planning and checks; confirm safety-critical decisions with official sources.",
       },
       {
         question: "Can I use this on mobile?",
         answer:
-          "Yes. OceanCalc tools are responsive and work on phones and tablets for quick checks on deck or in the cockpit.",
+          "Yes. Layouts are responsive for phones and tablets on deck or in the cockpit.",
       },
     ] as TemplateFaqItem[],
 
     useCases: (title: string) =>
-      `Typical uses for the ${title} include passage planning, briefing crew, converting instrument readouts to chart units, and double-checking mental math when fatigue or weather make errors more likely.`,
+      `${title}: passage planning, crew briefings, instrument-to-chart unit checks, and verifying mental math when tired or in rough weather.`,
 
     tips: (title: string) =>
       [
-        `Confirm that the units you enter match your chart, GPS, or instrument readout before relying on the ${title}.`,
-        `In rough weather or poor visibility, cross-check important results with a second method or a crew member.`,
-        `Treat simplified models (wave height, radar horizon, etc.) as estimates—real conditions vary with fetch, refraction, and equipment.`,
+        `Match input units to your chart, GPS, or instrument before trusting the ${title}.`,
+        `Cross-check important outputs with a second method or crew when visibility or motion is poor.`,
+        `Treat simplified models (waves, radar horizon, etc.) as estimates; real conditions vary.`,
       ] as string[],
   },
 };

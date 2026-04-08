@@ -22,9 +22,12 @@ export function RelatedTools({ tools, title = "Related Tools" }: RelatedToolsPro
           <li key={slug}>
             <Link
               href={`/tools/${slug}/`}
-              className="text-blue-600 dark:text-blue-400 hover:underline transition-colors duration-200"
+              className="text-blue-600 dark:text-blue-400 hover:underline transition-colors duration-200 text-sm leading-snug"
             >
-              {toolTitle} →
+              Use the {toolTitle}{" "}
+              <span className="text-slate-600 dark:text-slate-400 font-normal">
+                (maritime calculator)
+              </span>
             </Link>
           </li>
         ))}

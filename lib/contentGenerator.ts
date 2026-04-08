@@ -1,5 +1,6 @@
 import type { CalculatorEntry } from "./types";
 import { templates } from "@/data/contentTemplates";
+import { getEntityLeadForIntro } from "./aeo";
 
 /** Deterministic index from key (stable per build; no request-time randomness). */
 function pickVariantIndex(key: string, count: number): number {
@@ -51,8 +52,11 @@ export function generateContent(calculator: CalculatorEntry): GeneratedToolConte
   const t = templates.default;
   const introIdx = pickVariantIndex(calculator.slug, t.introVariants.length);
   const howIdx = pickVariantIndex(`${calculator.slug}:how`, t.howToVariants.length);
+  const baseIntro = t.introVariants[introIdx](calculator.title);
+  const entityLead = getEntityLeadForIntro(calculator);
+  const intro = entityLead ? `${entityLead} ${baseIntro}` : baseIntro;
   return {
-    intro: t.introVariants[introIdx](calculator.title),
+    intro,
     howTo: t.howToVariants[howIdx](calculator.title),
     formulaLine: t.formula(formulaText),
     useCases: t.useCases(calculator.title),

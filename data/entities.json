@@ -1,0 +1,62 @@
+{
+  "nautical mile": {
+    "definition": "A nautical mile is a unit of distance equal to exactly 1,852 meters, tied to one minute of latitude and used worldwide in maritime and aviation navigation.",
+    "type": "measurement"
+  },
+  "knot": {
+    "definition": "A knot is a unit of speed equal to one nautical mile per hour (1.852 km/h). Marine wind, boat speed, and current are usually given in knots.",
+    "type": "speed"
+  },
+  "fathom": {
+    "definition": "A fathom is six feet (1.8288 m), traditionally used for depth soundings and anchor rode in some regions.",
+    "type": "measurement"
+  },
+  "great circle": {
+    "definition": "A great circle is the shortest path between two points on a sphere; long ocean routes are often planned as great-circle tracks with rhumb-line legs for practical steering.",
+    "type": "navigation"
+  },
+  "bearing": {
+    "definition": "A bearing is a direction expressed as an angle, usually clockwise from north (true or magnetic), used to describe courses and relative positions.",
+    "type": "navigation"
+  },
+  "dead reckoning": {
+    "definition": "Dead reckoning estimates position from a known fix using course and distance (or speed and time) without new observations; it ignores set and drift unless adjusted to an estimated position.",
+    "type": "navigation"
+  },
+  "apparent wind": {
+    "definition": "Apparent wind is the wind felt on a moving vessel: the vector sum of true wind and wind created by the boat’s motion through the air.",
+    "type": "meteorology"
+  },
+  "true wind": {
+    "definition": "True wind is the wind relative to the fixed water or land surface, before the boat’s motion alters what an observer feels.",
+    "type": "meteorology"
+  },
+  "anchor scope": {
+    "definition": "Anchor scope is the ratio of deployed rode length to vertical depth at the bow; higher scope generally improves holding until swinging room becomes limiting.",
+    "type": "seamanship"
+  },
+  "Beaufort scale": {
+    "definition": "The Beaufort scale classifies wind strength by observed sea state and wind speed bands, giving mariners a common language for conditions.",
+    "type": "meteorology"
+  },
+  "significant wave height": {
+    "definition": "Significant wave height is approximately the average height of the highest one-third of waves in a sea state, not the largest single wave.",
+    "type": "oceanography"
+  },
+  "hull speed": {
+    "definition": "Hull speed is a practical speed ceiling for many displacement hulls, often approximated from waterline length; it is not a hard physical limit for all vessels.",
+    "type": "performance"
+  },
+  "VMG": {
+    "definition": "Velocity made good (VMG) is the component of the boat’s speed toward or away from a mark or waypoint, critical for upwind and downwind tactics.",
+    "type": "performance"
+  },
+  "rhumb line": {
+    "definition": "A rhumb line crosses meridians at a constant bearing; it is simpler to steer than a great circle but is not the shortest path on the globe.",
+    "type": "navigation"
+  },
+  "nautical chart": {
+    "definition": "A nautical chart is a map for navigation showing depths, aids, hazards, and often magnetic variation; distances are read with the latitude scale for nautical miles.",
+    "type": "navigation"
+  }
+}

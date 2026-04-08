@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getPriorityCalculators } from "@/lib/priorityPages";
 
 const CATEGORY_HUB: Record<string, { href: string; label: string }> = {
   navigation: { href: "/navigation/", label: "navigation articles" },
@@ -14,6 +15,7 @@ const CATEGORY_HUB: Record<string, { href: string; label: string }> = {
 
 export function CalculatorCategoryLinks({ category }: { category: string }) {
   const hub = CATEGORY_HUB[category];
+  const popular = getPriorityCalculators();
   return (
     <section
       className="card mt-8"
@@ -22,6 +24,24 @@ export function CalculatorCategoryLinks({ category }: { category: string }) {
       <h2 id="calc-category-links-heading" className="heading-section">
         Explore more
       </h2>
+      {popular.length > 0 ? (
+        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-3">
+          <span className="font-medium text-slate-800 dark:text-slate-200">
+            Popular calculators:
+          </span>{" "}
+          {popular.map((tool, i) => (
+            <span key={tool.slug}>
+              {i > 0 ? " · " : null}
+              <Link
+                href={`/tools/${tool.slug}/`}
+                className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+              >
+                {tool.title}
+              </Link>
+            </span>
+          ))}
+        </p>
+      ) : null}
       <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
         {hub ? (
           <>

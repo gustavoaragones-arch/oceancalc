@@ -9,6 +9,14 @@ import { AuthorPublisher } from "./AuthorPublisher";
 import { RelatedCalculators } from "./RelatedCalculators";
 import { CalculatorCategoryLinks } from "./CalculatorCategoryLinks";
 import LastUpdated from "./LastUpdated";
+import AnswerBlock from "./ai/AnswerBlock";
+import KeyTakeaways from "./ai/KeyTakeaways";
+import EntityDefinition from "./ai/EntityDefinition";
+import {
+  getAeoAnswerBlock,
+  getAeoKeyTakeaways,
+  getEntitiesForCalculator,
+} from "@/lib/aeo";
 
 export interface LearnMoreItem {
   slug: string;
@@ -40,6 +48,7 @@ export function CalculatorLayout({
 }: CalculatorLayoutProps) {
   const title = displayTitle ?? calculator.title;
   const faqs = faqItems ?? calculator.faq;
+  const entityAnchors = getEntitiesForCalculator(calculator).slice(0, 2);
 
   return (
     <article className="container-narrow py-8">
@@ -73,6 +82,24 @@ export function CalculatorLayout({
 
       {children}
 
+      <AnswerBlock {...getAeoAnswerBlock(calculator)} />
+
+      {entityAnchors.length > 0 ? (
+        <div
+          className="mt-6 space-y-4"
+          role="region"
+          aria-label="Key maritime definitions"
+        >
+          {entityAnchors.map((e) => (
+            <EntityDefinition
+              key={e.term}
+              term={e.term}
+              definition={e.definition}
+            />
+          ))}
+        </div>
+      ) : null}
+
       <RelatedCalculators currentSlug={calculator.slug} />
 
       {generated ? (
@@ -80,9 +107,10 @@ export function CalculatorLayout({
           <h2 id="intro-heading" className="heading-section">
             Overview
           </h2>
-          <p className="text-gray-700 dark:text-slate-300 leading-relaxed text-sm">
+          <p className="text-gray-700 dark:text-slate-300 leading-relaxed text-sm max-w-prose">
             {generated.intro}
           </p>
+          <KeyTakeaways points={getAeoKeyTakeaways(calculator, generated)} />
         </section>
       ) : null}
 
