@@ -3,14 +3,13 @@ export interface TemplateFaqItem {
   answer: string;
 }
 
-/** Definition-first, short lines for AEO / AI extraction. */
+/** Phase 6.6 — single intro template (recrawl / consistency). {toolName} = page title. */
+const PRIMARY_ACTION =
+  "apply your inputs to the stated nautical relationships";
+
 const introVariants = [
-  (title: string) =>
-    `${title}: standard nautical formulas, clear inputs, immediate results.`,
-  (title: string) =>
-    `${title} uses established maritime relationships—enter values and read outputs without extra steps.`,
-  (title: string) =>
-    `${title} applies familiar chart and piloting math in one place for deck and planning use.`,
+  (toolName: string) =>
+    `A ${toolName} is used in maritime navigation to perform precise calculations based on established nautical formulas. This tool allows you to ${PRIMARY_ACTION} using accurate and standardized methods.`,
 ] as const;
 
 const howToVariants = [

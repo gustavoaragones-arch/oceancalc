@@ -57,10 +57,7 @@ function pushPath(
  * Article, knot, and secondary static URLs. Uses the same `baseUrl` as `app/sitemap.ts`
  * so the merged sitemap never mixes domains.
  */
-export function getContentSitemapSlice(
-  lastModified: Date,
-  baseUrl: string
-): MetadataRoute.Sitemap {
+export function getContentSitemapSlice(baseUrl: string): MetadataRoute.Sitemap {
   const out: MetadataRoute.Sitemap = [];
 
   const staticPages: Array<[string, number]> = [
@@ -73,23 +70,23 @@ export function getContentSitemapSlice(
     ["/affiliate/", 0.4],
   ];
   for (const [path, pri] of staticPages) {
-    pushPath(out, baseUrl, path, pri, lastModified);
+    pushPath(out, baseUrl, path, pri, new Date());
   }
 
   for (const a of getNavigationArticles()) {
-    pushPath(out, baseUrl, `/navigation/${a.slug}/`, 0.75, lastModified);
+    pushPath(out, baseUrl, `/navigation/${a.slug}/`, 0.75, new Date());
   }
   for (const a of getWindWavesArticles()) {
-    pushPath(out, baseUrl, `/wind-waves/${a.slug}/`, 0.75, lastModified);
+    pushPath(out, baseUrl, `/wind-waves/${a.slug}/`, 0.75, new Date());
   }
   for (const a of getMeasurementsArticles()) {
-    pushPath(out, baseUrl, `/maritime-measurements/${a.slug}/`, 0.75, lastModified);
+    pushPath(out, baseUrl, `/maritime-measurements/${a.slug}/`, 0.75, new Date());
   }
   for (const a of getSailingArticles()) {
-    pushPath(out, baseUrl, `/sailing/${a.slug}/`, 0.75, lastModified);
+    pushPath(out, baseUrl, `/sailing/${a.slug}/`, 0.75, new Date());
   }
   for (const k of getKnots()) {
-    pushPath(out, baseUrl, `/knots/${k.slug}/`, 0.75, lastModified);
+    pushPath(out, baseUrl, `/knots/${k.slug}/`, 0.75, new Date());
   }
 
   return out;

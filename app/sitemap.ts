@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getAllCalculators } from "@/lib/contentLoader";
 import { toolVariants } from "@/lib/toolVariants";
-import { getBuildLastModified, getContentSitemapSlice } from "@/lib/indexing";
+import { getContentSitemapSlice } from "@/lib/indexing";
 
 /**
  * Static export: sitemap is generated at build/deploy (`out/sitemap.xml`).
@@ -15,49 +15,48 @@ const BASE_URL = (
 ).replace(/\/$/, "");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = getBuildLastModified();
   const changeFrequency = "weekly" as const;
 
   const corePages: MetadataRoute.Sitemap = [
     {
       url: `${BASE_URL}/`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency,
       priority: 1.0,
     },
     {
       url: `${BASE_URL}/tools/`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency,
       priority: 0.9,
     },
     {
       url: `${BASE_URL}/navigation/`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency,
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/knots/`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency,
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/wind-waves/`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency,
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/sailing/`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency,
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/maritime-measurements/`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency,
       priority: 0.8,
     },
@@ -67,13 +66,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const calculatorPages = calculators.flatMap((calc) => {
     const mainPage: MetadataRoute.Sitemap[number] = {
       url: `${BASE_URL}/tools/${calc.slug}/`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency,
       priority: 0.9,
     };
     const variantPages = toolVariants.map((variant) => ({
       url: `${BASE_URL}/tools/${calc.slug}/${variant}/`,
-      lastModified,
+      lastModified: new Date(),
       changeFrequency,
       priority: 0.7,
     }));
@@ -83,6 +82,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...corePages,
     ...calculatorPages,
-    ...getContentSitemapSlice(lastModified, BASE_URL),
+    ...getContentSitemapSlice(BASE_URL),
   ];
 }

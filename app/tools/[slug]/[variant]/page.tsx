@@ -26,20 +26,32 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const calculator = getCalculatorBySlug(slug);
   if (!calculator || !isToolVariantId(variant)) {
     const title = formatSlugToTitle(slug);
-    return buildSeoMetadata({
-      title: title + (variant ? ` (${variant})` : ""),
-      description: `Maritime calculator variant for ${title}.`,
-      path: `/tools/${slug}/${variant}/`,
-      canonicalPath: `/tools/${slug}/`,
-    });
+    return {
+      ...buildSeoMetadata({
+        title: title + (variant ? ` (${variant})` : ""),
+        description: `Maritime calculator variant for ${title}.`,
+        path: `/tools/${slug}/${variant}/`,
+        canonicalPath: `/tools/${slug}/`,
+      }),
+      robots: {
+        index: false,
+        follow: true,
+      },
+    };
   }
   const copy = getVariantPageCopy(calculator, variant);
-  return buildSeoMetadata({
-    title: copy.pageTitle,
-    description: copy.description,
-    path: `/tools/${slug}/${variant}/`,
-    canonicalPath: `/tools/${slug}/`,
-  });
+  return {
+    ...buildSeoMetadata({
+      title: copy.pageTitle,
+      description: copy.description,
+      path: `/tools/${slug}/${variant}/`,
+      canonicalPath: `/tools/${slug}/`,
+    }),
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
 }
 
 export default async function ToolVariantPage({ params }: PageProps) {

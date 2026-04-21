@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import type { CalculatorEntry } from "@/lib/types";
 import type { GeneratedToolContent } from "@/lib/contentGenerator";
 import { FAQ } from "./FAQ";
@@ -62,6 +63,9 @@ export function CalculatorLayout({
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-3 text-balance">
           {title}
         </h1>
+        <p className="text-xs text-gray-500 dark:text-slate-500 mt-1">
+          Updated recently with improved calculation accuracy and expanded examples.
+        </p>
         <p className="text-lg text-gray-600 dark:text-slate-400 leading-relaxed text-balance">
           {calculator.description}
         </p>
@@ -188,6 +192,68 @@ export function CalculatorLayout({
       )}
 
       {faqs.length > 0 && <FAQ items={faqs} />}
+
+      <section className="mt-10">
+        <h2 className="text-lg font-semibold mb-3 text-gray-900 dark:text-slate-100">
+          Related Navigation Calculations
+        </h2>
+
+        <ul className="grid md:grid-cols-2 gap-2 text-sm list-none p-0 m-0">
+          <li>
+            <Link
+              href="/tools/hull-speed-calculator/"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Calculate maximum hull speed based on waterline length
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/tools/rhumb-distance-calculator/"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Compute rhumb line distance for constant bearing navigation
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/tools/initial-bearing-calculator/"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Find initial bearing between two geographic coordinates
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/tools/distance-to-horizon-calculator/"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Estimate visual horizon distance based on observer height
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/tools/cross-track-error-calculator/"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Measure deviation from intended navigation path
+            </Link>
+          </li>
+
+          <li>
+            <Link
+              href="/tools/speed-over-ground-calculator/"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Calculate actual vessel speed considering current and heading
+            </Link>
+          </li>
+        </ul>
+      </section>
 
       <CalculatorCategoryLinks category={calculator.category} />
 

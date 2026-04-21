@@ -40,6 +40,17 @@ function ToolCardList({ tools }: { tools: CalculatorEntry[] }) {
 export default function ToolsHubPage() {
   const { popular, rest } = getCalculatorsWithPriorityFirst();
   return (
+    <>
+      <section className="max-w-5xl mx-auto px-4 mt-6">
+        <h2 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-slate-100">
+          Maritime Calculators Index
+        </h2>
+
+        <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">
+          Browse all maritime calculation tools including navigation, distance, speed, and sailing performance formulas.
+        </p>
+      </section>
+
     <div className="container-wide py-8">
       <header className="mb-10">
         <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white mb-3 text-balance">
@@ -72,5 +83,6 @@ export default function ToolsHubPage() {
         <ToolCardList tools={rest} />
       </section>
     </div>
+    </>
   );
 }
