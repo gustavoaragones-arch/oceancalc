@@ -82,6 +82,32 @@ export default function RootLayout({
             Bearing
           </Link>
         </div>
+        <div className="text-xs text-center mt-4 space-x-4 text-gray-600 dark:text-slate-400">
+          <Link
+            href="/navigation-calculations/"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Navigation
+          </Link>
+          <Link
+            href="/distance-measurement-calculators/"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Distance
+          </Link>
+          <Link
+            href="/wind-wave-calculators/"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Wind &amp; Waves
+          </Link>
+          <Link
+            href="/sailing-performance-calculators/"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Sailing
+          </Link>
+        </div>
         <Footer />
       </body>
     </html>

@@ -49,6 +49,33 @@ export default function ToolsHubPage() {
         <p className="text-sm text-gray-600 dark:text-slate-400 mb-4">
           Browse all maritime calculation tools including navigation, distance, speed, and sailing performance formulas.
         </p>
+
+        <div className="text-sm mb-4 space-x-4">
+          <Link
+            href="/navigation-calculations/"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Navigation
+          </Link>
+          <Link
+            href="/distance-measurement-calculators/"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Distance
+          </Link>
+          <Link
+            href="/wind-wave-calculators/"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Wind &amp; Waves
+          </Link>
+          <Link
+            href="/sailing-performance-calculators/"
+            className="text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            Sailing Performance
+          </Link>
+        </div>
       </section>
 
     <div className="container-wide py-8">

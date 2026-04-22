@@ -8,6 +8,12 @@ export interface AeoGeneratedSlice {
   howTo: string;
 }
 
+/** Key takeaways: `<strong>entity</strong> — definition` rows. */
+export interface KeyTakeawayBullet {
+  entity: string;
+  definition: string;
+}
+
 export interface EntityRecord {
   definition: string;
   type: string;
@@ -113,36 +119,78 @@ export function getAeoAnswerBlock(calculator: CalculatorEntry): {
   };
 }
 
-/** Short bullets for structured AI summaries. */
+function escapeRe(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/** Strip leading “A {term} is …” so the em-dash reads as entity — rest. */
+function definitionAfterEntity(def: string, term: string): string {
+  const t = term.trim();
+  if (!t) return def;
+  const re = new RegExp(`^(A|An|The)\\s+${escapeRe(t)}\\s+is\\s+`, "i");
+  const stripped = def.replace(re, "").trim();
+  return stripped.length > 0 ? stripped : def;
+}
+
+function entityDisplayName(term: string): string {
+  if (term === term.toUpperCase() && term.length <= 4) return term;
+  return term.charAt(0).toUpperCase() + term.slice(1);
+}
+
+/** Short bullets: entity — definition (AEO / entity parsing). */
 export function getAeoKeyTakeaways(
   calculator: CalculatorEntry,
   generated: AeoGeneratedSlice
-): string[] {
-  const points: string[] = [];
+): KeyTakeawayBullet[] {
+  const items: KeyTakeawayBullet[] = [];
   const lead = getEntityLeadForIntro(calculator);
   const entities = getEntitiesForCalculator(calculator);
+
   if (!lead) {
     for (const e of entities.slice(0, 2)) {
-      points.push(e.definition);
+      items.push({
+        entity: entityDisplayName(e.term),
+        definition: definitionAfterEntity(e.definition, e.term),
+      });
     }
   } else if (entities[1]) {
-    points.push(entities[1].definition);
+    const e = entities[1];
+    items.push({
+      entity: entityDisplayName(e.term),
+      definition: definitionAfterEntity(e.definition, e.term),
+    });
   }
 
   const introOne = takeSentences(generated.intro, 1);
-  if (introOne) points.push(introOne);
+  if (introOne) {
+    items.push({
+      entity: calculator.title,
+      definition: introOne,
+    });
+  }
 
   const formulaOne = takeSentences(calculator.formula, 1);
-  if (formulaOne && !points.some((p) => p.includes(formulaOne.slice(0, 20)))) {
-    points.push(formulaOne);
+  if (
+    formulaOne &&
+    !items.some((it) => it.definition.includes(formulaOne.slice(0, 20)))
+  ) {
+    items.push({
+      entity: "Formula",
+      definition: formulaOne,
+    });
   }
 
   const howOne = takeSentences(generated.howTo, 1);
-  if (howOne && points.length < 4) points.push(howOne);
+  if (howOne && items.length < 5) {
+    items.push({
+      entity: "How to use",
+      definition: howOne,
+    });
+  }
 
   const seen = new Set<string>();
-  const deduped = points.filter((p) => {
-    const k = p.slice(0, 96).toLowerCase();
+  const deduped = items.filter((it) => {
+    const k = `${it.entity}|${it.definition.slice(0, 96)}`.toLowerCase();
     if (seen.has(k)) return false;
     seen.add(k);
     return true;

@@ -60,6 +60,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency,
       priority: 0.8,
     },
+    {
+      url: `${BASE_URL}/navigation-calculations/`,
+      lastModified: new Date(),
+      changeFrequency,
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/distance-measurement-calculators/`,
+      lastModified: new Date(),
+      changeFrequency,
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/wind-wave-calculators/`,
+      lastModified: new Date(),
+      changeFrequency,
+      priority: 0.85,
+    },
+    {
+      url: `${BASE_URL}/sailing-performance-calculators/`,
+      lastModified: new Date(),
+      changeFrequency,
+      priority: 0.85,
+    },
   ];
 
   const calculators = getAllCalculators();

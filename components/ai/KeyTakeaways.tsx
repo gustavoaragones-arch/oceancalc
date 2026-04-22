@@ -1,12 +1,14 @@
+import type { KeyTakeawayBullet } from "@/lib/aeo";
+
 type Props = {
-  points: string[];
+  items: KeyTakeawayBullet[];
 };
 
 /**
- * AEO: structured bullet summary for AI extraction.
+ * AEO: entity — definition bullets for AI / Google entity parsing.
  */
-export default function KeyTakeaways({ points }: Props) {
-  if (points.length === 0) return null;
+export default function KeyTakeaways({ items }: Props) {
+  if (items.length === 0) return null;
   return (
     <section
       className="mt-8"
@@ -18,9 +20,13 @@ export default function KeyTakeaways({ points }: Props) {
       >
         Key takeaways
       </h2>
-      <ul className="mt-2 list-disc pl-5 text-sm text-gray-700 dark:text-slate-300 space-y-1.5 leading-relaxed">
-        {points.map((p, i) => (
-          <li key={i}>{p}</li>
+      <ul className="mt-2 space-y-2 text-sm list-none p-0 m-0 leading-relaxed">
+        {items.map((item, i) => (
+          <li key={i} className="text-gray-700 dark:text-slate-300">
+            <strong className="text-gray-900 dark:text-slate-100">{item.entity}</strong>
+            {" — "}
+            {item.definition}
+          </li>
         ))}
       </ul>
     </section>

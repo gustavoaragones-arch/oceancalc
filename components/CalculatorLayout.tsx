@@ -13,6 +13,8 @@ import LastUpdated from "./LastUpdated";
 import AnswerBlock from "./ai/AnswerBlock";
 import KeyTakeaways from "./ai/KeyTakeaways";
 import EntityDefinition from "./ai/EntityDefinition";
+import AdPlaceholder from "@/components/ads/AdPlaceholder";
+import MarineToolsBlock from "@/components/affiliate/MarineToolsBlock";
 import {
   getAeoAnswerBlock,
   getAeoKeyTakeaways,
@@ -86,6 +88,8 @@ export function CalculatorLayout({
 
       {children}
 
+      <AdPlaceholder label="Ad slot — after calculation result" />
+
       <AnswerBlock {...getAeoAnswerBlock(calculator)} />
 
       {entityAnchors.length > 0 ? (
@@ -114,7 +118,8 @@ export function CalculatorLayout({
           <p className="text-gray-700 dark:text-slate-300 leading-relaxed text-sm max-w-prose">
             {generated.intro}
           </p>
-          <KeyTakeaways points={getAeoKeyTakeaways(calculator, generated)} />
+          <KeyTakeaways items={getAeoKeyTakeaways(calculator, generated)} />
+          <MarineToolsBlock />
         </section>
       ) : null}
 
@@ -255,11 +260,39 @@ export function CalculatorLayout({
         </ul>
       </section>
 
+      <AdPlaceholder label="Ad slot — mid content" />
+
+      <section className="mt-8">
+        <h2 className="text-lg font-semibold mb-2 text-gray-900 dark:text-slate-100">
+          Explore Related Calculation Categories
+        </h2>
+
+        <ul className="text-sm space-y-1 list-none p-0 m-0 text-gray-700 dark:text-slate-300">
+          <li>
+            <Link href="/tools/" className="text-blue-600 dark:text-blue-400 hover:underline">
+              Browse all maritime calculators and navigation tools
+            </Link>
+          </li>
+          <li>
+            <Link href="/tools/" className="text-blue-600 dark:text-blue-400 hover:underline">
+              Explore distance, bearing, and route calculation tools
+            </Link>
+          </li>
+          <li>
+            <Link href="/tools/" className="text-blue-600 dark:text-blue-400 hover:underline">
+              View sailing performance and wind analysis calculators
+            </Link>
+          </li>
+        </ul>
+      </section>
+
       <CalculatorCategoryLinks category={calculator.category} />
 
       <LearnMore items={learnMoreItems} title="Learn More" />
 
       <CalculatorDisclaimer />
+
+      <AdPlaceholder label="Ad slot — bottom of page" />
     </article>
   );
 }

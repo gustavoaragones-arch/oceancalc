@@ -13,6 +13,7 @@ import {
   RECENTLY_UPDATED_TOOLS,
   RECENTLY_UPDATED_LABELS,
 } from "@/lib/freshness";
+import ClusterHub from "@/components/ClusterHub";
 
 export const metadata = buildSeoMetadata({
   title: "Maritime Calculators & Navigation Tools",
@@ -178,6 +179,8 @@ export default function HomePage() {
             ))}
           </ul>
         </section>
+
+        <ClusterHub />
       </div>
     </div>
   );
