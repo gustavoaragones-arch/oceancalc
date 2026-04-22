@@ -90,6 +90,12 @@ export function CalculatorLayout({
 
       <AdPlaceholder label="Ad slot — after calculation result" />
 
+      <section className="mt-4 p-4 rounded-xl border border-blue-100 bg-blue-50 dark:bg-slate-800 dark:border-slate-700">
+        <p className="text-sm">
+          Use this calculation together with proper navigation tools to improve route accuracy and on-water decision making.
+        </p>
+      </section>
+
       <AnswerBlock {...getAeoAnswerBlock(calculator)} />
 
       {entityAnchors.length > 0 ? (
@@ -286,7 +292,24 @@ export function CalculatorLayout({
         </ul>
       </section>
 
+      <section className="mt-8">
+        <h2 className="text-lg font-semibold mb-2">
+          When to Use This Calculation
+        </h2>
+
+        <ul className="text-sm space-y-1">
+          <li>• Planning a navigation route between two points</li>
+          <li>• Adjusting course based on wind, current, or drift</li>
+          <li>• Verifying distances and bearings during passage planning</li>
+          <li>• Supporting manual navigation alongside GPS systems</li>
+        </ul>
+      </section>
+
       <CalculatorCategoryLinks category={calculator.category} />
+
+      <p className="text-xs text-gray-500 mt-8">
+        These calculations are based on standard maritime navigation formulas used in seamanship, chart navigation, and marine route planning.
+      </p>
 
       <LearnMore items={learnMoreItems} title="Learn More" />
 
