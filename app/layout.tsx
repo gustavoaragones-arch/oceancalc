@@ -108,6 +108,9 @@ export default function RootLayout({
             Sailing
           </Link>
         </div>
+        <p className="text-center text-xs text-slate-500 px-4 mt-10">
+          OceanCalc publishes maritime navigation calculators, sailing references, and nautical measurement tools designed for educational and practical marine planning use.
+        </p>
         <Footer />
       </body>
     </html>

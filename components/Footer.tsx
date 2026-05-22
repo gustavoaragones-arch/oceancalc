@@ -2,8 +2,6 @@ import Link from "next/link";
 import { organization } from "@/config/siteOwner";
 
 const footerLinks = [
-  { href: "/about/", label: "About" },
-  { href: "/contact/", label: "Contact" },
   { href: "/privacy/", label: "Privacy Policy" },
   { href: "/terms/", label: "Terms" },
   { href: "/disclaimer/", label: "Disclaimer" },
@@ -26,11 +24,28 @@ export function Footer() {
             </Link>
           ))}
         </div>
+        <div className="flex flex-wrap justify-center gap-4 text-sm mb-4 mt-6 text-gray-500 dark:text-slate-500">
+          <Link href="/about/" className="hover:underline">
+            About
+          </Link>
+
+          <Link href="/contact/" className="hover:underline">
+            Contact
+          </Link>
+
+          <Link href="/editorial-policy/" className="hover:underline">
+            Editorial Policy
+          </Link>
+
+          <Link href="/privacy/" className="hover:underline">
+            Privacy Policy
+          </Link>
+        </div>
         <p className="text-center text-sm text-gray-500 dark:text-slate-500 mt-5 max-w-2xl mx-auto leading-relaxed">
           © {new Date().getFullYear()} OceanCalc. Maritime calculators and navigation reference.
         </p>
         <p className="text-center text-sm text-gray-500 dark:text-slate-500 mt-3 max-w-2xl mx-auto leading-relaxed">
-          OceanCalc is a maritime tools and navigation reference platform developed and operated by{" "}
+          Developed and operated by{" "}
           <a
             href={organization.url}
             target="_blank"
@@ -39,7 +54,7 @@ export function Footer() {
           >
             {organization.name}
           </a>
-          .
+          . {new Date().getFullYear()}
         </p>
       </div>
     </footer>

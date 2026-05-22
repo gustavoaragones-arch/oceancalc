@@ -1,48 +1,43 @@
-import { organization } from "@/config/siteOwner";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
 export const metadata = buildSeoMetadata({
   title: "Contact",
-  description: `Contact OceanCalc and ${organization.name}. Get in touch with the OceanCalc team.`,
+  description:
+    "Contact OceanCalc for calculator feedback, corrections, and partnership inquiries.",
   path: "/contact/",
 });
 
 export default function ContactPage() {
   return (
-    <div className="container-narrow py-8">
-      <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
-        Contact
+    <main className="max-w-3xl mx-auto px-4 py-12">
+      <h1 className="text-3xl font-bold mb-6">
+        Contact OceanCalc
       </h1>
 
-      <div className="prose prose-slate dark:prose-invert max-w-none space-y-6">
-        <p className="text-slate-700 dark:text-slate-300">
-          OceanCalc is developed and operated by{" "}
-          <a
-            href={organization.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            {organization.name}
-          </a>
-          . For questions, corrections, or suggestions about our maritime calculators and content, please reach out.
+      <div className="space-y-5 text-slate-700 dark:text-slate-300 leading-7">
+        <p>
+          OceanCalc is continuously expanding its maritime calculators, sailing tools, and navigation resources.
         </p>
 
-        <div className="rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 p-6">
-          <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-2">
-            Email
-          </h2>
-          <a
-            href={`mailto:${organization.email}`}
-            className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
-          >
-            {organization.email}
-          </a>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
-            We aim to respond within a few business days.
+        <p>
+          For general questions, correction requests, calculator feedback, or partnership inquiries, please contact:
+        </p>
+
+        <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+          <p className="font-medium">
+            <a
+              href="mailto:contact@oceancalc.com"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              contact@oceancalc.com
+            </a>
           </p>
         </div>
+
+        <p className="text-sm text-slate-500">
+          Response times may vary depending on request volume.
+        </p>
       </div>
-    </div>
+    </main>
   );
 }

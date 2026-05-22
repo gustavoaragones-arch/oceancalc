@@ -1,56 +1,47 @@
-import Link from "next/link";
-import { organization } from "@/config/siteOwner";
 import { generateMetadata as buildSeoMetadata } from "@/lib/seo";
 
 export const metadata = buildSeoMetadata({
   title: "About",
-  description: `About OceanCalc — maritime calculators and navigation reference. Built by ${organization.name}.`,
+  description:
+    "About OceanCalc — maritime navigation and sailing calculation tools for route planning, seamanship, and nautical navigation.",
   path: "/about/",
 });
 
 export default function AboutPage() {
   return (
-    <div className="container-narrow py-8">
-      <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">
+    <main className="max-w-4xl mx-auto px-4 py-12">
+      <h1 className="text-3xl font-bold mb-6">
         About OceanCalc
       </h1>
 
-      <div className="prose prose-slate dark:prose-invert max-w-none space-y-6">
-        <p className="text-slate-700 dark:text-slate-300">
-          OceanCalc is an independent maritime tools and navigation reference platform built by{" "}
-          <a
-            href={organization.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
-          >
-            {organization.name}
-          </a>
-          , a digital product studio focused on creating useful web tools and educational platforms.
+      <div className="space-y-5 text-slate-700 dark:text-slate-300 leading-7">
+        <p>
+          OceanCalc is a maritime navigation and sailing calculation platform built to simplify common marine calculations used during route planning, seamanship training, sailing performance analysis, and nautical navigation.
         </p>
 
-        <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-100 mt-8">
-          Mission
-        </h2>
-        <p className="text-slate-700 dark:text-slate-300">
-          Our goal is to be the largest maritime calculator and navigation knowledge hub on the internet—free, accurate, and fast. We provide tools for converting nautical units, planning passages, calculating anchor scope, and understanding wind and sea state for sailors, mariners, and anyone who works or plays on the water.
+        <p>
+          The platform includes calculators for bearings, nautical distance, wave behavior, vessel speed, heading conversion, route geometry, and marine measurement systems.
         </p>
 
-        <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-100 mt-8">
+        <p>
+          OceanCalc was developed as a lightweight, fast-loading navigation resource focused on practical usability, clean calculation interfaces, and educational clarity.
+        </p>
+
+        <p>
+          The goal is to provide sailors, navigators, students, and marine professionals with accessible tools that support real-world maritime planning and navigation workflows.
+        </p>
+
+        <p>
+          All tools are designed for informational and educational use only and should not replace certified marine navigation equipment or official nautical publications.
+        </p>
+
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100 pt-2">
           Ownership &amp; Disclosure
         </h2>
-        <p className="text-slate-700 dark:text-slate-300">
-          OceanCalc is owned and operated by {organization.name}, {organization.description} We build and operate our own web properties; OceanCalc is one of our products. We are based in the {organization.jurisdiction}, {organization.foundingCountry}.
-        </p>
-
-        <p className="text-slate-700 dark:text-slate-300">
-          For questions or feedback, please{" "}
-          <Link href="/contact/" className="text-blue-600 dark:text-blue-400 hover:underline">
-            contact us
-          </Link>
-          .
+        <p>
+          OceanCalc is owned and operated by Albor Digital LLC, Independent digital product studio building utility web applications and tools. We build and operate our own web properties; OceanCalc is one of our products. We are based in the Wyoming, United States.
         </p>
       </div>
-    </div>
+    </main>
   );
 }
