@@ -6,7 +6,9 @@ import { Footer } from "@/components/Footer";
 import { AllCalculatorsGrid } from "@/components/AllCalculatorsGrid";
 import OrganizationSchema from "@/components/schema/OrganizationSchema";
 import WebsiteSchema from "@/components/schema/WebsiteSchema";
+import AdSenseScript from "@/components/ads/AdSenseScript";
 import { siteConfig } from "@/config/site";
+import { ADSENSE_CLIENT_ID } from "@/lib/ads";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -36,6 +38,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  other: {
+    "google-adsense-account": ADSENSE_CLIENT_ID,
+  },
 };
 
 export default function RootLayout({
@@ -46,6 +51,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col antialiased">
+        <AdSenseScript />
         <OrganizationSchema />
         <WebsiteSchema />
         <Header />
