@@ -6,7 +6,6 @@ import { Footer } from "@/components/Footer";
 import { AllCalculatorsGrid } from "@/components/AllCalculatorsGrid";
 import OrganizationSchema from "@/components/schema/OrganizationSchema";
 import WebsiteSchema from "@/components/schema/WebsiteSchema";
-import AdSenseScript from "@/components/ads/AdSenseScript";
 import { siteConfig } from "@/config/site";
 import { ADSENSE_CLIENT_ID } from "@/lib/ads";
 
@@ -50,8 +49,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* AdSense — must be in <head> as static HTML for crawler verification */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-screen flex flex-col antialiased">
-        <AdSenseScript />
         <OrganizationSchema />
         <WebsiteSchema />
         <Header />
