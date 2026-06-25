@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -14,11 +15,15 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md transition-all duration-200">
       <div className="container-wide flex items-center justify-between h-16">
-        <Link
-          href="/"
-          className="font-semibold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
-        >
-          OceanCalc
+        <Link href="/" className="flex items-center shrink-0">
+          <Image
+            src="/logo.png"
+            alt="OceanCalc"
+            width={140}
+            height={40}
+            priority
+            className="h-9 w-auto"
+          />
         </Link>
         <nav aria-label="Main navigation" className="flex items-center gap-0.5 sm:gap-1 flex-wrap justify-end">
           {navItems.map(({ href, label }) => (
