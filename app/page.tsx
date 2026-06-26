@@ -64,8 +64,18 @@ const SECTIONS = [
 export default function HomePage() {
   return (
     <div>
-      <section className="bg-gradient-to-b from-white to-gray-50 dark:from-slate-900 dark:to-slate-950 border-b border-gray-100 dark:border-slate-800">
-        <div className="container-wide py-16 sm:py-20 text-center">
+      <section
+        className="relative border-b border-gray-100 dark:border-slate-800 overflow-hidden"
+        style={{
+          backgroundImage: "url('/oceancalc-background.svg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* overlay so text stays readable */}
+        <div className="absolute inset-0 bg-white/70 dark:bg-slate-900/80" aria-hidden="true" />
+        <div className="relative container-wide py-16 sm:py-20 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-gray-900 dark:text-white max-w-3xl mx-auto text-balance">
             Maritime Calculators &amp; Navigation Tools
           </h1>
