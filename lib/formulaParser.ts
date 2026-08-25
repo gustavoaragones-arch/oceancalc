@@ -28,6 +28,8 @@ const MATH_FUNCTIONS: CustomFunctions = {
   log: (x) => Math.log10(x),
   deg2rad: (d) => (d * Math.PI) / 180,
   rad2deg: (r) => (r * 180) / Math.PI,
+  /** Normalize an angle in degrees to the range [0, 360). Handles negative inputs and multiple revolutions. */
+  mod360: (deg) => ((deg % 360) + 360) % 360,
 };
 
 /** Beaufort force (0–12) from wind speed in knots */
@@ -112,9 +114,14 @@ function geographic_range_nm(eye_ft: number, light_ft: number): number {
   return 1.17 * (Math.sqrt(Math.max(0, eye_ft)) + Math.sqrt(Math.max(0, light_ft)));
 }
 
-/** Radar horizon (nm) from antenna height (meters), common refraction approximation */
+/**
+ * Radar horizon (nm) from antenna height in METERS, 4/3-Earth-radius standard-refraction approximation.
+ * The 1.23 coefficient is calibrated for height in feet (standard radar-horizon references, e.g. d(nm) ≈ 1.22-1.23 × √h_ft);
+ * the meters input is converted to feet before applying it so the coefficient's unit assumption is respected.
+ */
 function radar_horizon_nm(h_m: number): number {
-  return 1.23 * Math.sqrt(Math.max(0, h_m));
+  const h_ft = Math.max(0, h_m) / 0.3048;
+  return 1.23 * Math.sqrt(h_ft);
 }
 
 /** Cross-track error (nm) ≈ distance along track × sin(bearing error in degrees) */

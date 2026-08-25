@@ -1,6 +1,6 @@
 {
   "nautical mile": {
-    "definition": "A nautical mile is a unit of distance equal to exactly 1,852 meters, tied to one minute of latitude and used worldwide in maritime and aviation navigation.",
+    "definition": "A nautical mile is exactly 1,852 meters. One minute of latitude is approximately one nautical mile, but its exact length varies slightly with latitude on the reference ellipsoid. It is used worldwide in maritime and aviation navigation.",
     "type": "measurement"
   },
   "knot": {
@@ -16,7 +16,19 @@
     "type": "navigation"
   },
   "bearing": {
-    "definition": "A bearing is a direction expressed as an angle, usually clockwise from north (true or magnetic), used to describe courses and relative positions.",
+    "definition": "Bearing is the direction from the observer or vessel to a referenced object or position, expressed as an angle from north.",
+    "type": "navigation"
+  },
+  "heading": {
+    "definition": "Heading is the direction a vessel's bow is pointing, normally expressed as an angle clockwise from north.",
+    "type": "navigation"
+  },
+  "course": {
+    "definition": "Course is the intended direction of travel, expressed as an angle referenced to north.",
+    "type": "navigation"
+  },
+  "magnetic variation": {
+    "definition": "Magnetic variation is the angular difference between true north and magnetic north at a given location and time.",
     "type": "navigation"
   },
   "dead reckoning": {

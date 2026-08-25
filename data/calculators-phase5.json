@@ -24,7 +24,7 @@
   {
     "slug": "initial-bearing-calculator",
     "title": "Initial Bearing Calculator",
-    "description": "Compute the initial true bearing from one lat/lon waypoint to another (great-circle start heading).",
+    "description": "Compute the initial true bearing from one lat/lon waypoint to another (the great-circle route's starting bearing).",
     "category": "navigation",
     "type": "engine",
     "engine": {
@@ -40,7 +40,7 @@
       "formulaDisplay": "Forward azimuth via spherical trigonometry (atan2 of sin/cos terms)"
     },
     "formula": "Initial bearing uses the standard forward azimuth formula between two geographic points on a sphere.",
-    "formulaDetail": "Does not apply variation/deviation; output is true bearing.",
+    "formulaDetail": "Does not apply variation/deviation; output is true bearing. This calculation uses spherical-Earth geometry and is an approximation of the corresponding ellipsoidal geodesic bearing.",
     "examples": ["NYC to London initial bearing ≈ 51°", "Use with great-circle distance for route sketching"],
     "faq": [
       { "question": "Does bearing stay constant along the route?", "answer": "No. Great-circle routes change bearing along the arc; this value is only the starting heading." }
@@ -148,7 +148,7 @@
       ],
       "formulaDisplay": "1° latitude = 60 nm (meridian arc)"
     },
-    "formula": "One degree of latitude equals 60 nautical miles by definition (one minute = one nm).",
+    "formula": "One degree of latitude is approximately 60 nautical miles (one minute ≈ one nm); the exact length varies slightly with latitude on the reference ellipsoid.",
     "formulaDetail": "Longitude distance varies with cos(latitude); this tool is for latitude or equator longitude.",
     "examples": ["1° lat = 60 nm", "0.5° = 30 nm"],
     "faq": [
@@ -215,6 +215,7 @@
       "formulaDisplay": "1 shackle = 15 fathoms = 90 ft"
     },
     "formula": "US Navy / common shipping: 1 shackle of chain = 15 fathoms = 90 feet.",
+    "formulaDetail": "Shackle length varies by maritime convention; verify the convention used for the vessel, chart, or reference material.",
     "examples": ["5 shackles = 450 ft"],
     "faq": []
   },
@@ -274,6 +275,7 @@
       "formulaDisplay": "1 cable = 0.1 nm = 185.2 m"
     },
     "formula": "The cable (tenth of a nautical mile) is still seen in some charting and naval usage.",
+    "formulaDetail": "A cable is commonly treated as 0.1 nautical mile (185.2 m) in modern maritime usage, but historical and national conventions can differ.",
     "examples": ["10 cables = 1 nm"],
     "faq": []
   },
@@ -294,7 +296,7 @@
       "formulaDisplay": "d (nm) ≈ 1.17×(√eye + √light), heights in feet"
     },
     "formula": "Optical geographic range sums horizon distances from observer and light. Atmospheric conditions and light power alter actual sighting.",
-    "examples": ["9 ft eye, 80 ft light → ~15 nm combined geometric range"],
+    "examples": ["9 ft eye, 80 ft light → ~14.0 nm combined geometric range"],
     "faq": [
       { "question": "Is this luminous range?", "answer": "No—this is geometric horizon range. Nominal range depends on light intensity and visibility." }
     ]
@@ -312,10 +314,11 @@
       "outputs": [
         { "name": "nm", "label": "Radar horizon (nm)", "formula": "radar_horizon_nm(h_m)", "decimals": 1 }
       ],
-      "formulaDisplay": "d (nm) ≈ 1.23 × √(h), h in meters (approximate)"
+      "formulaDisplay": "Approximate radar horizon: d (nm) ≈ 1.23 × √(h / 0.3048), where h is antenna height in meters."
     },
     "formula": "Empirical radar horizon approximation; target detectability also depends on power, sea clutter, and target height.",
-    "examples": ["12 m scanner → ~4.3 nm to sea surface (rough)"],
+    "formulaDetail": "This is an approximate radar-horizon calculation using a standard 4/3-Earth-radius atmospheric-refraction model; actual radar range can vary with atmospheric conditions, antenna height, and target characteristics.",
+    "examples": ["12 m scanner → ~7.7 nm to the sea surface."],
     "faq": []
   },
   {
@@ -528,7 +531,7 @@
         { "name": "var", "label": "Variation (°, E+ / W−)", "type": "number", "unit": "degrees", "default": 10 }
       ],
       "outputs": [
-        { "name": "true", "label": "True heading (°)", "formula": "mag + var", "decimals": 1 }
+        { "name": "true", "label": "True heading (°)", "formula": "mod360(mag + var)", "decimals": 1 }
       ],
       "formulaDisplay": "True = Magnetic + variation (east positive)"
     },
@@ -595,6 +598,7 @@
       "formulaDisplay": "k = 1 / cos(φ)"
     },
     "formula": "On a Mercator chart, scale expands away from the equator; k is the linear exaggeration at latitude φ.",
+    "formulaDetail": "This calculation uses the spherical Mercator model and does not account for ellipsoidal geodesic corrections.",
     "examples": ["60° → k = 2", "45° → k ≈ 1.414"],
     "faq": []
   },
@@ -614,6 +618,7 @@
       "formulaDisplay": "shackles = feet ÷ 90"
     },
     "formula": "Common anchor chain marking: 1 shackle = 15 fathoms = 90 feet.",
+    "formulaDetail": "Shackle length varies by maritime convention; verify the convention used for the vessel, chart, or reference material.",
     "examples": ["180 ft = 2 shackles"],
     "faq": []
   },

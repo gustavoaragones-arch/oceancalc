@@ -102,6 +102,7 @@ export function CalculatorEngine({ config, title = "Calculator" }: CalculatorEng
       const rules: ValidationRule = {};
       if (input.min !== undefined) rules.min = input.min;
       if (input.max !== undefined) rules.max = input.max;
+      if (input.message !== undefined) rules.message = input.message;
       const result = validateInput(raw, rules);
       out[input.name] = result;
     }

@@ -9,6 +9,7 @@
     "pages:build": "npm run clean && npx @cloudflare/next-on-pages",
     "start": "next start",
     "lint": "next lint",
+    "test": "npx tsx scripts/test-formula-engine.ts",
     "sitemap": "npx tsx scripts/generate-sitemap.ts",
     "generate-sitemap": "npx tsx scripts/generate-sitemap.ts",
     "ping:indexing": "node scripts/ping-indexing.mjs",

@@ -7,7 +7,6 @@ import { UnitConverter } from "./calculators/UnitConverter";
 import { DistanceToHorizonCalculator } from "./calculators/DistanceToHorizon";
 import { GreatCircleDistanceCalculator } from "./calculators/GreatCircleDistance";
 import { AnchorScopeCalculator } from "./calculators/AnchorScope";
-import { BeaufortScaleCalculator } from "./calculators/BeaufortScale";
 import { ApparentWindCalculator } from "./calculators/ApparentWind";
 
 interface CalculatorRendererProps {
@@ -51,8 +50,6 @@ export function CalculatorRenderer({ calculator }: CalculatorRendererProps) {
       return <GreatCircleDistanceCalculator />;
     case "anchor-scope":
       return <AnchorScopeCalculator />;
-    case "beaufort":
-      return <BeaufortScaleCalculator />;
     case "apparent-wind":
       return <ApparentWindCalculator />;
     default:

@@ -48,7 +48,7 @@
     "defaultFrom": "nautical miles",
     "defaultTo": "kilometers",
     "formula": "1 nautical mile = 1,852 m = 1.852 km. 1 nm ≈ 1.15078 statute miles ≈ 6,076 feet.",
-    "formulaDetail": "The nautical mile is defined as one minute of latitude (1/60 of a degree). So 60 nautical miles = 1° of latitude.",
+    "formulaDetail": "A nautical mile is exactly 1,852 meters. One minute of latitude is approximately one nautical mile, but its exact length varies slightly with latitude on the reference ellipsoid.",
     "examples": ["10 nautical miles = 18.52 km ≈ 11.5 statute miles", "1 nm = 1,852 m (exact)", "A 100 nm passage is 185.2 km"],
     "faq": [
       {
@@ -61,7 +61,7 @@
       },
       {
         "question": "Why do sailors use nautical miles?",
-        "answer": "Nautical miles align with latitude: one degree of latitude equals 60 nautical miles. This makes chart work and dead reckoning simpler, since distance and position use the same angular measure."
+        "answer": "Nautical miles align with latitude: one degree of latitude is approximately 60 nautical miles, with the exact length varying slightly by latitude on the reference ellipsoid. This makes chart work and dead reckoning simpler, since distance and position use closely related angular measures."
       }
     ]
   },
@@ -165,17 +165,17 @@
       ],
       "formulaDisplay": "Distance (nm) = 1.17 × √(height in feet)"
     },
-    "formula": "Distance to horizon (nm) ≈ 1.17 × √(height in feet). In metric: horizon (km) ≈ 3.57 × √(height in meters). Assumes spherical Earth and normal atmospheric refraction.",
+    "formula": "Distance to horizon (nm) ≈ 1.17 × √(height in feet). In metric: horizon (km) ≈ 3.92 × √(height in meters). Assumes spherical Earth and normal atmospheric refraction.",
     "formulaDetail": "Your line of sight is tangent to the Earth's surface at the horizon. The greater the height of eye, the farther the tangent point.",
-    "examples": ["6 ft (cockpit): ~2.9 nm (~5.4 km)", "30 ft (mast): ~6.4 nm (~11.9 km)", "100 ft (bridge): ~11.7 nm (~21.7 km)"],
+    "examples": ["6 ft (cockpit): ~2.9 nm (~5.3 km)", "30 ft (mast): ~6.4 nm (~11.9 km)", "100 ft (bridge): ~11.7 nm (~21.7 km)"],
     "faq": [
       {
         "question": "How far can you see at sea?",
-        "answer": "From 6 feet (about 1.8 m) above water, the horizon is roughly 2.9 nautical miles (5.4 km) away. From 30 feet it is about 6.4 nm. The formula is distance (nm) ≈ 1.17 × √(height in feet)."
+        "answer": "From 6 feet (about 1.8 m) above water, the horizon is roughly 2.9 nautical miles (5.3 km) away. From 30 feet it is about 6.4 nm. The formula is distance (nm) ≈ 1.17 × √(height in feet)."
       },
       {
         "question": "What is the horizon formula?",
-        "answer": "For height of eye in feet: horizon distance in nautical miles ≈ 1.17 × √h. In metric: horizon in km ≈ 3.57 × √(height in meters). This assumes a smooth, spherical Earth and standard refraction."
+        "answer": "For height of eye in feet: horizon distance in nautical miles ≈ 1.17 × √h. In metric: horizon in km ≈ 3.92 × √(height in meters). This assumes a smooth, spherical Earth and standard refraction."
       },
       {
         "question": "Why does height of eye matter?",
@@ -258,8 +258,8 @@
       "formulaDisplay": "Haversine: d = 2R × asin(√(sin²(Δlat/2) + cos(lat1)×cos(lat2)×sin²(Δlon/2)))"
     },
     "formula": "Haversine formula: a = sin²(Δlat/2) + cos(lat₁)×cos(lat₂)×sin²(Δlon/2); c = 2×atan2(√a, √(1−a)); d = R × c. R ≈ 3,440.065 nautical miles (Earth radius).",
-    "formulaDetail": "A great circle is any circle on Earth's surface whose center is the planet's center. The shortest route between two points lies along the unique great circle that passes through both.",
-    "examples": ["New York to London: ~3,076 nm (~5,697 km)", "1° of latitude ≈ 60 nm (along a meridian)", "Equator: 1° longitude = 60 nm; at 60°N, 1° longitude ≈ 30 nm"],
+    "formulaDetail": "A great circle is any circle on Earth's surface whose center is the planet's center. The shortest route between two points lies along the unique great circle that passes through both. OceanCalc uses a spherical Earth model for this calculation, so results are an approximation of the corresponding ellipsoidal geodesic distance.",
+    "examples": ["New York to London: ~3,007.7 nm (~5,570.2 km)", "1° of latitude ≈ 60 nm (along a meridian)", "Equator: 1° longitude = 60 nm; at 60°N, 1° longitude ≈ 30 nm"],
     "faq": [
       {
         "question": "What is great circle distance?",
@@ -271,7 +271,7 @@
       },
       {
         "question": "Why use nautical miles for great circle?",
-        "answer": "One nautical mile equals one minute of latitude, so great circle distance in nm relates directly to angular distance. For example, 60 nm is 1° of arc along a great circle."
+        "answer": "One nautical mile is approximately one minute of latitude (the exact length varies slightly with latitude on the reference ellipsoid), so great circle distance in nm relates closely to angular distance. For example, 60 nm is approximately 1° of arc along a great circle."
       }
     ]
   },
@@ -363,7 +363,7 @@
     },
     "formula": "Apparent wind = true wind − boat velocity (vector). Va² = Vb² + Vt² + 2·Vb·Vt·cos(TWA). cos(AWA) = (Vt·cos(TWA) + Vb) / Va. Vb=boat, Vt=true wind, TWA=true wind angle, AWA=apparent wind angle.",
     "formulaDetail": "When you sail into the wind, your motion adds to the wind you feel—so apparent wind is stronger. Downwind, boat motion subtracts, so apparent wind is less than true wind.",
-    "examples": ["6 kn boat, 10 kn true wind, 90° TWA → ~11.7 kn apparent, ~32° AWA", "Headwind: TWA 0° → apparent = true + boat speed", "Downwind: TWA 180° → apparent = |true − boat speed|"],
+    "examples": ["6 kn boat, 10 kn true wind, 90° TWA → ~11.7 kn apparent, ~59° AWA", "Headwind: TWA 0° → apparent = true + boat speed", "Downwind: TWA 180° → apparent = |true − boat speed|"],
     "faq": [
       {
         "question": "What is apparent wind?",
@@ -390,14 +390,14 @@
         { "name": "windSpeed", "label": "Wind speed", "type": "number", "unit": "knots", "units": ["knots", "mph", "km_h"], "default": 20, "min": 0 }
       ],
       "outputs": [
-        { "name": "waveHeight_m", "label": "Approx. wave height (m)", "formula": "0.024 * windSpeed * windSpeed", "decimals": 2 },
-        { "name": "waveHeight_ft", "label": "Approx. wave height (ft)", "formula": "0.024 * windSpeed * windSpeed * 3.28084", "decimals": 1 }
+        { "name": "waveHeight_m", "label": "Approx. significant wave height (m)", "formula": "0.024 * pow(windSpeed * 0.514444, 2)", "decimals": 2 },
+        { "name": "waveHeight_ft", "label": "Approx. significant wave height (ft)", "formula": "0.024 * pow(windSpeed * 0.514444, 2) * 3.28084", "decimals": 1 }
       ],
-      "formulaDisplay": "Simplified: H ≈ 0.024 × wind_speed_kn² (open water, fetch-limited)"
+      "formulaDisplay": "Simplified SMB-style estimate: H ≈ 0.024 × U², where U is wind speed in m/s."
     },
     "formula": "Significant wave height is approximated from wind speed. Actual height depends on fetch, duration, and depth.",
-    "formulaDetail": "This uses a simplified empirical relationship. Real wave height varies with fetch (distance over water), wind duration, and water depth.",
-    "examples": ["20 kn wind → ~9.6 m waves (open ocean)", "10 kn → ~2.4 m", "30 kn → ~21.6 m (storm)"],
+    "formulaDetail": "This simplified estimate assumes a fully developed sea in open water; actual wave height also depends on fetch, wind duration, water depth, and other sea-state conditions.",
+    "examples": ["10 kn wind → ~0.64 m significant wave height", "20 kn wind → ~2.54 m significant wave height", "30 kn wind → ~5.72 m significant wave height"],
     "faq": [
       { "question": "What is significant wave height?", "answer": "Significant wave height is the average height of the highest one-third of waves. It is commonly reported in marine forecasts." },
       { "question": "Why does wave height vary?", "answer": "Wave height depends on wind speed, fetch (distance the wind blows over water), duration, and water depth. Shallow water limits wave growth." }
@@ -459,7 +459,7 @@
     "type": "engine",
     "engine": {
       "inputs": [
-        { "name": "tempF", "label": "Air temperature (°F)", "type": "number", "unit": "ratio", "default": 35 },
+        { "name": "tempF", "label": "Air temperature (°F)", "type": "number", "unit": "ratio", "default": 35, "max": 50, "message": "Wind chill is intended for air temperatures at or below 50°F." },
         { "name": "windMph", "label": "Wind speed (mph)", "type": "number", "unit": "mph", "units": ["mph", "knots", "km_h"], "default": 15, "min": 0 }
       ],
       "outputs": [
@@ -469,7 +469,7 @@
     },
     "formula": "NWS wind chill formula: combines temperature and wind speed to estimate how cold it feels. Only applies when temp ≤ 50°F and wind ≥ 3 mph.",
     "formulaDetail": "Wind chill reflects heat loss from exposed skin. At sea, spray and moisture can make it feel colder than the formula suggests.",
-    "examples": ["35°F, 15 mph → ~24°F feels like", "20°F, 25 mph → ~2°F feels like"],
+    "examples": ["35°F, 15 mph → ~25°F feels like", "20°F, 25 mph → ~3°F feels like"],
     "faq": [
       { "question": "What is wind chill?", "answer": "Wind chill is the apparent temperature felt on exposed skin due to wind. It reflects how quickly the body loses heat in wind." },
       { "question": "Does wind chill affect boats?", "answer": "Wind chill affects people on deck and can increase risk of hypothermia. It does not change the actual water or air temperature for equipment." }

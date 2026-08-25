@@ -13,6 +13,8 @@ export interface InputConfig {
   max?: number;
   step?: string;
   units?: string[];
+  /** Custom validation message shown when min/max is violated (overrides the default "Value must be..." text). */
+  message?: string;
 }
 
 interface InputFieldProps {
