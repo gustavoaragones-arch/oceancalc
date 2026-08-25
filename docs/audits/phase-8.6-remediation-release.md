@@ -169,24 +169,39 @@ No SEO, AEO architecture, AdSense, UI, sitemap, dead-code, or calculator-formula
 
 Reviewed `git diff` in full before staging — confirmed it contains only: F-1, F-2, the already-audited Phase 8.1–8.4 accumulated corrections (`lib/formulaParser.ts`, `data/calculators-phase5.json`, `components/CalculatorRenderer.tsx`, `components/calculators/BeaufortScale.tsx` deletion, `components/calculator-engine/CalculatorEngine.tsx`, `components/calculator-engine/InputField.tsx`, `data/entities.json`, `data/measurements.json`, `package.json`), the regression test script (`scripts/test-formula-engine.ts`), and the full `docs/audits/` phase history. Nothing unrelated included.
 
-[Commit SHA and confirmation recorded below, in the Final Response section, after the commit is created.]
+**Commit:** `71db77a5620fb42305c279ac8afd31623a4cce15` — "Phase 8 maritime accuracy remediation and release" (22 files changed, 2110 insertions, 128 deletions).
 
 ---
 
 ## Production Deployment
 
-Per explicit confirmation: Cloudflare Pages is connected to this GitHub repository and auto-deploys on push to `origin/main`. No `wrangler` CLI invocation was available or required from this environment (wrangler is unauthenticated here, and no Pages project reference exists in the repo — consistent with a dashboard-managed, Git-integration-based deployment rather than a CLI-driven one).
+Confirmed with the project owner: Cloudflare Pages is connected to this GitHub repository and auto-deploys on push to `origin/main`. No `wrangler` CLI invocation was available or required from this environment (wrangler is unauthenticated here, and no Pages project reference exists in the repo — consistent with a dashboard-managed, Git-integration-based deployment rather than a CLI-driven one).
 
-Deployment is triggered by the push recorded below; production verification follows.
+`git push origin main` completed: `3c98f26..71db77a main -> main`. `git rev-parse HEAD` and `git rev-parse origin/main` both return `71db77a5620fb42305c279ac8afd31623a4cce15` — local and remote match exactly.
+
+Polled `https://oceancalc.com/tools/radar-horizon-calculator/` every 25s after the push, checking for the corrected "~7.7 nm" text. The corrected content appeared within the first polling window (≈2–3 minutes after push) — Cloudflare's auto-deploy completed quickly.
 
 ---
 
 ## Production Verification
 
-[Recorded after the push, once Cloudflare's build has had time to complete — see Final Response section.]
+Direct `curl` checks against live production, performed after the deploy completed:
+
+| Route | Check | Result |
+|---|---|---|
+| `/tools/radar-horizon-calculator/` | Old `"h), h in meters"` (pre-fix formulaDisplay) absent; new `"h / 0.3048"` and `"~7.7 nm"` present | **PASS** |
+| `/tools/wave-height-calculator/` | Old `"wind_speed_kn"`/`"9.6 m waves"` absent; new `"U is wind speed in m/s"` and `"0.64 m significant wave height"` present | **PASS** |
+| `/tools/distance-to-horizon-calculator/` | Old `"~5.4 km"` absent; new `"~5.3 km"` present (F-1) | **PASS** |
+| `/tools/great-circle-distance-calculator/` | Old `"3,076 nm"` absent; new `"3,007.7 nm"` present | **PASS** |
+| `/tools/true-magnetic-heading-calculator/` | Formula string `"mod360(mag + var)"` present in the page's embedded data payload; **the shipped JS bundle** (`/_next/static/chunks/365-d70530b4bd5a487c.js`) directly inspected and found to contain `mod360:e=>(e%360+360)%360` — the correct double-modulo implementation, byte-for-byte. (A literal button-click UI test wasn't possible via `curl` against a client-rendered React calculator; this bundle-level verification is stronger, since it proves the actual logic that will run for any user input, not just one sample.) | **PASS** |
+| `/ads.txt` | `HTTP/2 200`, `content-type: text/plain; charset=utf-8`, body exactly `google.com, pub-3974004697476579, DIRECT, f08c47fec0942fa0` | **PASS** |
+
+**Production synchronization proof:** the same shipped-bundle chunk (`365-d70530b4bd5a487c.js`) was also checked for `radar_horizon_nm` and found to contain `radar_horizon_nm:function(e){return 1.23*Math.sqrt(Math.max(0,e)/.3048)}` — identical, byte-for-byte, to the local build's corrected implementation. Repository → build → production now demonstrably match at the level of the actual minified function bodies, not just page text.
 
 ---
 
 ## Final Release Status
 
-[Recorded after production verification — see Final Response section.]
+# RELEASED — READY FOR PHASE 8.7
+
+All F-1/F-2 corrections applied, regression suite and build pass, and production independently re-verified (page content and shipped-bundle byte content) to match the corrected repository at commit `71db77a5620fb42305c279ac8afd31623a4cce15`. This phase does not itself certify OceanCalc — final certification is reserved for Phase 8.7's full 45-route production re-verification.
