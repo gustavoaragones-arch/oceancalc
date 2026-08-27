@@ -29,6 +29,16 @@ export default function NavigationHubPage() {
 
       <PriorityCalculatorsStrip />
 
+      <p className="text-sm text-gray-600 dark:text-slate-400 mb-8">
+        Looking for the full set of navigation tools?{" "}
+        <Link
+          href="/navigation-calculations/"
+          className="text-blue-600 dark:text-blue-400 hover:underline font-medium"
+        >
+          Navigation Calculators
+        </Link>
+      </p>
+
       <div className="flex flex-col lg:flex-row lg:items-start gap-8">
         <ul className="flex-1 min-w-0 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 list-none p-0 m-0">
           {articles.map((article) => (

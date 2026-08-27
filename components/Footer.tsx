@@ -2,6 +2,7 @@ import Link from "next/link";
 import { organization } from "@/config/siteOwner";
 
 const footerLinks = [
+  { href: "/tools/", label: "All Calculators" },
   { href: "/privacy/", label: "Privacy Policy" },
   { href: "/terms/", label: "Terms" },
   { href: "/disclaimer/", label: "Disclaimer" },

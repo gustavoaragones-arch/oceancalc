@@ -88,62 +88,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="max-w-5xl mx-auto px-4 mt-10">
-        <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-slate-100">
-          Most Used Maritime Calculators
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-4">
-          <Link
-            href="/tools/hull-speed-calculator/"
-            className="block border border-gray-200 dark:border-slate-600 rounded-lg p-4 hover:shadow-md transition bg-white dark:bg-slate-800/50"
-          >
-            <h3 className="font-medium text-gray-900 dark:text-slate-100">
-              Hull Speed Calculator
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-slate-400">
-              Calculate the theoretical maximum speed of a displacement hull based on waterline length.
-            </p>
-          </Link>
-
-          <Link
-            href="/tools/rhumb-distance-calculator/"
-            className="block border border-gray-200 dark:border-slate-600 rounded-lg p-4 hover:shadow-md transition bg-white dark:bg-slate-800/50"
-          >
-            <h3 className="font-medium text-gray-900 dark:text-slate-100">
-              Rhumb Line Distance Calculator
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-slate-400">
-              Compute constant bearing navigation distance between two coordinates.
-            </p>
-          </Link>
-
-          <Link
-            href="/tools/initial-bearing-calculator/"
-            className="block border border-gray-200 dark:border-slate-600 rounded-lg p-4 hover:shadow-md transition bg-white dark:bg-slate-800/50"
-          >
-            <h3 className="font-medium text-gray-900 dark:text-slate-100">
-              Initial Bearing Calculator
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-slate-400">
-              Determine the forward azimuth between two geographic positions.
-            </p>
-          </Link>
-
-          <Link
-            href="/tools/great-circle-distance-calculator/"
-            className="block border border-gray-200 dark:border-slate-600 rounded-lg p-4 hover:shadow-md transition bg-white dark:bg-slate-800/50"
-          >
-            <h3 className="font-medium text-gray-900 dark:text-slate-100">
-              Nautical Distance Calculator
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-slate-400">
-              Measure sea distance between two points using spherical Earth models.
-            </p>
-          </Link>
-        </div>
-      </section>
-
       <div className="container-wide py-12 sm:py-16">
         <nav
           className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"

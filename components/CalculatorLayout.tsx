@@ -14,7 +14,6 @@ import AnswerBlock from "./ai/AnswerBlock";
 import KeyTakeaways from "./ai/KeyTakeaways";
 import EntityDefinition from "./ai/EntityDefinition";
 import AdPlaceholder from "@/components/ads/AdPlaceholder";
-import MarineToolsBlock from "@/components/affiliate/MarineToolsBlock";
 import {
   getAeoAnswerBlock,
   getAeoKeyTakeaways,
@@ -90,12 +89,6 @@ export function CalculatorLayout({
 
       <AdPlaceholder label="Ad slot — after calculation result" />
 
-      <section className="mt-4 p-4 rounded-xl border border-blue-100 bg-blue-50 dark:bg-slate-800 dark:border-slate-700">
-        <p className="text-sm">
-          Use this calculation together with proper navigation tools to improve route accuracy and on-water decision making.
-        </p>
-      </section>
-
       <AnswerBlock {...getAeoAnswerBlock(calculator)} />
 
       {entityAnchors.length > 0 ? (
@@ -125,7 +118,6 @@ export function CalculatorLayout({
             {generated.intro}
           </p>
           <KeyTakeaways items={getAeoKeyTakeaways(calculator, generated)} />
-          <MarineToolsBlock />
         </section>
       ) : null}
 
@@ -204,68 +196,6 @@ export function CalculatorLayout({
 
       {faqs.length > 0 && <FAQ items={faqs} />}
 
-      <section className="mt-10">
-        <h2 className="text-lg font-semibold mb-3 text-gray-900 dark:text-slate-100">
-          Related Navigation Calculations
-        </h2>
-
-        <ul className="grid md:grid-cols-2 gap-2 text-sm list-none p-0 m-0">
-          <li>
-            <Link
-              href="/tools/hull-speed-calculator/"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              Calculate maximum hull speed based on waterline length
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              href="/tools/rhumb-distance-calculator/"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              Compute rhumb line distance for constant bearing navigation
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              href="/tools/initial-bearing-calculator/"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              Find initial bearing between two geographic coordinates
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              href="/tools/distance-to-horizon-calculator/"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              Estimate visual horizon distance based on observer height
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              href="/tools/cross-track-error-calculator/"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              Measure deviation from intended navigation path
-            </Link>
-          </li>
-
-          <li>
-            <Link
-              href="/tools/speed-over-ground-calculator/"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              Calculate actual vessel speed considering current and heading
-            </Link>
-          </li>
-        </ul>
-      </section>
-
       <AdPlaceholder label="Ad slot — mid content" />
 
       <section className="mt-8">
@@ -289,19 +219,6 @@ export function CalculatorLayout({
               View sailing performance and wind analysis calculators
             </Link>
           </li>
-        </ul>
-      </section>
-
-      <section className="mt-8">
-        <h2 className="text-lg font-semibold mb-2">
-          When to Use This Calculation
-        </h2>
-
-        <ul className="text-sm space-y-1">
-          <li>• Planning a navigation route between two points</li>
-          <li>• Adjusting course based on wind, current, or drift</li>
-          <li>• Verifying distances and bearings during passage planning</li>
-          <li>• Supporting manual navigation alongside GPS systems</li>
         </ul>
       </section>
 
