@@ -87,6 +87,12 @@ export function CalculatorLayout({
 
       {children}
 
+      {calculator.slug === "great-circle-distance-calculator" ? (
+        <p className="text-sm text-slate-600 dark:text-slate-400 mt-4">
+          This calculation uses a spherical-Earth model, so results are an approximation of real-world geographic distance.
+        </p>
+      ) : null}
+
       <AdPlaceholder label="Ad slot — after calculation result" />
 
       <AnswerBlock {...getAeoAnswerBlock(calculator)} />
