@@ -14,7 +14,7 @@ const navItems = [
 export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md transition-all duration-200">
-      <div className="container-wide flex items-center justify-between h-16">
+      <div className="container-wide flex items-center justify-between min-h-16">
         <Link href="/" className="flex items-center shrink-0">
           <Image
             src="/logo.png"
