@@ -51,7 +51,7 @@ export function Footer() {
             href={organization.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 underline-offset-2 hover:underline transition-colors"
+            className="text-gray-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 underline underline-offset-2 transition-colors"
           >
             {organization.name}
           </a>
