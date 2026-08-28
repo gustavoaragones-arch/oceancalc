@@ -5,25 +5,6 @@
     "description": "Convert between nautical miles, statute miles, kilometers, and meters. Essential for chart work and passage planning.",
     "category": "maritime-measurements",
     "type": "unit-converter",
-    "simpleRegistry": {
-      "formulaKey": "nauticalMilesToKm",
-      "inputs": [
-        {
-          "name": "value",
-          "label": "Nautical Miles",
-          "type": "number",
-          "unit": "nmi",
-          "canonical": "nmi",
-          "default": 1,
-          "min": 0,
-          "validation": "nonNegative",
-          "step": "any"
-        }
-      ],
-      "resultLabel": "Kilometers",
-      "output": { "unit": "km", "decimals": 4 },
-      "decimals": 4
-    },
     "engine": {
       "inputs": [
         { "name": "distance", "label": "Distance", "type": "number", "unit": "nautical_miles", "units": ["nautical_miles", "kilometers", "miles", "meters", "feet"], "default": 1 }

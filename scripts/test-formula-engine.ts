@@ -16,6 +16,7 @@
 import * as fs from "fs";
 import * as path from "path";
 import { parseFormula, DEFAULT_CUSTOM_FUNCTIONS } from "../lib/formulaParser";
+import { formatValue } from "../components/calculator-engine/OutputField";
 
 let failures = 0;
 let passes = 0;
@@ -247,6 +248,76 @@ function checkFile(file: string) {
 }
 checkFile("calculators.json");
 checkFile("calculators-phase5.json");
+
+// ---------------------------------------------------------------------------
+// Phase 9.11 — nautical-mile-converter's three engine outputs, end-to-end
+// (formula evaluation + display formatting), at the inputs that previously
+// exposed the Phase 9.9/9.10 meter-magnitude defect (10, 100, 2.5 nm all
+// used to display "1852"/"1852"/"463" regardless of the true magnitude).
+{
+  const nmRecord = (
+    JSON.parse(fs.readFileSync(path.join(dataDir, "calculators.json"), "utf-8")) as Array<{
+      slug: string;
+      simpleRegistry?: unknown;
+      engine?: { outputs: Array<{ name: string; formula: string; decimals?: number }> };
+    }>
+  ).find((r) => r.slug === "nautical-mile-converter");
+
+  if (!nmRecord?.engine) {
+    failures++;
+    console.error("  FAIL  nautical-mile-converter: engine configuration missing");
+  } else if (nmRecord.simpleRegistry) {
+    failures++;
+    console.error("  FAIL  nautical-mile-converter: simpleRegistry still present, engine is shadowed");
+  } else {
+    console.log("\n=== Phase 9.11: nautical-mile-converter three-output reconciliation ===");
+    const expected: Record<number, { kilometers: string; miles: string; meters: string }> = {
+      1: { kilometers: "1.852", miles: "1.1508", meters: "1852" },
+      10: { kilometers: "18.52", miles: "11.5078", meters: "18520" },
+      100: { kilometers: "185.2", miles: "115.078", meters: "185200" },
+      2.5: { kilometers: "4.63", miles: "2.877", meters: "4630" },
+    };
+    for (const [distanceStr, exp] of Object.entries(expected)) {
+      const distance = Number(distanceStr);
+      for (const output of nmRecord.engine.outputs) {
+        const raw = parseFormula(output.formula, { distance }, fns);
+        const displayed = formatValue(raw, { name: output.name, label: output.name, formula: output.formula, decimals: output.decimals });
+        const key = output.name as keyof typeof exp;
+        assertEqual(displayed, exp[key], `nautical-mile-converter.${output.name}(${distance} nm) displayed value`);
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// OutputField.formatValue() — Phase 9.10 regression test.
+//
+// A zero-decimals output (e.g. `decimals: 0`) must display its full integer
+// value, not have trailing zero *digits* stripped as if they were leftover
+// fractional-formatting artifacts. This previously affected any engine
+// output configured with `decimals: 0` whose rounded result ended in one or
+// more zeros (e.g. anchor-scope-calculator's default render: 50 → "5").
+const outCfg = (decimals?: number) => ({
+  name: "x",
+  label: "X",
+  formula: "x",
+  decimals,
+});
+function assertFormat(value: number, decimals: number | undefined, expected: string, label: string) {
+  const actual = formatValue(value, outCfg(decimals));
+  assertEqual(actual, expected, label);
+}
+assertFormat(18520, 0, "18520", "formatValue: decimals=0 preserves trailing zero digits (18520)");
+assertFormat(1852, 0, "1852", "formatValue: decimals=0, no trailing zero to strip (1852)");
+assertFormat(50, 0, "50", "formatValue: decimals=0 preserves trailing zero (50, anchor-scope-calculator default)");
+assertFormat(450, 0, "450", "formatValue: decimals=0 preserves trailing zeros (450, anchor-shackle-rode-calculator default)");
+assertFormat(0, 0, "0", "formatValue: decimals=0, zero value does not become empty string");
+assertFormat(10, 0, "10", "formatValue: decimals=0, value=10 does not become 1");
+assertFormat(5.7165, 1, "5.7", "formatValue: decimals=1 rounds correctly (5.7165 -> 5.7)");
+assertFormat(5.7165, 2, "5.72", "formatValue: decimals=2 rounds correctly (5.7165 -> 5.72)");
+assertFormat(20, 2, "20", "formatValue: decimals=2, whole number still strips trailing .00 (20)");
+assertFormat(180.5, 2, "180.5", "formatValue: decimals=2 strips a single trailing fractional zero (180.50 -> 180.5)");
+assertFormat(1.852, undefined, "1.85", "formatValue: omitted decimals defaults to 2dp rounding (unchanged existing behavior)");
 
 // ---------------------------------------------------------------------------
 console.log(`\n=== RESULT: ${passes} passed, ${failures} failed ===`);

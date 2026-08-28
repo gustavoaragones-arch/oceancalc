@@ -26,6 +26,19 @@ export interface LearnMoreItem {
   category: string;
 }
 
+const MODEL_NOTES: Record<string, string> = {
+  "great-circle-distance-calculator":
+    "This calculation uses a spherical-Earth model, so results are an approximation of real-world geographic distance.",
+  "wave-height-calculator":
+    "Model note: This calculator estimates significant wave height using an empirical wind-wave relationship; actual sea state can differ with fetch, duration, swell, and local conditions.",
+  "radar-horizon-calculator":
+    "Model note: This calculator uses the standard 4/3-Earth-radius approximation for radar horizon; actual detection range can vary with atmospheric refraction, antenna height, terrain, and target height.",
+  "initial-bearing-calculator":
+    "Model note: This calculator uses a spherical-Earth model to determine the initial bearing between the two coordinates; results are an approximation of navigation on the Earth's ellipsoid.",
+  "mercator-scale-factor-calculator":
+    "Model note: This calculator uses the spherical Mercator projection model; scale factors for a reference ellipsoid differ slightly.",
+};
+
 interface CalculatorLayoutProps {
   calculator: CalculatorEntry;
   children: ReactNode;
@@ -87,9 +100,9 @@ export function CalculatorLayout({
 
       {children}
 
-      {calculator.slug === "great-circle-distance-calculator" ? (
+      {MODEL_NOTES[calculator.slug] ? (
         <p className="text-sm text-slate-600 dark:text-slate-400 mt-4">
-          This calculation uses a spherical-Earth model, so results are an approximation of real-world geographic distance.
+          {MODEL_NOTES[calculator.slug]}
         </p>
       ) : null}
 

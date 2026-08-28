@@ -41,7 +41,7 @@ export default function PrivacyPage() {
         </h2>
         <p>
           We may use cookies and similar technologies for analytics and to improve the user experience. You can manage cookie preferences in your browser. See our{" "}
-          <Link href="/cookies/" className="text-blue-600 dark:text-blue-400 hover:underline">
+          <Link href="/cookies/" className="text-blue-600 dark:text-blue-400 underline">
             Cookies
           </Link>{" "}
           page for more detail.
@@ -61,7 +61,7 @@ export default function PrivacyPage() {
           For privacy-related questions, contact us at{" "}
           <a
             href="mailto:contact@oceancalc.com"
-            className="text-blue-600 dark:text-blue-400 hover:underline"
+            className="text-blue-600 dark:text-blue-400 underline"
           >
             contact@oceancalc.com
           </a>

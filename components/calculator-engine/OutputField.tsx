@@ -17,7 +17,7 @@ interface OutputFieldProps {
   displayUnit?: string;
 }
 
-function formatValue(value: number, config: OutputConfig): string {
+export function formatValue(value: number, config: OutputConfig): string {
   if (!Number.isFinite(value)) return "—";
   const dec = config.decimals ?? 2;
   if (config.format === "hours") {
@@ -27,7 +27,8 @@ function formatValue(value: number, config: OutputConfig): string {
     return `${m} min`;
   }
   const rounded = Math.round(value * Math.pow(10, dec)) / Math.pow(10, dec);
-  return rounded.toFixed(dec).replace(/\.?0+$/, "");
+  const fixed = rounded.toFixed(dec);
+  return dec > 0 ? fixed.replace(/\.?0+$/, "") : fixed;
 }
 
 export function OutputField({ config, value, displayUnit }: OutputFieldProps) {
