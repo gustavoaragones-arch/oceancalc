@@ -33,14 +33,14 @@ export default function PrivacyPage() {
           Information We Collect
         </h2>
         <p>
-          We may collect information you provide directly (e.g. contact form submissions, email) and automatically (e.g. IP address, browser type, usage data) when you use our site. We use this to operate the service, improve content, and respond to inquiries.
+          We may collect information you provide directly (e.g. contact form submissions, email) and automatically (e.g. IP address, browser type, usage data) when you use our site. We use this to operate the service, improve content, respond to inquiries, and serve and measure ads (see Advertising below).
         </p>
 
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
           Cookies and Similar Technologies
         </h2>
         <p>
-          We may use cookies and similar technologies for analytics and to improve the user experience. You can manage cookie preferences in your browser. See our{" "}
+          We may use cookies and similar technologies for analytics, to improve the user experience, and for advertising (see Advertising below). You can manage cookie preferences in your browser. See our{" "}
           <Link href="/cookies/" className="text-blue-600 dark:text-blue-400 underline">
             Cookies
           </Link>{" "}
@@ -48,10 +48,24 @@ export default function PrivacyPage() {
         </p>
 
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
+          Advertising
+        </h2>
+        <p>
+          We use Google AdSense to display ads. Google and its partners may use cookies, web beacons and similar technologies to collect information such as your IP address, browser type and the pages you visit, in order to serve and measure ads, including ads based on your interests. We do not sell personal information we collect directly, and calculations you enter into OceanCalc tools run in your browser and are not sent to us.
+        </p>
+        <p>
+          Visitors in the EEA, UK and Switzerland are asked for consent before personalized ads are served. For details on the cookies used and how to opt out, see our{" "}
+          <Link href="/cookies/" className="text-blue-600 dark:text-blue-400 underline">
+            Cookie Policy
+          </Link>
+          .
+        </p>
+
+        <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
           Data Sharing
         </h2>
         <p>
-          We do not sell your personal data. We may share data with service providers who assist in operating the site, subject to confidentiality obligations.
+          We do not sell your personal data. We may share data with service providers who assist in operating the site, subject to confidentiality obligations. Advertising partners such as Google may also collect information through cookies on this site, as described in the Advertising section.
         </p>
 
         <h2 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
