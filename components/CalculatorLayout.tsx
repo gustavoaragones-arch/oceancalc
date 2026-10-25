@@ -13,7 +13,8 @@ import LastUpdated from "./LastUpdated";
 import AnswerBlock from "./ai/AnswerBlock";
 import KeyTakeaways from "./ai/KeyTakeaways";
 import EntityDefinition from "./ai/EntityDefinition";
-import AdPlaceholder from "@/components/ads/AdPlaceholder";
+import AdSlot from "@/components/ads/AdSlot";
+import { AD_SLOTS } from "@/lib/ads";
 import {
   getAeoAnswerBlock,
   getAeoKeyTakeaways,
@@ -106,8 +107,6 @@ export function CalculatorLayout({
         </p>
       ) : null}
 
-      <AdPlaceholder label="Ad slot — after calculation result" />
-
       <AnswerBlock {...getAeoAnswerBlock(calculator)} />
 
       {entityAnchors.length > 0 ? (
@@ -125,6 +124,8 @@ export function CalculatorLayout({
           ))}
         </div>
       ) : null}
+
+      <AdSlot slot={AD_SLOTS.inArticle} variant="in-article" className="mb-16" />
 
       <RelatedCalculators currentSlug={calculator.slug} />
 
@@ -173,6 +174,8 @@ export function CalculatorLayout({
         )}
       </section>
 
+      <AdSlot slot={AD_SLOTS.display} variant="display" />
+
       {generated ? (
         <section className="card mt-8" aria-labelledby="use-cases-heading">
           <h2 id="use-cases-heading" className="heading-section">
@@ -215,7 +218,9 @@ export function CalculatorLayout({
 
       {faqs.length > 0 && <FAQ items={faqs} />}
 
-      <AdPlaceholder label="Ad slot — mid content" />
+      <AdSlot slot={AD_SLOTS.multiplex} variant="multiplex" className="mt-10 mb-16" />
+
+      <hr className="border-gray-200 dark:border-slate-700 mb-8" />
 
       <section className="mt-8">
         <h2 className="text-lg font-semibold mb-2 text-gray-900 dark:text-slate-100">
@@ -250,8 +255,6 @@ export function CalculatorLayout({
       <LearnMore items={learnMoreItems} title="Learn More" />
 
       <CalculatorDisclaimer />
-
-      <AdPlaceholder label="Ad slot — bottom of page" />
     </article>
   );
 }
